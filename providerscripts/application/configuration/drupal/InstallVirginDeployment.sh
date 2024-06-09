@@ -22,8 +22,6 @@
 
 version="`/bin/echo ${APPLICATION} | /usr/bin/awk -F':' '{print $NF}'`"
 
-cd /var/www/html
-
 if ( [ "`/bin/echo ${APPLICATION} | /bin/grep 'social'`" = "" ] )
 then
 	product="drupal"
@@ -33,6 +31,7 @@ fi
 
 if ( [ "${product}" = "drupal" ] )
 then
+	cd /var/www/html
 	/usr/bin/wget https://ftp.drupal.org/files/projects/${product}-${version}.tar.gz
 	/bin/tar xvfx ${product}-${version}.tar.gz
 	/bin/rm ${product}-${version}.tar.gz
@@ -45,7 +44,11 @@ then
 	/bin/echo "1"
 elif ( [ "${product}" = "social" ] )
 then
-	BUILDOS="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'BUILDOS'`"
-	${HOME}/installscripts/InstallComposer.sh ${BUILDOS}
-	/usr/bin/sudo -u www-data /usr/local/bin/composer create-project goalgorilla/social_template:dev-master /var/www --no-interaction
+        BUILDOS="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'BUILDOS'`"
+        ${HOME}/installscripts/InstallComposer.sh ${BUILDOS}
+        /bin/rm -r /var/www/*
+        /bin/mkdir -p /var/www/html
+        /bin/chown www-data:www-data /var/www/html
+        /bin/chmod 755 /var/www/html
+        /usr/bin/sudo -u www-data /usr/local/bin/composer create-project goalgorilla/social_template:dev-master /var/www --no-interaction
 fi
