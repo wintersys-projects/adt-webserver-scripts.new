@@ -61,12 +61,7 @@ then
 	if ( [ "${BUILDOS}" = "debian" ] )
 	then
  		if ( [ "${BUILDOSVERSION}" = "11" ] || [ "${BUILDOSVERSION}" = "12" ] )
-		then
-			#removed php-mcrypt
-			#DEBIAN_FRONTEND=noninteractive /usr/bin/apt-get -qq -y install apt-transport-https lsb-release ca-certificates
-			#/usr/bin/wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
-			#/bin/sh -c 'echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/php.list'
-   			
+		then	
 			DEBIAN_FRONTEND=noninteractive /usr/bin/add-apt-repository -y ppa:ondrej/php-${PHP_VERSION}
 			${HOME}/installscripts/Update.sh ${BUILDOS}
 			DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=-1  -qq -y install php
