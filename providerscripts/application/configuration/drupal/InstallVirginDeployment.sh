@@ -48,7 +48,8 @@ then
         ${HOME}/installscripts/InstallComposer.sh ${BUILDOS}
 
         /bin/mkdir /tmp/scratch.$$
-        /usr/local/bin/composer create-project goalgorilla/social_template:dev-master /tmp/scratch.$$ --no-interaction
+	/usr/bin/sudo www-data /usr/local/bin/composer update
+        /usr/bin/sudo www-data /usr/local/bin/composer create-project goalgorilla/social_template:dev-master /tmp/scratch.$$ --no-interaction
 	
         if ( [ ! -d /var/www/html ] )
         then
