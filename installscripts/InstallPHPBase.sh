@@ -57,25 +57,28 @@ then
 			/usr/bin/update-alternatives --set php /usr/bin/php${PHP+VERSION}
 	   
 		fi
-   fi
+	fi
 
-   if ( [ "${BUILDOS}" = "debian" ] )
-   then
-	   #removed php-mcrypt
-	DEBIAN_FRONTEND=noninteractive /usr/bin/apt-get -qq -y install apt-transport-https lsb-release ca-certificates
-	/usr/bin/wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
-	/bin/sh -c 'echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/php.list'
-	${HOME}/installscripts/Update.sh ${BUILDOS}
+	if ( [ "${BUILDOS}" = "debian" ] )
+	then
+ 		if ( [ "${BUILDOSVERSION}" = "11" ] || [ "${BUILDOSVERSION}" = "12" ] )
+		then
+			#removed php-mcrypt
+			DEBIAN_FRONTEND=noninteractive /usr/bin/apt-get -qq -y install apt-transport-https lsb-release ca-certificates
+			/usr/bin/wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
+			/bin/sh -c 'echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/php.list'
+			${HOME}/installscripts/Update.sh ${BUILDOS}
  
- 	DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=-1  -qq -y install php${PHP_VERSION}
+ 			DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=-1  -qq -y install php${PHP_VERSION}
   	
-	modules="`${HOME}/providerscripts/utilities/ExtractBuildStyleValues.sh "PHP" "stripped" | /bin/sed 's/|.*//g' | /bin/sed 's/:/ /g'`"
+			modules="`${HOME}/providerscripts/utilities/ExtractBuildStyleValues.sh "PHP" "stripped" | /bin/sed 's/|.*//g' | /bin/sed 's/:/ /g'`"
 	
-	for module in ${modules}
-	do
-		DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=-1  -qq -y install php${PHP_VERSION}-${module}
-	done
+			for module in ${modules}
+			do
+				DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=-1  -qq -y install php${PHP_VERSION}-${module}
+			done
 	
- 	/usr/bin/update-alternatives --set php /usr/bin/php${PHP+VERSION}
-    fi
+ 			/usr/bin/update-alternatives --set php /usr/bin/php${PHP+VERSION}
+    		fi
+	fi
 fi
