@@ -47,5 +47,5 @@ elif ( [ "${product}" = "social" ] )
 then
 	BUILDOS="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'BUILDOS'`"
 	${HOME}/installscripts/InstallComposer.sh ${BUILDOS}
-	/usr/local/bin/composer create-project goalgorilla/social_template:dev-master /var/www --no-interaction
+	/usr/bin/sudo -u www-data /usr/local/bin/composer create-project goalgorilla/social_template:dev-master /var/www --no-interaction
 fi
