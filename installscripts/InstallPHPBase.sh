@@ -46,19 +46,6 @@ then
 			${HOME}/installscripts/Update.sh ${BUILDOS}
 
 			DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=-1  -qq -y install php${PHP_VERSION}
-
-			#${HOME}/installscripts/UpdateAndUpgrade.sh ${BUILDOS}
-
-#			if ( [ -f /usr/bin/php ] )
-#			then
-#				installed_php_version="`/usr/bin/php -v | /bin/grep "^PHP" | /usr/bin/awk '{print $2}' | /usr/bin/awk -F'.' '{print $1,$2}' | /bin/sed 's/ /\./g'`"
-#				if ( [ "${installed_php_version}" != "${PHP_VERSION}" ] )
-#				then
-#					DEBIAN_FRONTEND=noninteractive ${apt}  -o DPkg::Lock::Timeout=-1 -qq -y purge php*
-#					DEBIAN_FRONTEND=noninteractive ${apt}  -o DPkg::Lock::Timeout=-1 -qq -y autoclean
-#					DEBIAN_FRONTEND=noninteractive ${apt}  -o DPkg::Lock::Timeout=-1 -qq -y autoremove
-#				fi
-#			fi
 		
 			modules="`${HOME}/providerscripts/utilities/ExtractBuildStyleValues.sh "PHP" "stripped" | /bin/sed 's/|.*//g' | /bin/sed 's/:/ /g'`"
 	
@@ -66,14 +53,9 @@ then
 			do
 				DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=-1 -qq -y install php${PHP_VERSION}-${module}
 			done
-			 
-			/bin/rm /usr/bin/php
-			/usr/bin/ln -s /usr/bin/php${PHP_VERSION} /usr/bin/php
+
+			/usr/bin/update-alternatives --set php /usr/bin/php${PHP+VERSION}
 	   
-			if ( [ "`/bin/echo ${PHP_VERSION} | /bin/grep '7\.'`" != "" ] )
-			then
-				DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=-1  -qq -y install php${PHP_VERSION}-json
-			fi
 		fi
    fi
 
@@ -86,21 +68,7 @@ then
 	${HOME}/installscripts/Update.sh ${BUILDOS}
  
  	DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=-1  -qq -y install php${PHP_VERSION}
-  
-	#${HOME}/installscripts/UpdateAndUpgrade.sh ${BUILDOS}
-
-#	if ( [ -f /usr/bin/php ] )#
-#	then
-#		installed_php_version="`/usr/bin/php -v | /bin/grep "^PHP" | /usr/bin/awk '{print $2}' | /usr/bin/awk -F'.' '{print $1,$2}' | /bin/sed 's/ /\./g'`"
-#	  
-#		if ( [ "${installed_php_version}" != "${PHP_VERSION}" ] )
-#		then
-#			DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=-1  -qq -y purge php*
-#			DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=-1  -qq -y autoclean
-#			DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=-1  -qq -y autoremove
-#		fi
-#	fi
-	
+  	
 	modules="`${HOME}/providerscripts/utilities/ExtractBuildStyleValues.sh "PHP" "stripped" | /bin/sed 's/|.*//g' | /bin/sed 's/:/ /g'`"
 	
 	for module in ${modules}
@@ -108,12 +76,6 @@ then
 		DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=-1  -qq -y install php${PHP_VERSION}-${module}
 	done
 	
-	/bin/rm /usr/bin/php
-	/usr/bin/ln -s /usr/bin/php${PHP_VERSION} /usr/bin/php
-
-	if ( [ "`/bin/echo ${PHP_VERSION} | /bin/grep '7\.'`" != "" ] )
-	then
-		DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=-1  -qq -y install php${PHP_VERSION}-json
-	fi
+ 	/usr/bin/update-alternatives --set php /usr/bin/php${PHP+VERSION}
     fi
 fi
