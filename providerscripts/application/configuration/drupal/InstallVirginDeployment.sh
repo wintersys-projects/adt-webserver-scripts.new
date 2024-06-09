@@ -20,11 +20,16 @@
 #################################################################################
 #set -x
 
-version="`/bin/echo ${application} | /usr/bin/awk -F':' '{print $NF}'`"
+version="`/bin/echo ${APPLICATION} | /usr/bin/awk -F':' '{print $NF}'`"
 
 cd /var/www/html
 
-product="drupal"
+if ( [ "`/bin/echo ${APPLICATION} | /bin/grep 'social'`" = "" ] )
+then
+	product="drupal"
+else
+	product="social"
+fi
 
 if ( [ "${product}" = "drupal" ] )
 then
@@ -38,4 +43,9 @@ then
 	/bin/chown -R www-data:www-data /var/www/html/*
 	cd /home/${SERVER_USER}
 	/bin/echo "1"
+elif ( [ "${product}" = "social" ] )
+then
+	BUILDOS="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'BUILDOS'`"
+	${HOME}/installscripts/InstallComposer.sh ${BUILDOS}
+	/usr/local/bin/composer create-project goalgorilla/social_template:dev-master /var/www --no-interaction
 fi
