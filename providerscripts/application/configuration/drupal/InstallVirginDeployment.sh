@@ -46,16 +46,13 @@ elif ( [ "${product}" = "social" ] )
 then
         BUILDOS="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'BUILDOS'`"
         ${HOME}/installscripts/InstallComposer.sh ${BUILDOS}
-
+        /bin/rm -r /var/www/*
         /bin/mkdir /tmp/scratch.$$
-	/usr/bin/sudo www-data /usr/local/bin/composer update
-        /usr/bin/sudo www-data /usr/local/bin/composer create-project goalgorilla/social_template:dev-master /tmp/scratch.$$ --no-interaction
-	
-        if ( [ ! -d /var/www/html ] )
-        then
-                /bin/mkdir -p /var/www/html
-        fi
-
-        /bin/mv /tmp/scartch.$$/* /var/www/html
+        /bin/chmod 755 /tmp/scratch.$$
+        /bin/chown www-data:www-data /tmp/scratch.$$
+        /bin/chown www-data:www-data /var/www
+        /usr/bin/sudo -u www-data /usr/local/bin/composer update
+        /usr/bin/sudo -u www-data /usr/local/bin/composer create-project goalgorilla/social_template:dev-master /tmp/scratch.$$ --no-interaction
+        /bin/mv /tmp/scratch.$$/* /var/www/
         /bin/rm -r /tmp/scratch.$$
 fi
