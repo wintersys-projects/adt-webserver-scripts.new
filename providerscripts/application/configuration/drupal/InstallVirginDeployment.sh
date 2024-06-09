@@ -18,11 +18,11 @@
 # along with The Agile Deployment Toolkit.  If not, see <http://www.gnu.org/licenses/>.
 #################################################################################
 #################################################################################
-#set -x
+set -x
 
-version="`/bin/echo ${APPLICATION} | /usr/bin/awk -F':' '{print $NF}'`"
+version="`/bin/echo ${application} | /usr/bin/awk -F':' '{print $NF}'`"
 
-if ( [ "`/bin/echo ${APPLICATION} | /bin/grep 'social'`" = "" ] )
+if ( [ "`/bin/echo ${application} | /bin/grep 'social'`" = "" ] )
 then
 	product="drupal"
 else
