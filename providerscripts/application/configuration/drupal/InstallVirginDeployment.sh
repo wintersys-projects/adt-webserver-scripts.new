@@ -24,31 +24,37 @@ version="`/bin/echo ${application} | /usr/bin/awk -F':' '{print $NF}'`"
 
 if ( [ "`/bin/echo ${application} | /bin/grep 'social'`" = "" ] )
 then
-	product="drupal"
+        product="drupal"
 else
-	product="social"
+        product="social"
 fi
 
 if ( [ "${product}" = "drupal" ] )
 then
-	cd /var/www/html
-	/usr/bin/wget https://ftp.drupal.org/files/projects/${product}-${version}.tar.gz
-	/bin/tar xvfx ${product}-${version}.tar.gz
-	/bin/rm ${product}-${version}.tar.gz
-	/bin/mv ${product}-${version}/* .
-	/bin/mv ${product}-${version}/.* .
-	/bin/rmdir ${product}-${version}
-	/bin/rm -r .git
-	/bin/chown -R www-data:www-data /var/www/html/*
-	cd /home/${SERVER_USER}
-	/bin/echo "1"
+        cd /var/www/html
+        /usr/bin/wget https://ftp.drupal.org/files/projects/${product}-${version}.tar.gz
+        /bin/tar xvfx ${product}-${version}.tar.gz
+        /bin/rm ${product}-${version}.tar.gz
+        /bin/mv ${product}-${version}/* .
+        /bin/mv ${product}-${version}/.* .
+        /bin/rmdir ${product}-${version}
+        /bin/rm -r .git
+        /bin/chown -R www-data:www-data /var/www/html/*
+        cd /home/${SERVER_USER}
+        /bin/echo "1"
 elif ( [ "${product}" = "social" ] )
 then
         BUILDOS="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'BUILDOS'`"
         ${HOME}/installscripts/InstallComposer.sh ${BUILDOS}
-        /bin/rm -r /var/www/*
-        /bin/mkdir -p /var/www/html
-        /bin/chown www-data:www-data /var/www/html
-        /bin/chmod 755 /var/www/html
-        /usr/bin/sudo -u www-data /usr/local/bin/composer create-project goalgorilla/social_template:dev-master /var/www --no-interaction
+
+        /bin/mkdir /tmp/scratch.$$
+        /usr/local/bin/composer create-project goalgorilla/social_template:dev-master /tmp/scratch.$$ --no-interaction
+	
+        if ( [ ! -d /var/www/html ] )
+        then
+                /bin/mkdir -p /var/www/html
+        fi
+
+        /bin/mv /tmp/scartch.$$/* /var/www/html
+        /bin/rm -r /tmp/scratch.$$
 fi
