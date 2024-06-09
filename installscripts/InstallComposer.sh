@@ -39,8 +39,8 @@ then
 	if ( [ "${buildos}" = "ubuntu" ] )
 	then
 		/usr/sbin/service crond stop
-		DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=-1 -qq  update
-		DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=-1 -qq  install php-cli unzip
+		DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=-1 -qq -y update
+		DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=-1 -qq -y install php-cli unzip
 		cd ~
 		/usr/bin/curl -sS https://getcomposer.org/installer -o /tmp/composer-setup.php
 		HASH=`/usr/bin/curl -sS https://composer.github.io/installer.sig`
@@ -52,8 +52,8 @@ then
 	if ( [ "${buildos}" = "debian" ] )
 	then
 		/usr/sbin/service crond stop
-		DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=-1 -qq  update
-		DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=-1 -qq  install php-cli unzip
+		DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=-1 -qq  -y update
+		DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=-1 -qq  -y install php-cli unzip
 		cd ~
 		/usr/bin/curl -sS https://getcomposer.org/installer -o /tmp/composer-setup.php
 		HASH=`/usr/bin/curl -sS https://composer.github.io/installer.sig`
