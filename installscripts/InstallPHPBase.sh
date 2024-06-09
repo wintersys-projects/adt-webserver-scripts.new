@@ -72,8 +72,7 @@ then
 			do
 				DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=-1  -qq -y install php${PHP_VERSION}-${module}
 			done
-	
- 			/usr/bin/update-alternatives --set php /usr/bin/php${PHP_VERSION}
+			/usr/bin/update-alternatives --set php /usr/bin/php${PHP_VERSION}
     		fi
 	fi
 fi
