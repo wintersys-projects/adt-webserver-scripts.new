@@ -170,8 +170,7 @@ then
 	/bin/echo "\$settings['config_sync_directory'] = '/var/www/html/sites/default';" >> ${HOME}/runtime/drupal_settings.php
 	/bin/echo "\$config['system.performance']['css']['preprocess'] = FALSE;" >> ${HOME}/runtime/drupal_settings.php
 	/bin/echo "\$config['system.performance']['js']['preprocess'] = FALSE;" >> ${HOME}/runtime/drupal_settings.php 
-	#/bin/echo "\$settings['file_private_path'] = \$app_root . '/sites/default/files/private';" >> ${HOME}/runtime/drupal_settings.php
-	/bin/echo "\$settings['file_private_path'] = '/var/www/private';" >> ${HOME}/runtime/drupal_settings.php	
+	/bin/echo "\$settings['file_private_path'] = \$app_root . '../private';" >> ${HOME}/runtime/drupal_settings.php
  	/bin/echo "${0} `/bin/date`: Adjusted the drupal settings:  trusted_host_patterns, config_sync_directory, system.performance" >> ${HOME}/logs/OPERATIONAL_MONITORING.log
 fi
 
