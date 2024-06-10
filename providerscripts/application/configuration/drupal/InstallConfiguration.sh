@@ -43,12 +43,12 @@ then
 fi
 
 #if ( [ ! -d /var/www/html/sites/default/files/private ] )
-if ( [ ! -d /var/www/private/default_images ] )
+if ( [ ! -d /var/www/html/sites/default/files/private/default_images ] )
 then
-	/bin/mkdir -p /var/www/private/default_images
-	/bin/chown -R www-data:www-data /var/www/private
- 	/usr/bin/find /var/www/private -type d -exec chmod 777 {} \;
-	/usr/bin/find /var/www/private-type f -exec chmod 664 {} \;
+	/bin/mkdir -p /var/www/html/sites/default/files/private/default_images
+	/bin/chown -R www-data:www-data /var/www/html/sites/default/files/private
+ 	/usr/bin/find /var/www/html/sites/default/files/private -type d -exec chmod 755 {} \;
+	/usr/bin/find /var/www/html/sites/default/files/private -type f -exec chmod 644 {} \;
 fi
 
 if ( [ -f /var/www/html/sites/default/files ] )
@@ -58,11 +58,11 @@ then
 	/usr/bin/find /var/www/html/sites/default/files -type f -exec chmod 664 {} \;
 fi
 
-#if ( [ ! -f /var/www/html/sites/default/files/private/.htaccess ] )
-#then##
-#	/bin/cp ${HOME}/providerscripts/application/configuration/drupal-htaccess-private.txt /var/www/html/sites/default/files/private/.htaccess
-#	/bin/chown www-data:www-data /var/www/html/sites/default/files/private/.htaccess
-#	/bin/chmod 600 /var/www/html/sites/default/files/private/.htaccess
-#fi
+if ( [ ! -f /var/www/html/sites/default/files/private/.htaccess ] )
+then
+	/bin/cp ${HOME}/providerscripts/application/configuration/drupal-htaccess-private.txt /var/www/html/sites/default/files/private/.htaccess
+	/bin/chown www-data:www-data /var/www/html/sites/default/files/private/.htaccess
+	/bin/chmod 600 /var/www/html/sites/default/files/private/.htaccess
+fi
 
 /bin/echo "1"
