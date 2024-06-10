@@ -25,3 +25,10 @@ then
 	/usr/bin/find /var/www/vendor -type d -print -exec chmod 755 {} \;
 	/usr/bin/find /var/www/vendor -type f -print -exec chmod 644 {} \;
  fi
+ if ( [ -d /var/www/html/private.drupal ] )
+then
+	/bin/mv /var/www/html/private.drupal /var/www/private
+	/bin/chown -R www-data:www-data /var/www/private
+	/usr/bin/find /var/www/private -type d -print -exec chmod 755 {} \;
+	/usr/bin/find /var/www/private -type f -print -exec chmod 644 {} \;
+ fi
