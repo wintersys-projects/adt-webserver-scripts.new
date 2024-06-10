@@ -46,17 +46,17 @@ fi
 if ( [ ! -d /var/www/html/sites/default/files/private/default_images ] )
 then
 	/bin/mkdir -p /var/www/html/sites/default/files/private/default_images
-	/bin/chown -R www-data:www-data /var/www/html/sites/default/files/private
- 	/usr/bin/find /var/www/html/sites/default/files/private -type d -exec chmod 755 {} \;
-	/usr/bin/find /var/www/html/sites/default/files/private -type f -exec chmod 644 {} \;
+	/bin/chown -R www-data:www-data /var/www/html/sites/default/files
+ 	/usr/bin/find /var/www/html/sites/default/files -type d -exec chmod 755 {} \;
+	/usr/bin/find /var/www/html/sites/default/files -type f -exec chmod 644 {} \;
 fi
 
-if ( [ -f /var/www/html/sites/default/files ] )
-then
-	/bin/chown -R www-data:www-data /var/www/html/sites/default/files
-	/usr/bin/find /var/www/html/sites/default/files -type d -exec chmod g+ws {} \;
-	/usr/bin/find /var/www/html/sites/default/files -type f -exec chmod 664 {} \;
-fi
+#if ( [ -f /var/www/html/sites/default/files ] )
+#then
+#	/bin/chown -R www-data:www-data /var/www/html/sites/default/files
+#	/usr/bin/find /var/www/html/sites/default/files -type d -exec chmod g+ws {} \;
+#	/usr/bin/find /var/www/html/sites/default/files -type f -exec chmod 664 {} \;
+#fi
 
 if ( [ ! -f /var/www/html/sites/default/files/private/.htaccess ] )
 then
