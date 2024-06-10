@@ -44,25 +44,22 @@ fi
 
 if ( [ ! -d /var/www/html/sites/default/files/private ] )
 then
-	#/bin/mkdir -p /var/www/html/sites/default/files/private
-	#/bin/chown -R www-data:www-data /var/www/html/sites/default/files
- 	#/usr/bin/find /var/www/html/sites/default/files -type d -exec chmod 750 {} \;
-	#/usr/bin/find /var/www/html/sites/default/files -type d -exec chmod g+ws {} \;
-	#/usr/bin/find /var/www/html/sites/default/files -type f -exec chmod 664 {} \;
- 	/bin/mkdir -p /var/www/private
- 	/usr/bin/find /var/www/private -type d -exec chmod 755 {} \;
-   	/usr/bin/find /var/www/private -type d -exec chown www-data:www-data {} \;
+	/bin/mkdir -p /var/www/html/sites/default/files/private
+	/bin/chown -R www-data:www-data /var/www/html/sites/default/files
+ 	/usr/bin/find /var/www/html/sites/default/files -type d -exec chmod 750 {} \;
+	/usr/bin/find /var/www/html/sites/default/files -type d -exec chmod g+ws {} \;
+	/usr/bin/find /var/www/html/sites/default/files -type f -exec chmod 664 {} \;
 else
 	/bin/chown -R www-data:www-data /var/www/html/sites/default/files
 	/usr/bin/find /var/www/html/sites/default/files -type d -exec chmod g+ws {} \;
 	/usr/bin/find /var/www/html/sites/default/files -type f -exec chmod 664 {} \;
 fi
 
-if ( [ ! -f /var/www/html/sites/default/files/private/.htaccess ] )
-then
-	/bin/cp ${HOME}/providerscripts/application/configuration/drupal-htaccess-private.txt /var/www/html/sites/default/files/private/.htaccess
-	/bin/chown www-data:www-data /var/www/html/sites/default/files/private/.htaccess
-	/bin/chmod 600 /var/www/html/sites/default/files/private/.htaccess
-fi
+#if ( [ ! -f /var/www/html/sites/default/files/private/.htaccess ] )
+#then#
+#	/bin/cp ${HOME}/providerscripts/application/configuration/drupal-htaccess-private.txt /var/www/html/sites/default/files/private/.htaccess
+#	/bin/chown www-data:www-data /var/www/html/sites/default/files/private/.htaccess
+#	/bin/chmod 600 /var/www/html/sites/default/files/private/.htaccess
+#fi
 
 /bin/echo "1"
