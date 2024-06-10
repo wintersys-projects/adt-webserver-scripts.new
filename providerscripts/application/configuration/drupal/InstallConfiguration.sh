@@ -58,11 +58,11 @@ then
 	/usr/bin/find /var/www/html/sites/default/files -type f -exec chmod 664 {} \;
 fi
 
-if ( [ ! -f /var/www/html/sites/default/files/private/.htaccess ] )
-then#
-	/bin/cp ${HOME}/providerscripts/application/configuration/drupal-htaccess-private.txt /var/www/html/sites/default/files/private/.htaccess
-	/bin/chown www-data:www-data /var/www/html/sites/default/files/private/.htaccess
-	/bin/chmod 600 /var/www/html/sites/default/files/private/.htaccess
-fi
+#if ( [ ! -f /var/www/html/sites/default/files/private/.htaccess ] )
+#then##
+#	/bin/cp ${HOME}/providerscripts/application/configuration/drupal-htaccess-private.txt /var/www/html/sites/default/files/private/.htaccess
+#	/bin/chown www-data:www-data /var/www/html/sites/default/files/private/.htaccess
+#	/bin/chmod 600 /var/www/html/sites/default/files/private/.htaccess
+#fi
 
 /bin/echo "1"
