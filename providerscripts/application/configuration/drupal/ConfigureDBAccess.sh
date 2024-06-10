@@ -20,9 +20,9 @@
 #####################################################################################
 #set -x
 
-if ( [ ! -d /var/www/private ] )
+if ( [ ! -d  /var/www/html/sites/default/files/private/default_images ] )
 then
-	/bin/mkdir -p /var/www/private
+	/bin/mkdir -p /var/www/html/sites/default/files/private/default_images
 fi
 
 #This is the php temporary upload directory
