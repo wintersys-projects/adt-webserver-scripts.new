@@ -46,6 +46,7 @@ if ( [ ! -d /var/www/html/sites/default/files/private ] )
 then
 	/bin/mkdir -p /var/www/html/sites/default/files/private
 	/bin/chown -R www-data:www-data /var/www/html/sites/default/files
+ 	/usr/bin/find /var/www/html/sites/default/files -type d -exec chmod 750 {} \;
 	/usr/bin/find /var/www/html/sites/default/files -type d -exec chmod g+ws {} \;
 	/usr/bin/find /var/www/html/sites/default/files -type f -exec chmod 664 {} \;
 
