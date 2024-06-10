@@ -47,7 +47,7 @@ if ( [ ! -d /var/www/private ] )
 then
 	/bin/mkdir -p /var/www/private
 	/bin/chown -R www-data:www-data /var/www/private
- 	/usr/bin/find /var/www/private -type d -exec chmod 775 {} \;
+ 	/usr/bin/find /var/www/private -type d -exec chmod 777 {} \;
 	/usr/bin/find /var/www/private-type f -exec chmod 664 {} \;
 fi
 
