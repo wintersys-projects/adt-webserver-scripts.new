@@ -20,9 +20,10 @@
 #####################################################################################
 #set -x
 
-if ( [ ! -d /var/www/html//sites/default/files/private ] )
+#if ( [ ! -d /var/www/html//sites/default/files/private ] )
+if ( [ ! -d /var/www/private ] )
 then
-	/bin/mkdir -p /var/www/html/sites/default/files/private
+	/bin/mkdir -p /var/www/private
 fi
 
 if ( [ ! -d /var/www/tmp ] )
@@ -42,7 +43,8 @@ then
 	/bin/echo "\$settings['config_sync_directory'] = '/var/www/html/sites/default';" >> /var/www/html/sites/default/settings.php
 	/bin/echo "\$config['system.performance']['css']['preprocess'] = FALSE;" >> /var/www/html/sites/default/settings.php
 	/bin/echo "\$config['system.performance']['js']['preprocess'] = FALSE;" >> /var/www/html/sites/default/settings.php
-	/bin/echo "\$settings['file_private_path'] = \$app_root . '/sites/default/files/private';" >> /var/www/html/sites/default/settings.php
+	#/bin/echo "\$settings['file_private_path'] = \$app_root . '/sites/default/files/private';" >> /var/www/html/sites/default/settings.php
+ 	/bin/echo "\$settings['file_private_path'] = /var/www/private';" >> /var/www/html/sites/default/settings.php
 	/bin/echo "${0} `/bin/date`: Adjusted the drupal settings: file_private_path, trusted_host_patterns, config_sync_directory, system.performance" >> ${HOME}/logs/OPERATIONAL_MONITORING.log
 	/bin/cp /var/www/html/sites/default/settings.php ${HOME}/runtime/drupal_settings.php 
 fi
