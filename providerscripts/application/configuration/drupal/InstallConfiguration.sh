@@ -45,7 +45,7 @@ fi
 #if ( [ ! -d /var/www/html/sites/default/files/private ] )
 if ( [ ! -d /var/www/private ] )
 then
-	/bin/mkdir -p /var/www/private
+	/bin/mkdir -p /var/www/private/default_images
 	/bin/chown -R www-data:www-data /var/www/private
  	/usr/bin/find /var/www/private -type d -exec chmod 777 {} \;
 	/usr/bin/find /var/www/private-type f -exec chmod 664 {} \;
