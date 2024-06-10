@@ -28,7 +28,7 @@ then
 	/bin/chmod 600 /var/www/html/sites/default/settings.php
 fi
 
-if ( [ ! -f /var/www/html/sites/default/settings.php ] && [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh BUILDARCHIVECHOICE:virgin`" = "1" ] )
+if ( [ ! -f /var/www/html/sites/default/settings.php ] && [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh BUILDARCHIVECHOICE:virgin`" != "1" ] )
 then
 	/bin/cp /var/www/html/sites/default/default.settings.php /var/www/html/sites/default/settings.php
 	/bin/chown www-data:www-data /var/www/html/sites/default/settings.php
