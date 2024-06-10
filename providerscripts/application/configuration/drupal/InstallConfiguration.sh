@@ -42,14 +42,17 @@ then
 	/bin/chmod 600 /var/www/html/.htaccess
 fi
 
-if ( [ ! -d /var/www/html/sites/default/files/private ] )
+#if ( [ ! -d /var/www/html/sites/default/files/private ] )
+if ( [ ! -d /var/www/private ] )
 then
-	/bin/mkdir -p /var/www/html/sites/default/files/private
-	/bin/chown -R www-data:www-data /var/www/html/sites/default/files
- 	/usr/bin/find /var/www/html/sites/default/files -type d -exec chmod 750 {} \;
-	/usr/bin/find /var/www/html/sites/default/files -type d -exec chmod g+ws {} \;
-	/usr/bin/find /var/www/html/sites/default/files -type f -exec chmod 664 {} \;
-else
+	/bin/mkdir -p /var/www/private
+	/bin/chown -R www-data:www-data /var/www/private
+ 	/usr/bin/find /var/www/private -type d -exec chmod 775 {} \;
+	/usr/bin/find /var/www/private-type f -exec chmod 664 {} \;
+fi
+
+if ( [ -f /var/www/html/sites/default/files ] )
+then
 	/bin/chown -R www-data:www-data /var/www/html/sites/default/files
 	/usr/bin/find /var/www/html/sites/default/files -type d -exec chmod g+ws {} \;
 	/usr/bin/find /var/www/html/sites/default/files -type f -exec chmod 664 {} \;
