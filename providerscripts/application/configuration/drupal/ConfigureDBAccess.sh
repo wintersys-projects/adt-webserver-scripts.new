@@ -29,6 +29,8 @@ fi
 if ( [ ! -d /var/www/html/tmp ] )
 then
 	/bin/mkdir -p /var/www/html/tmp
+ 	/bin/chown www-data:www-data /var/www/html/tmp
+  	/bin/chmod 755 /var/www/html/tmp
 fi
 
 if ( [ "`${HOME}/providerscripts/datastore/configwrapper/ListFromConfigDatastore.sh drupal_settings.php`" != "" ] )
