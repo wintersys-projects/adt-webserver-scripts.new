@@ -53,6 +53,10 @@ then
         /bin/chown www-data:www-data /var/www
         /usr/bin/sudo -u www-data /usr/local/bin/composer update
         /usr/bin/sudo -u www-data /usr/local/bin/composer create-project goalgorilla/social_template:dev-master /tmp/scratch.$$ --with-all-dependencies --no-interaction --working-dir=/tmp/scratch.$$
+        dir="`/usr/bin/pwd`"
+        cd /var/www
+        /usr/bin/sudo -u www-data /usr/local/bin/composer update --with-all-dependencies goalgorilla/open_social
+        cd ${dir}
         /bin/mv /tmp/scratch.$$/* /var/www/
         /bin/rm -r /tmp/scratch.$$
 fi
