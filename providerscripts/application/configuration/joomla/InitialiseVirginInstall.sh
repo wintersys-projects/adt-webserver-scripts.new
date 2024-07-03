@@ -25,9 +25,15 @@
 ##########################################################################################
 #set -x
 
+if ( [ -f /var/www/html/installation/_J* ] )
+then
+	/bin/rm /var/www/html/installation/_J*
+fi
+
 if ( [ -f /var/www/html/configuration.php ] )
 then
 	dbprefix="`/bin/grep "dbprefix" /var/www/html/configuration.php | /usr/bin/awk -F"'" '{print $2}'`"
+ 
 	if ( [ "${dbprefix}" = "" ] )
 	then
 		dbprefix="`/bin/grep "dbprefix" /var/www/html/configuration.php | /usr/bin/awk -F"\\"" '{print $2}'`"
