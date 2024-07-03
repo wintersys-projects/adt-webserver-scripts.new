@@ -108,5 +108,6 @@ fi
 /bin/ln -s /etc/apache2/ports.conf /etc/apache2/conf/ports.conf
 
 /usr/sbin/update-rc.d apache2 defaults
+/bin/rm /etc/apache2/sites-enabled/*
 /usr/bin/systemctl enable apache2.service
 /usr/bin/systemctl start apache2.service &
