@@ -70,11 +70,13 @@ then
 		cd /home/${SERVER_USER}
 		/bin/echo "1"
 	fi
- elif ( [ "${product}" = "framework" ] )
- then
+ 
+elif ( [ "${product}" = "framework" ] )
+then
+        BUILDOS="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'BUILDOS'`"
+        ${HOME}/installscripts/InstallComposer.sh ${BUILDOS}
  	/usr/bin/git clone https://github.com/joomla/framework.joomla.org.git
   	/bin/mv framework.joomla.org/* .
    	/bin/rm -r framework.joomla.org
+        /usr/bin/sudo -u www-data /usr/local/bin/composer install
 fi
-
- fi
