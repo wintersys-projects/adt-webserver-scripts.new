@@ -70,7 +70,6 @@ then
 		cd /home/${SERVER_USER}
 		/bin/echo "1"
 	fi
- 	/bin/rm /var/www/html/installation/_J* 2>/dev/null
 elif ( [ "${product}" = "framework" ] )
 then
 	:
