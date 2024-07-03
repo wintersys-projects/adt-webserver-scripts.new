@@ -23,42 +23,54 @@
 version="`/bin/echo ${application} | /usr/bin/awk -F':' '{print $NF}'`"
 cd /var/www/html
 
-if ( [ "`/bin/echo ${version} | /bin/grep alpha`" != "" ] )
+if ( [ "`/bin/echo ${application} | /bin/grep 'framework'`" = "" ] )
 then
-	/usr/bin/wget https://github.com/joomla/joomla-cms/releases/download/${version}/Joomla_${version}-Alpha-Full_Package.zip
-	/bin/echo "${0} `/bin/date`: Downloaded an alpha version (${version}) of Joomla" >> ${HOME}/logs/OPERATIONAL_MONITORING.log
-	/usr/bin/unzip Joomla_${version}-Alpha-Full_Package.zip
-	/bin/rm Joomla_${version}-Alpha-Full_Package.zip
-	/bin/mv /var/www/html/htaccess.txt /var/www/html/.htaccess
-	/bin/chown -R www-data:www-data /var/www/html/*
-	/bin/chmod 440 /var/www/html/.htaccess
-	cd /home/${SERVER_USER}
-	/bin/echo "1"
-elif ( [ "`/bin/echo ${version} | /bin/grep beta`" != "" ] )
-then
-	/usr/bin/wget https://github.com/joomla/joomla-cms/releases/download/${version}/Joomla_${version}-Beta-Full_Package.zip
-	/bin/echo "${0} `/bin/date`: Downloaded a beta version (${version}) of Joomla" >> ${HOME}/logs/OPERATIONAL_MONITORING.log
-	/usr/bin/unzip Joomla_${version}-Beta-Full_Package.zip
-	/bin/rm Joomla_${version}-Beta-Full_Package.zip
-	/bin/chown -R www-data:www-data /var/www/html/*
-	cd /home/${SERVER_USER}
-	/bin/echo "1"
-elif ( [ "`/bin/echo ${version} | /bin/grep rc`" != "" ] )
-then
-	/usr/bin/wget https://github.com/joomla/joomla-cms/releases/download/${version}/Joomla_${version}-Release_Candidate-Full_Package.zip
-	/bin/echo "${0} `/bin/date`: Downloaded a rc version (${version}) of Joomla" >> ${HOME}/logs/OPERATIONAL_MONITORING.log
-	/usr/bin/unzip Joomla_${version}-Release_Candidate-Full_Package.zip
-	/bin/rm Joomla_${version}-Release_Candidate-Full_Package.zip
-	/bin/chown -R www-data:www-data /var/www/html/*
-	cd /home/${SERVER_USER}
-	/bin/echo "1"
-
+        product="cms"
 else
-	/usr/bin/wget https://github.com/joomla/joomla-cms/releases/download/${version}/Joomla_${version}-Stable-Full_Package.zip
-	/bin/echo "${0} `/bin/date`: Downloaded a stable version (${version}) of Joomla" >> ${HOME}/logs/OPERATIONAL_MONITORING.log
-	/usr/bin/unzip Joomla_${version}-Stable-Full_Package.zip
-	/bin/rm Joomla_${version}-Stable-Full_Package.zip
-	/bin/chown -R www-data:www-data /var/www/html/*
-	cd /home/${SERVER_USER}
-	/bin/echo "1"
+        product="framework"
 fi
+
+if ( [ "${product}" = "cms" ] )
+then
+	if ( [ "`/bin/echo ${version} | /bin/grep alpha`" != "" ] )
+	then
+		/usr/bin/wget https://github.com/joomla/joomla-cms/releases/download/${version}/Joomla_${version}-Alpha-Full_Package.zip
+		/bin/echo "${0} `/bin/date`: Downloaded an alpha version (${version}) of Joomla" >> ${HOME}/logs/OPERATIONAL_MONITORING.log
+		/usr/bin/unzip Joomla_${version}-Alpha-Full_Package.zip
+		/bin/rm Joomla_${version}-Alpha-Full_Package.zip
+		/bin/mv /var/www/html/htaccess.txt /var/www/html/.htaccess
+		/bin/chown -R www-data:www-data /var/www/html/*
+		/bin/chmod 440 /var/www/html/.htaccess
+		cd /home/${SERVER_USER}
+		/bin/echo "1"
+	elif ( [ "`/bin/echo ${version} | /bin/grep beta`" != "" ] )
+	then
+		/usr/bin/wget https://github.com/joomla/joomla-cms/releases/download/${version}/Joomla_${version}-Beta-Full_Package.zip
+		/bin/echo "${0} `/bin/date`: Downloaded a beta version (${version}) of Joomla" >> ${HOME}/logs/OPERATIONAL_MONITORING.log
+		/usr/bin/unzip Joomla_${version}-Beta-Full_Package.zip
+		/bin/rm Joomla_${version}-Beta-Full_Package.zip
+		/bin/chown -R www-data:www-data /var/www/html/*
+		cd /home/${SERVER_USER}
+		/bin/echo "1"
+	elif ( [ "`/bin/echo ${version} | /bin/grep rc`" != "" ] )
+	then
+		/usr/bin/wget https://github.com/joomla/joomla-cms/releases/download/${version}/Joomla_${version}-Release_Candidate-Full_Package.zip
+		/bin/echo "${0} `/bin/date`: Downloaded a rc version (${version}) of Joomla" >> ${HOME}/logs/OPERATIONAL_MONITORING.log
+		/usr/bin/unzip Joomla_${version}-Release_Candidate-Full_Package.zip
+		/bin/rm Joomla_${version}-Release_Candidate-Full_Package.zip
+		/bin/chown -R www-data:www-data /var/www/html/*
+		cd /home/${SERVER_USER}
+		/bin/echo "1"
+	else
+		/usr/bin/wget https://github.com/joomla/joomla-cms/releases/download/${version}/Joomla_${version}-Stable-Full_Package.zip
+		/bin/echo "${0} `/bin/date`: Downloaded a stable version (${version}) of Joomla" >> ${HOME}/logs/OPERATIONAL_MONITORING.log
+		/usr/bin/unzip Joomla_${version}-Stable-Full_Package.zip
+		/bin/rm Joomla_${version}-Stable-Full_Package.zip
+		/bin/chown -R www-data:www-data /var/www/html/*
+		cd /home/${SERVER_USER}
+		/bin/echo "1"
+	fi
+ elif ( [ "${product}" = "framework" ] )
+ then
+
+ fi
