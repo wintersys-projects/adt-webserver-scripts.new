@@ -73,6 +73,7 @@ then
  
 elif ( [ "${product}" = "framework" ] )
 then
+	:
 	#BUILDOS="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'BUILDOS'`"
 	#${HOME}/installscripts/InstallComposer.sh ${BUILDOS}
  #	/usr/bin/git clone https://github.com/joomla/framework.joomla.org.git
