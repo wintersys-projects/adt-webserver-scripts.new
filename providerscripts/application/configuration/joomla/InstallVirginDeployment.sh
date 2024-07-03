@@ -72,5 +72,9 @@ then
 	fi
  elif ( [ "${product}" = "framework" ] )
  then
+ 	/usr/bin/git clone https://github.com/joomla/framework.joomla.org.git
+  	/bin/mv framework.joomla.org/* .
+   	/bin/rm -r framework.joomla.org
+fi
 
  fi
