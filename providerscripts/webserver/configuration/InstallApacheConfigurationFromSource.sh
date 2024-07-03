@@ -109,5 +109,7 @@ fi
 
 /usr/sbin/update-rc.d apache2 defaults
 /bin/rm /etc/apache2/sites-enabled/*default*
+#Don't enable any additional mods by default
+/bin/rm  /etc/apache2/mods-enabled/*
 /usr/bin/systemctl enable apache2.service
 /usr/bin/systemctl start apache2.service &
