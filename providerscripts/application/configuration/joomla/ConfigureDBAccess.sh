@@ -225,6 +225,6 @@ fi
 if ( [ -f /var/www/html/cli/garbagecron.php ] )
 then
 	/usr/bin/php /var/www/html/cli/garbagecron.php
-else
+elif ( [ -f /var/www/html/cli/joomla.php ] )
 	/usr/bin/php /var/www/html/cli/joomla.php cache:clean
 fi
