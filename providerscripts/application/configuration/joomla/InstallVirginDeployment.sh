@@ -66,6 +66,8 @@ then
 		/bin/echo "${0} `/bin/date`: Downloaded a stable version (${version}) of Joomla" >> ${HOME}/logs/OPERATIONAL_MONITORING.log
 		/usr/bin/unzip Joomla_${version}-Stable-Full_Package.zip
 		/bin/rm Joomla_${version}-Stable-Full_Package.zip
+		/usr/bin/wget https://github.com/templaza/astroid-framework/releases/download/v3.0.15/astroid-quickstart.zip
+  		uzip -o ./astroid-quickstart.zip
 		/bin/chown -R www-data:www-data /var/www/html/*
 		cd /home/${SERVER_USER}
 		/bin/echo "1"
