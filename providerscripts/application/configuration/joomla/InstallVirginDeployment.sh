@@ -23,14 +23,14 @@
 version="`/bin/echo ${application} | /usr/bin/awk -F':' '{print $NF}'`"
 cd /var/www/html
 
-if ( [ "`/bin/echo ${application} | /bin/grep 'framework'`" = "" ] )
+if ( [ "`/bin/echo ${application} | /bin/grep 'jed'`" = "" ] )
 then
         product="cms"
 else
-        product="framework"
+        product="jed"
 fi
 
-if ( [ "${product}" = "cms" ] )
+if ( [ "${product}" = "cms" ] || [ "${product}" = "jed" ] )
 then
 	if ( [ "`/bin/echo ${version} | /bin/grep alpha`" != "" ] )
 	then
@@ -70,23 +70,14 @@ then
 		cd /home/${SERVER_USER}
 		/bin/echo "1"
 	fi
-elif ( [ "${product}" = "framework" ] )
-then
-	:
-#	BUILDOS="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'BUILDOS'`"
-#	${HOME}/installscripts/InstallComposer.sh ${BUILDOS}
-# 	/usr/bin/git clone https://github.com/joomla/framework.joomla.org.git
-#  	/bin/mv framework.joomla.org/* .
-#	/bin/mv framework.joomla.org/.* .
-#	/bin/rm -r framework.joomla.org
-#	/usr/bin/sudo -u www-data /usr/local/bin/composer install
-elif ( [ "${product}" = "jed" ] )
+fi
+
+if ( [ "${product}" = "jed" ] )
 then
 	BUILDOS="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'BUILDOS'`"
 	${HOME}/installscripts/InstallComposer.sh ${BUILDOS}
 	/usr/bin/git clone https://github.com/joomla-projects/Joomla-Extension-Directory.git
- 	/bin/mv /var/www/html/Joomla-Extension-Directory/* /var/www/html
   	/bin/chown -R www-data:www-data /var/www/html
-	/usr/bin/sudo -u www-data /bin/sh /var/www/html/clean-linux.sh
- 	/usr/bin/sudo -u www-data /bin/sh /var/www/html/build-linux.sh
+	/usr/bin/sudo -u www-data /bin/sh /var/www/html/Joomla-Extension-Directory/clean-linux.sh
+ 	/usr/bin/sudo -u www-data /bin/sh /var/www/html/Joomla-Extension-Directory/build-linux.sh
 fi
