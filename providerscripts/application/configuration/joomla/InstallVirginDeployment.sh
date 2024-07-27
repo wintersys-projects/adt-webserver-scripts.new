@@ -80,10 +80,10 @@ then
         /usr/bin/git clone https://github.com/joomla-projects/Joomla-Extension-Directory.git
         /bin/mv Joomla-Extension-Directory/* .
         /bin/rm -r Joomla-Extension-Directory 
-	cd /var/www/html/dist
-	/usr/bin/unzip ./pkg*jed*-*[0-9]*.zip
         /bin/chown -R www-data:www-data /var/www/html
         /usr/bin/sudo -u www-data /bin/sh /var/www/html/clean-linux.sh
         /usr/bin/sudo -u www-data /bin/sh /var/www/html/build-linux.sh
+	cd /var/www/html/dist
+	/usr/bin/unzip ./pkg*jed*-*[0-9]*.zip
         cd /home/${SERVER_USER}
 fi
