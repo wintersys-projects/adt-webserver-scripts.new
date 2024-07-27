@@ -80,4 +80,13 @@ then
 #	/bin/mv framework.joomla.org/.* .
 #	/bin/rm -r framework.joomla.org
 #	/usr/bin/sudo -u www-data /usr/local/bin/composer install
+elif ( [ "${product}" = "jed" ] )
+then
+	BUILDOS="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'BUILDOS'`"
+	${HOME}/installscripts/InstallComposer.sh ${BUILDOS}
+	/usr/bin/git clone https://github.com/joomla-projects/Joomla-Extension-Directory.git
+ 	/bin/mv /var/www/html/Joomla-Extension-Directory/* /var/www/html
+  	/bin/chown -R www-data:www-data /var/www/html
+	/usr/bin/sudo -u www-data /var/www/html/clean-linux.sh
+ 	/usr/bin/sudo -u www-data /var/www/html/clean-linux.sh
 fi
