@@ -88,5 +88,5 @@ then
  	/bin/mv /var/www/html/Joomla-Extension-Directory/* /var/www/html
   	/bin/chown -R www-data:www-data /var/www/html
 	/usr/bin/sudo -u www-data /bin/sh /var/www/html/clean-linux.sh
- 	/usr/bin/sudo -u www-data /bin/sh /var/www/html/clean-linux.sh
+ 	/usr/bin/sudo -u www-data /bin/sh /var/www/html/build-linux.sh
 fi
