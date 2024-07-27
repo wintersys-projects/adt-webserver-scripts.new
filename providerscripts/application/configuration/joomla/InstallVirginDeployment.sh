@@ -74,10 +74,14 @@ fi
 
 if ( [ "${product}" = "jed" ] )
 then
-	BUILDOS="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'BUILDOS'`"
-	${HOME}/installscripts/InstallComposer.sh ${BUILDOS}
-	/usr/bin/git clone https://github.com/joomla-projects/Joomla-Extension-Directory.git
-  	/bin/chown -R www-data:www-data /var/www/html
-	/usr/bin/sudo -u www-data /bin/sh /var/www/html/Joomla-Extension-Directory/clean-linux.sh
- 	/usr/bin/sudo -u www-data /bin/sh /var/www/html/Joomla-Extension-Directory/build-linux.sh
+        cd /var/www/html
+        BUILDOS="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'BUILDOS'`"
+        ${HOME}/installscripts/InstallComposer.sh ${BUILDOS}
+        /usr/bin/git clone https://github.com/joomla-projects/Joomla-Extension-Directory.git
+        /bin/mv Joomla-Extension-Directory/* .
+        /bin/rm -r Joomla-Extension-Directory 
+        /bin/chown -R www-data:www-data /var/www/html
+        /usr/bin/sudo -u www-data /bin/sh /var/www/html/clean-linux.sh
+        /usr/bin/sudo -u www-data /bin/sh /var/www/html/build-linux.sh
+        cd /home/${SERVER_USER}
 fi
