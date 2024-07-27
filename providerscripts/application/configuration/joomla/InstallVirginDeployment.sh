@@ -87,6 +87,6 @@ then
 	/usr/bin/git clone https://github.com/joomla-projects/Joomla-Extension-Directory.git
  	/bin/mv /var/www/html/Joomla-Extension-Directory/* /var/www/html
   	/bin/chown -R www-data:www-data /var/www/html
-	/usr/bin/sudo -u www-data /var/www/html/clean-linux.sh
- 	/usr/bin/sudo -u www-data /var/www/html/clean-linux.sh
+	/usr/bin/sudo -u www-data /bin/sh /var/www/html/clean-linux.sh
+ 	/usr/bin/sudo -u www-data /bin/sh /var/www/html/clean-linux.sh
 fi
