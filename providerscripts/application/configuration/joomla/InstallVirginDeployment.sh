@@ -23,11 +23,14 @@
 version="`/bin/echo ${application} | /usr/bin/awk -F':' '{print $NF}'`"
 cd /var/www/html
 
-if ( [ "`/bin/echo ${application} | /bin/grep 'jed'`" = "" ] )
+if ( [ "`/bin/echo ${application} | /bin/grep 'jed'`" != "" ] )
 then
-        product="cms"
-else
         product="jed"
+elif ( [ "`/bin/echo ${application} | /bin/grep 'vp'`" != "" ] )
+then
+        product="vp"
+else
+        product="cms"
 fi
 
 if ( [ "${product}" = "cms" ] || [ "${product}" = "jed" ] )
@@ -85,5 +88,21 @@ then
         /usr/bin/sudo -u www-data /bin/sh /var/www/html/build-linux.sh
 	cd /var/www/html/dist
 	/usr/bin/unzip ./pkg*jed*-*[0-9]*.zip
+        cd /home/${SERVER_USER}
+fi
+
+if ( [ "${product}" = "vp" ] )
+then
+        cd /var/www/html
+        BUILDOS="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'BUILDOS'`"
+        ${HOME}/installscripts/InstallComposer.sh ${BUILDOS}
+        /usr/bin/git clone https://github.com/joomla-projects/joomla-volunteer-portal.git
+        /bin/mv joomla-volunteer-portal/* .
+        /bin/rm -r joomla-volunteer-portal 
+        /bin/chown -R www-data:www-data /var/www/html
+        /usr/bin/sudo -u www-data /bin/sh /var/www/html/clean-linux.sh
+        /usr/bin/sudo -u www-data /bin/sh /var/www/html/build-linux.sh
+	#cd /var/www/html/dist
+	#/usr/bin/unzip ./pkg*jed*-*[0-9]*.zip
         cd /home/${SERVER_USER}
 fi
