@@ -102,7 +102,7 @@ then
         /bin/chown -R www-data:www-data /var/www/html
         /usr/bin/sudo -u www-data /bin/sh /var/www/html/clean-linux.sh
         /usr/bin/sudo -u www-data /bin/sh /var/www/html/build-linux.sh
-	#cd /var/www/html/dist
-	#/usr/bin/unzip ./pkg*jed*-*[0-9]*.zip
+	cd /var/www/html/dist
+	/usr/bin/unzip ./pkg-volunteers-*[0-9]*.zip
         cd /home/${SERVER_USER}
 fi
