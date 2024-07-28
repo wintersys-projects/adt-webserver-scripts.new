@@ -33,7 +33,7 @@ else
         product="cms"
 fi
 
-if ( [ "${product}" = "cms" ] || [ "${product}" = "jed" ] )
+if ( [ "${product}" = "cms" ] || [ "${product}" = "jed" ] || [ "${product}" = "vp" ] )
 then
 	if ( [ "`/bin/echo ${version} | /bin/grep alpha`" != "" ] )
 	then
