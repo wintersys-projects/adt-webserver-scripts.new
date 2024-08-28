@@ -33,6 +33,7 @@ BUILDOS="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'BUILDOS'`"
 
 if ( [ "${BUILDOS}" = "ubuntu" ] || [ "${BUILDOS}" = "debian" ] )
 then
+	DEBIAN_FRONTEND=noninteractive /usr/bin/apt-get  -o DPkg::Lock::Timeout=-1  -qq -y  update
 	DEBIAN_FRONTEND=noninteractive /usr/bin/apt-get  -o DPkg::Lock::Timeout=-1  -qq -y  install pandoc build-essential libssl-dev libexpat-dev libpcre3-dev libapr1-dev libaprutil1-dev libnghttp2-dev
 fi
 
