@@ -38,19 +38,19 @@ if ( [ "${apt}" != "" ] )
 then
 	if ( [ "${buildos}" = "ubuntu" ] )
 	then
-		mysql_apt_config="`/usr/bin/wget -O- https://dev.mysql.com/downloads/repo/apt/ | /bin/grep -o mysql-apt-config.* | /usr/bin/head -1 | /bin/sed 's/deb.*/deb/g'`"
-		/usr/bin/wget https://dev.mysql.com/get/${mysql_apt_config} 
-		DEBIAN_FRONTEND=noninteractive /usr/bin/dpkg -i ${mysql_apt_config}
-		/bin/rm ${mysql_apt_config}
-		DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=60 -qq -y install mysql-client
+	#	mysql_apt_config="`/usr/bin/wget -O- https://dev.mysql.com/downloads/repo/apt/ | /bin/grep -o mysql-apt-config.* | /usr/bin/head -1 | /bin/sed 's/deb.*/deb/g'`"
+	#	/usr/bin/wget https://dev.mysql.com/get/${mysql_apt_config} 
+#		DEBIAN_FRONTEND=noninteractive /usr/bin/dpkg -i ${mysql_apt_config}
+#		/bin/rm ${mysql_apt_config}
+		DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=60 -qq -y install mysql-community-client
 	fi
 
 	if ( [ "${buildos}" = "debian" ] )
 	then
-		mysql_apt_config="`/usr/bin/wget -O- https://dev.mysql.com/downloads/repo/apt/ | /bin/grep -o mysql-apt-config.* | /usr/bin/head -1 | /bin/sed 's/deb.*/deb/g'`"
-		/usr/bin/wget https://dev.mysql.com/get/${mysql_apt_config} 
-		DEBIAN_FRONTEND=noninteractive /usr/bin/dpkg -i ${mysql_apt_config}
-		/bin/rm ${mysql_apt_config}
-		DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=60 -qq -y install mysql-client
+		#mysql_apt_config="`/usr/bin/wget -O- https://dev.mysql.com/downloads/repo/apt/ | /bin/grep -o mysql-apt-config.* | /usr/bin/head -1 | /bin/sed 's/deb.*/deb/g'`"
+		#/usr/bin/wget https://dev.mysql.com/get/${mysql_apt_config} 
+		#DEBIAN_FRONTEND=noninteractive /usr/bin/dpkg -i ${mysql_apt_config}
+		#/bin/rm ${mysql_apt_config}
+		DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=60 -qq -y install mysql-community-client
 	fi
 fi
