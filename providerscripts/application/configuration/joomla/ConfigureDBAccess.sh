@@ -65,18 +65,11 @@ then
 	${HOME}/providerscripts/datastore/configwrapper/PutToConfigDatastore.sh SECRET:${secret}    
 fi
 
-if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEINSTALLATIONTYPE:DBaaS`" = "1" ] )
-then
-	DBaaSHOSTNAME="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DBaaSHOSTNAME'`"
- 	${HOME}/providerscripts/datastore/configwrapper/PutToConfigDatastore.sh DBaaSHOSTNAME:${DBaaSHOSTNAME}    
-fi
-
 if ( [ ! -d /var/www/html/tmp ] )
 then
 	/bin/mkdir -p /var/www/html/tmp
  	/bin/chown www-data:www-data /var/www/html/tmp
    	/bin/chmod 750 /var/www/html/tmp
-
 fi
 
 if ( [ ! -d /var/www/html/logs ] )
