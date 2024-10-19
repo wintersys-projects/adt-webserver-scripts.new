@@ -20,56 +20,56 @@
 ###################################################################################
 #set -x
 
-if ( [ -f /var/www/html/wp-config.php ] )
-then
-	/bin/chmod 600 /var/www/html/wp-config.php
-	/bin/chmod 600 ${HOME}/runtime/wordpress_config.php
-	/bin/chown www-data:www-data /var/www/html/wp-config.php
-	/bin/chown www-data:www-data ${HOME}/runtime/wordpress_config.php
-fi
+#if ( [ -f /var/www/html/wp-config.php ] )
+#then
+#	/bin/chmod 600 /var/www/html/wp-config.php
+#	/bin/chmod 600 ${HOME}/runtime/wordpress_config.php
+#	/bin/chown www-data:www-data /var/www/html/wp-config.php
+#	/bin/chown www-data:www-data ${HOME}/runtime/wordpress_config.php
+#fi
 
-if ( [ -f /var/www/html/wp-config.php ] )
-then
-	dbprefix="`/bin/grep "table_prefix" /var/www/html/wp-config.php | /usr/bin/awk -F"'" '{print $2}'`"
-	if ( [ "${dbprefix}" = "" ] )
-	then
-		dbprefix="`/bin/grep "table_prefix" /var/www/html/wp-config.php | /usr/bin/awk -F"\\"" '{print $2}'`"
-	fi
-	if ( [ -f /var/www/html/dbp.dat ] )
-	then
-		if ( [ "${dbprefix}" != "`/bin/cat /var/www/html/dbp.dat`" ] )
-		then
-			/bin/echo ${dbprefix} > /var/www/html/dbp.dat
-		fi
-	elif ( [ "${dbprefix}" != "" ] )
-	then
-		 /bin/echo ${dbprefix} > /var/www/html/dbp.dat
-	fi
-	
-	/bin/chown www-data:www-data /var/www/html/dbp.dat
-	/bin/chmod 600 /var/www/html/dbp.dat
-
-	if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEDBaaSINSTALLATIONTYPE:Maria`" = "1" ] || [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEINSTALLATIONTYPE:Maria`" = "1" ] )
-	then
-		/bin/echo "For your information this application requires Maria DB as its database" > /var/www/html/dbe.dat
-	fi
-	
-	if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEDBaaSINSTALLATIONTYPE:MySQL`" = "1" ] || [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEINSTALLATIONTYPE:MySQL`" = "1" ] )
-	then
-		/bin/echo "For your information this application requires MySQL as its database"  > /var/www/html/dbe.dat
-	fi
-
-	if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEDBaaSINSTALLATIONTYPE:Postgres`" = "1" ] || [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEINSTALLATIONTYPE:Postgres`" = "1" ] )
-	then
-		/bin/echo "For your information this application requires Postgres as its database"  > /var/www/html/dbe.dat
-	fi
-
-fi
-
-if ( [ ! -d /var/www/html/tmp ] )
-then
-	/bin/mkdir -p /var/www/html/tmp
- 	/bin/chmod 755 /var/www/html/tmp
-  	/bin/chown www-data:www-data /var/www/html/tmp
-fi
+#if ( [ -f /var/www/html/wp-config.php ] )
+#then
+#	dbprefix="`/bin/grep "table_prefix" /var/www/html/wp-config.php | /usr/bin/awk -F"'" '{print $2}'`"
+#	if ( [ "${dbprefix}" = "" ] )
+#	then
+#		dbprefix="`/bin/grep "table_prefix" /var/www/html/wp-config.php | /usr/bin/awk -F"\\"" '{print $2}'`"
+#	fi
+#	if ( [ -f /var/www/html/dbp.dat ] )
+#	then
+#		if ( [ "${dbprefix}" != "`/bin/cat /var/www/html/dbp.dat`" ] )
+#		then
+#			/bin/echo ${dbprefix} > /var/www/html/dbp.dat
+#		fi
+#	elif ( [ "${dbprefix}" != "" ] )
+#	then
+#		 /bin/echo ${dbprefix} > /var/www/html/dbp.dat
+#	fi
+#	
+#	/bin/chown www-data:www-data /var/www/html/dbp.dat
+#	/bin/chmod 600 /var/www/html/dbp.dat
+#
+#	if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEDBaaSINSTALLATIONTYPE:Maria`" = "1" ] || [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEINSTALLATIONTYPE:Maria`" = "1" ] )
+#	then
+#		/bin/echo "For your information this application requires Maria DB as its database" > /var/www/html/dbe.dat
+#	fi
+#	
+#	if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEDBaaSINSTALLATIONTYPE:MySQL`" = "1" ] || [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEINSTALLATIONTYPE:MySQL`" = "1" ] )
+#	then
+#		/bin/echo "For your information this application requires MySQL as its database"  > /var/www/html/dbe.dat
+#	fi
+#
+#	if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEDBaaSINSTALLATIONTYPE:Postgres`" = "1" ] || [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEINSTALLATIONTYPE:Postgres`" = "1" ] )
+#	then
+#		/bin/echo "For your information this application requires Postgres as its database"  > /var/www/html/dbe.dat
+#	fi
+#
+#fi
+#
+#if ( [ ! -d /var/www/html/tmp ] )
+#then
+#	/bin/mkdir -p /var/www/html/tmp
+# 	/bin/chmod 755 /var/www/html/tmp
+#  	/bin/chown www-data:www-data /var/www/html/tmp
+#fi
 
