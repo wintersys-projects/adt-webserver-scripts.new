@@ -20,6 +20,15 @@
 #################################################################################
 #set -x
 
+if ( [ ! -f ${HOME}/runtime/CONFIG_PRIMED ] && [ "`${HOME}/providerscripts/datastore/configwrapper/ListFromConfigDatastore.sh configuration.php.default`" = "" ] )
+then
+	${HOME}/providerscripts/datastore/configwrapper/PutToConfigDatastore.sh /var/www/html/configuration.php.default
+	if ( [ "$?" = "0" ] )
+ 	then
+  		/bin/touch ${HOME}/runtime/CONFIG_PRIMED
+	fi
+fi
+
 if ( [ "`${HOME}/providerscripts/datastore/configwrapper/ListFromConfigDatastore.sh joomla_configuration.php`" != "" ] )
 then
 	/bin/sleep 5
