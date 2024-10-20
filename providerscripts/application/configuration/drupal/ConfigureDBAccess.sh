@@ -31,6 +31,19 @@ then
   	/bin/touch ${HOME}/runtime/DRUPAL_CONFIG_SET
 fi
 
+if ( [ ! -f ${HOME}/runtime/DB_PREFIX_SET ] )
+then
+	dbprefix="`${HOME}/providerscripts/datastore/configwrapper/ListFromConfigDatastore.sh DBPREFIX:*  | /usr/bin/awk -F':' '{print $NF}'`"
+
+	if ( [ "${dbprefix}" = "" ] )
+	then
+		dbprefix="`/bin/cat /var/www/html/dbp.dat`"
+	fi
+ 
+	${HOME}/providerscripts/datastore/configwrapper/PutToConfigDatastore.sh DBPREFIX:${dbprefix}
+ 	/bin/touch ${HOME}/runtime/DB_PREFIX_SET
+fi
+
 if ( [ ! -d  /var/www/private/default_images ] )
 then
 	/bin/mkdir -p /var/www/private/default_images
