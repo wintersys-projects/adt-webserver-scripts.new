@@ -51,19 +51,29 @@ then
 	fi
 fi
 
-dbprefix="`/bin/cat /var/www/html/dbp.dat`"
-if ( [ "${dbprefix}" = "" ] )
+if ( [ ! -f ${HOME}/runtime/DB_PREFIX_SET ] ||  [ ! -f ${HOME}/runtime/SECRET_SET ] )
 then
-	dbprefix="`${HOME}/providerscripts/datastore/configwrapper/ListFromConfigDatastore.sh DBPREFIX:*`"
-fi
+	dbprefix="`${HOME}/providerscripts/datastore/configwrapper/ListFromConfigDatastore.sh DBPREFIX:*  | /usr/bin/awk -F':' '{print $NF}'`"
 
-secret="`${HOME}/providerscripts/datastore/configwrapper/ListFromConfigDatastore.sh SECRET:*  | /usr/bin/awk -F':' '{print $NF}'`"
+	if ( [ "${dbprefix}" != "" ] )
+	then
+		dbprefix="`/bin/cat /var/www/html/dbp.dat`"
+	fi
+ 
+	${HOME}/providerscripts/datastore/configwrapper/PutToConfigDatastore.sh DBPREFIX:${dbprefix}
+ 	/bin/touch ${HOME}/runtime/DB_PREFIX_SET
 
-if ( [ "${secret}" = "" ] )
-then
-	secret="`/usr/bin/openssl rand -base64 32 | /usr/bin/tr -cd 'a-zA-Z0-9' | /usr/bin/cut -b 1-16 | /usr/bin/tr '[:upper:]' '[:lower:]'`"
+	secret="`${HOME}/providerscripts/datastore/configwrapper/ListFromConfigDatastore.sh SECRET:*  | /usr/bin/awk -F':' '{print $NF}'`"
+
+	if ( [ "${secret}" = "" ] )
+	then
+		secret="`/usr/bin/openssl rand -base64 32 | /usr/bin/tr -cd 'a-zA-Z0-9' | /usr/bin/cut -b 1-16 | /usr/bin/tr '[:upper:]' '[:lower:]'`"
+	fi
+
 	${HOME}/providerscripts/datastore/configwrapper/PutToConfigDatastore.sh SECRET:${secret}    
+ 	/bin/touch ${HOME}/runtime/SECRET_SET
 fi
+
 
 if ( [ ! -d /var/www/html/tmp ] )
 then
