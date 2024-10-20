@@ -35,20 +35,8 @@ then
 fi
 
 if ( [ "`${HOME}/providerscripts/datastore/configwrapper/ListFromConfigDatastore.sh joomla_configuration.php`" != "" ] )
-then
-	/bin/sleep 5
-	
-	${HOME}/providerscripts/datastore/configwrapper/GetFromConfigDatastore.sh joomla_configuration.php ${HOME}/runtime/joomla_configuration.php.$$
-
-	if ( [ "`/usr/bin/diff ${HOME}/runtime/joomla_configuration.php.$$ /var/www/html/configuration.php`" != "" ] )
-	then
-		/bin/mv ${HOME}/runtime/joomla_configuration.php.$$ /var/www/html/configuration.php
-		/bin/cp /var/www/html/configuration.php ${HOME}/runtime/joomla_configuration.php
-		/bin/chown www-data:www-data /var/www/html/configuration.php
-		/bin/chmod 600 /var/www/html/configuration.php
-	else
-		/bin/rm ${HOME}/runtime/joomla_configuration.php.$$
-	fi
+then	
+	${HOME}/providerscripts/datastore/configwrapper/GetFromConfigDatastore.sh joomla_configuration.php ${HOME}/runtime/joomla_configuration.php
 fi
 
 if ( [ ! -f ${HOME}/runtime/DB_PREFIX_SET ] ||  [ ! -f ${HOME}/runtime/SECRET_SET ] )
