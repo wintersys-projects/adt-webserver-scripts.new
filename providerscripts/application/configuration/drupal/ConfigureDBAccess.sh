@@ -44,7 +44,15 @@ then
  	/bin/touch ${HOME}/runtime/DB_PREFIX_SET
 fi
 
+if ( [ ! -d  /var/www/private/default_images ] )
+then
+	/bin/mkdir -p /var/www/private/default_images
+fi
 
+if ( [ ! -f /var/www/private/styles/social_medium/private/default_images/default-profile-picture.png.webp ] )
+then
+	/bin/cp -r /var/www/html/sites/default/files/private/* /var/www/private
+fi
 
 #This is the php temporary upload directory
 if ( [ ! -d /var/www/html/tmp ] )
