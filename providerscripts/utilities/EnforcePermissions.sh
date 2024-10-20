@@ -29,6 +29,7 @@ SERVER_USER="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'SERVERUSE
 /bin/chown ${SERVER_USER}:root ${HOME}/.ssh
 /bin/chmod 400 ${HOME}/super/Super.sh
 
+/usr/bin/find /var/www -path /var/www/html -prune -o -exec /bin/chown www-data:www-data {} +
 
 if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh PERSISTASSETSTOCLOUD:0`" = "1" ] )
 then
