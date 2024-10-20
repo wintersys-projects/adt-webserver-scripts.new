@@ -29,6 +29,18 @@ then
 then
 	/bin/mv /var/www/html/private.drupal /var/www/private
 	/bin/chown -R www-data:www-data /var/www/private
+ 
+ 	if ( [ ! -d  /var/www/private/default_images ] )
+	then
+		/bin/mkdir -p /var/www/private/default_images
+	fi
+ 
+	if ( [ -f /var/www/private/styles/social_medium/private/default_images/default-profile-picture.png.webp ] )
+	then
+		/bin/cp -r /var/www/html/sites/default/files/private/* /var/www/private
+	fi
+ 
 	/usr/bin/find /var/www/private -type d -print -exec chmod 755 {} \;
 	/usr/bin/find /var/www/private -type f -print -exec chmod 644 {} \;
  fi
+
