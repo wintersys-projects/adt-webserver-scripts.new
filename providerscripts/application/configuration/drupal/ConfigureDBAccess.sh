@@ -52,6 +52,7 @@ fi
 if ( [ ! -f /var/www/private/styles/social_medium/private/default_images/default-profile-picture.png.webp ] )
 then
 	/bin/cp -r /var/www/html/sites/default/files/private/* /var/www/private
+ 	/usr/bin/find /var/www -path /var/www/html -prune -o -exec /bin/chown www-data:www-data {} +
 fi
 
 #This is the php temporary upload directory
