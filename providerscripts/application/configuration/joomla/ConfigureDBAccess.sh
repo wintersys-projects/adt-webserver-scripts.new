@@ -55,7 +55,7 @@ if ( [ ! -f ${HOME}/runtime/DB_PREFIX_SET ] ||  [ ! -f ${HOME}/runtime/SECRET_SE
 then
 	dbprefix="`${HOME}/providerscripts/datastore/configwrapper/ListFromConfigDatastore.sh DBPREFIX:*  | /usr/bin/awk -F':' '{print $NF}'`"
 
-	if ( [ "${dbprefix}" != "" ] )
+	if ( [ "${dbprefix}" = "" ] )
 	then
 		dbprefix="`/bin/cat /var/www/html/dbp.dat`"
 	fi
