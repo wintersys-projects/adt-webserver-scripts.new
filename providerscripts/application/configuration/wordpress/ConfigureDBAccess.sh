@@ -11,3 +11,17 @@ then
   		/bin/touch ${HOME}/runtime/CONFIG_PRIMED
 	fi
 fi
+
+if ( [ "`${HOME}/providerscripts/datastore/configwrapper/ListFromConfigDatastore.sh wordpress_config.php`" != "" ] )
+then
+	${HOME}/providerscripts/datastore/configwrapper/GetFromConfigDatastore.sh wordpress_config.php ${HOME}/runtime/wordpress_config.php.$$
+
+	if ( [ "`/usr/bin/diff ${HOME}/runtime/wordpress_config.php.$$ /var/www/html/wp-config.php`" != "" ] )
+	then
+		/bin/mv ${HOME}/runtime/wordpress_config.php.$$ /var/www/html/wp-config.php
+		/bin/chown www-data:www-data /var/www/html/wp-config.php
+		/bin/chmod 600 /var/www/html/wp-config.php
+	else
+		/bin/rm ${HOME}/runtime/wordpress_config.php.$$
+	fi
+fi
