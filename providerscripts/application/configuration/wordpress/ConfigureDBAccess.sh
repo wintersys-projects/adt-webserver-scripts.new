@@ -12,9 +12,9 @@ then
 	fi
 fi
 
-if ( [ "`${HOME}/providerscripts/datastore/configwrapper/ListFromConfigDatastore.sh wp-config-sample.php`" != "" ] )
+if ( [ "`${HOME}/providerscripts/datastore/configwrapper/ListFromConfigDatastore.sh wordpress_config.php`" != "" ] )
 then
-	${HOME}/providerscripts/datastore/configwrapper/GetFromConfigDatastore.sh wp-config-sample.php ${HOME}/runtime/wordpress_config.php
+	${HOME}/providerscripts/datastore/configwrapper/GetFromConfigDatastore.sh wordpress_config.php ${HOME}/runtime/wordpress_config.php
 
 	if ( [ -f /var/www/html/wp-config.php ] )
  	then
