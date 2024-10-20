@@ -25,3 +25,16 @@ then
 		/bin/rm ${HOME}/runtime/wordpress_config.php.$$
 	fi
 fi
+
+if ( [ ! -f ${HOME}/runtime/DB_PREFIX_SET ] )
+then
+	dbprefix="`${HOME}/providerscripts/datastore/configwrapper/ListFromConfigDatastore.sh DBPREFIX:*  | /usr/bin/awk -F':' '{print $NF}'`"
+
+	if ( [ "${dbprefix}" = "" ] )
+	then
+		dbprefix="`/bin/cat /var/www/html/dbp.dat`"
+	fi
+ 
+	${HOME}/providerscripts/datastore/configwrapper/PutToConfigDatastore.sh DBPREFIX:${dbprefix}
+ 	/bin/touch ${HOME}/runtime/DB_PREFIX_SET
+fi
