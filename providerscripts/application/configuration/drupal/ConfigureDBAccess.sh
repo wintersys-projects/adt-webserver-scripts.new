@@ -47,6 +47,8 @@ fi
 if ( [ ! -d  /var/www/private/default_images ] )
 then
 	/bin/mkdir -p /var/www/private/default_images
+	/bin/cp -r /var/www/html/sites/default/files/private/* /var/www/private
+	/bin/chown -R www-data:www-data /var/www/private
 fi
 
 #This is the php temporary upload directory
