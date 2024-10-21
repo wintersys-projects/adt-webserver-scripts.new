@@ -70,31 +70,3 @@ then
  	/bin/touch ${HOME}/runtime/SECRET_SET
 fi
 
-
-if ( [ ! -d /var/www/html/tmp ] )
-then
-	/bin/mkdir -p /var/www/html/tmp
- 	/bin/chown www-data:www-data /var/www/html/tmp
-   	/bin/chmod 750 /var/www/html/tmp
-fi
-
-if ( [ ! -d /var/www/html/logs ] )
-then
-	/bin/mkdir -p /var/www/html/logs
-  	/bin/chown www-data:www-data /var/www/html/logs
-      	/bin/chmod 750 /var/www/html/logs
-fi
-
-if ( [ ! -d /var/www/html/cache ] )
-then
-	/bin/mkdir -p /var/www/html/cache
-  	/bin/chown www-data:www-data /var/www/html/cache
-   	/bin/chmod 750 /var/www/html/cache
-fi
-
-if ( [ -f /var/www/html/cli/garbagecron.php ] )
-then
-	/usr/bin/php /var/www/html/cli/garbagecron.php
-elif ( [ -f /var/www/html/cli/joomla.php ] )
-	/usr/bin/php /var/www/html/cli/joomla.php cache:clean
-fi
