@@ -57,5 +57,4 @@ then
 	/bin/mkdir -p /var/www/html/tmp
 fi
 	
-/bin/touch ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED
 /bin/echo "1"
