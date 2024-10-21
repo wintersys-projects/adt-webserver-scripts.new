@@ -68,15 +68,6 @@ then
  	/bin/touch ${HOME}/runtime/DB_PREFIX_SET
 fi
 
-#This is the php temporary upload directory
-if ( [ ! -d /var/www/html/tmp ] )
-then
-	/bin/mkdir -p /var/www/html/tmp
-fi
 
-if ( [ ! -d /var/www/moodledata ] )
-then
-	/bin/mkdir /var/www/moodledata
-fi
 
 
