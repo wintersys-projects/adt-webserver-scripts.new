@@ -22,7 +22,7 @@
 
 #These scripts run every minute
 /bin/echo "*/1 * * * * export HOME="${HOMEDIR}" && ${HOME}/providerscripts/webserver/CheckWebserverIsUp.sh ${WEBSERVER_CHOICE}" >> /var/spool/cron/crontabs/root
-/bin/echo "*/1 * * * * export HOME="${HOMEDIR}" && ${HOME}/providerscripts/application/configuration/ConfigureDBAccessByApplication.sh" >> /var/spool/cron/crontabs/root
+/bin/echo "*/1 * * * * export HOME="${HOMEDIR}" && ${HOME}/providerscripts/application/configuration/InstallConfigurationByApplication.sh" >> /var/spool/cron/crontabs/root
 /bin/echo "*/1 * * * * export HOME="${HOMEDIR}" && ${HOME}/providerscripts/application/configuration/InitialiseVirginInstallByApplication.sh" >> /var/spool/cron/crontabs/root
 /bin/echo "*/1 * * * * export HOME="${HOMEDIR}" && ${HOME}/providerscripts/application/configuration/InstallConfigurationByApplication.sh" >> /var/spool/cron/crontabs/root
 /bin/echo "*/1 * * * * export HOME="${HOMEDIR}" && ${HOME}/providerscripts/utilities/AcknowledgeBuildCompletion.sh" >> /var/spool/cron/crontabs/root
