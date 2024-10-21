@@ -32,7 +32,7 @@ fi
 
 if ( [ ! -f ${HOME}/runtime/CONFIG_PRIMED ] && [ "`${HOME}/providerscripts/datastore/configwrapper/ListFromConfigDatastore.sh confign.php`" = "" ] )
 then
-	${HOME}/providerscripts/datastore/configwrapper/PutToConfigDatastore.sh /var/www/html/config.php
+	${HOME}/providerscripts/datastore/configwrapper/PutToConfigDatastore.sh /var/www/html/moodle/config.php
 	if ( [ "$?" = "0" ] )
  	then
   		/bin/touch ${HOME}/runtime/CONFIG_PRIMED
