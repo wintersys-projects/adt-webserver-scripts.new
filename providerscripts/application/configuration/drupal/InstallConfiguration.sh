@@ -42,7 +42,6 @@ then
 	/bin/chmod 600 /var/www/html/.htaccess
 fi
 
-#if ( [ ! -d /var/www/html/sites/default/files/private ] )
 if ( [ ! -d /var/www/private/default_images ] )
 then
 	/bin/mkdir -p /var/www/private/default_images
@@ -51,18 +50,25 @@ then
 	/usr/bin/find /var/www/private -type f -exec chmod 644 {} \;
 fi
 
-#if ( [ -f /var/www/html/sites/default/files ] )
-#then
-#	/bin/chown -R www-data:www-data /var/www/html/sites/default/files
-#	/usr/bin/find /var/www/html/sites/default/files -type d -exec chmod g+ws {} \;
-#	/usr/bin/find /var/www/html/sites/default/files -type f -exec chmod 664 {} \;
-#fi
+if ( [ ! -f /var/www/private/styles/social_medium/private/default_images/default-profile-picture.png.webp ] )
+then
+	/bin/cp -r /var/www/html/sites/default/files/private/* /var/www/private
+ 	/usr/bin/find /var/www -path /var/www/html -prune -o -exec /bin/chown www-data:www-data {} +
+fi
 
-#if ( [ ! -f /var/www/html/sites/default/files/private/.htaccess ] )
-#then
-#	/bin/cp ${HOME}/providerscripts/application/configuration/drupal-htaccess-private.txt /var/www/html/sites/default/files/private/.htaccess
-#	/bin/chown www-data:www-data /var/www/html/sites/default/files/private/.htaccess
-#	/bin/chmod 600 /var/www/html/sites/default/files/private/.htaccess
-#fi
+#This is the php temporary upload directory
+if ( [ ! -d /var/www/html/tmp ] )
+then
+	/bin/mkdir -p /var/www/html/tmp
+ 	/bin/chown www-data:www-data /var/www/html/tmp
+	/bin/chmod 755 /var/www/html/tmp
+fi
+
+if ( [ ! -d /var/www/tmp ] )
+then
+	/bin/mkdir -p /var/www/tmp
+	/bin/chmod 755 /var/www/tmp
+	/bin/chown www-data:www-data /var/www/tmp
+fi
 
 /bin/echo "1"
