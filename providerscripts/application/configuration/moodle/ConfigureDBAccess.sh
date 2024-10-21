@@ -81,4 +81,9 @@ then
 	/bin/mkdir -p /var/www/html/tmp
 fi
 
+if ( [ ! -d /var/www/moodledata ] )
+then
+	/bin/mkdir /var/www/moodledata
+fi
+
 
