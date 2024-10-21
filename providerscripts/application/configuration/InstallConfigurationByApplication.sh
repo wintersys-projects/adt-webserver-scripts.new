@@ -27,7 +27,7 @@ do
 	applicationname="`/bin/echo ${applicationdir} | /bin/sed 's/\/$//' | /usr/bin/awk -F'/' '{print $NF}'`"
 	if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh APPLICATION:${applicationname}`" = "1" ] )
 	then
-		. ${applicationdir}InstallConfiguration.sh
+		. ${applicationdir}SetApplicationConfiguration.sh
 	fi
 done
 
