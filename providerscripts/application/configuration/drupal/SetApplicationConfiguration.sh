@@ -65,28 +65,3 @@ then
  	/bin/touch ${HOME}/runtime/DB_PREFIX_SET
 fi
 
-if ( [ ! -d  /var/www/private/default_images ] )
-then
-	/bin/mkdir -p /var/www/private/default_images
-fi
-
-if ( [ ! -f /var/www/private/styles/social_medium/private/default_images/default-profile-picture.png.webp ] )
-then
-	/bin/cp -r /var/www/html/sites/default/files/private/* /var/www/private
- 	/usr/bin/find /var/www -path /var/www/html -prune -o -exec /bin/chown www-data:www-data {} +
-fi
-
-#This is the php temporary upload directory
-if ( [ ! -d /var/www/html/tmp ] )
-then
-	/bin/mkdir -p /var/www/html/tmp
- 	/bin/chown www-data:www-data /var/www/html/tmp
-	/bin/chmod 755 /var/www/html/tmp
-fi
-
-if ( [ ! -d /var/www/tmp ] )
-then
-	/bin/mkdir -p /var/www/tmp
-	/bin/chmod 755 /var/www/tmp
-	/bin/chown www-data:www-data /var/www/tmp
-fi
