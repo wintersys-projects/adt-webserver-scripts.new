@@ -68,13 +68,6 @@ then
  	/bin/touch ${HOME}/runtime/DB_PREFIX_SET
 fi
 
-
-
-
-
-
-
-
 #This is the php temporary upload directory
 if ( [ ! -d /var/www/html/tmp ] )
 then
