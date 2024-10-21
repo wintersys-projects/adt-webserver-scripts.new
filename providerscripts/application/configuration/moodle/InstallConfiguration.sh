@@ -50,6 +50,12 @@ then
 	/bin/chmod -R 755 /var/www/html/moodledata
 	/bin/chown -R www-data:www-data /var/www/html/moodledata
 fi
+
+#This is the php temporary upload directory
+if ( [ ! -d /var/www/html/tmp ] )
+then
+	/bin/mkdir -p /var/www/html/tmp
+fi
 	
 /bin/touch ${HOME}/runtime/APPLICATION_CONFIGURATION_PREPARED
 /bin/echo "1"
