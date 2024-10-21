@@ -41,10 +41,10 @@ then
   	then
    		/bin/rm /var/www/html/wp-config.php
 	fi
- 	/bin/cp ${HOME}/runtime/wordpress_config.php /var/www/html/wp-config.php
-    	/bin/chown www:data-www:data /var/www/html/wp-config.php
-   	/bin/chmod 600 /var/www/html/wp-config.php
-  	/bin/touch ${HOME}/runtime/WP_CONFIG_SET
+	/bin/cp ${HOME}/runtime/wordpress_config.php /var/www/html/wp-config.php
+	/bin/chown www:data-www:data /var/www/html/wp-config.php
+	/bin/chmod 600 /var/www/html/wp-config.php
+	/bin/touch ${HOME}/runtime/WP_CONFIG_SET
 fi
 
 if ( [ ! -f ${HOME}/runtime/DB_PREFIX_SET ] )
