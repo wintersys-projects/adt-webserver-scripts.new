@@ -47,9 +47,21 @@ then
    		/bin/rm /var/www/html/sites/default/settings.php
 	fi
  	/bin/cp ${HOME}/runtime/drupal_settings.php /var/www/html/sites/default/settings.php
-  	/bin/chown www:data-www:data /var/www/html/sites/default/settings.php
-   	/bin/chmod 600 /var/www/html/sites/default/settings.php
   	/bin/touch ${HOME}/runtime/DRUPAL_CONFIG_SET
+elif ( [ "`${HOME}/providerscripts/datastore/configwrapper/ListFromConfigDatastore.sh wordpress_config.php`" != "" ] )
+then
+	${HOME}/providerscripts/datastore/configwrapper/GetFromConfigDatastore.sh drupal_settings.php ${HOME}/runtime/drupal_settings.php.$$
+	if ( [ "`/usr/bin/diff ${HOME}/runtime/drupal_settings.php.$$ /var/www/html/sites/default/settings.php`" != "" ] )
+	then
+		/bin/cp ${HOME}/runtime/drupal_settings.php.$$ ${HOME}/runtime/drupal_settings.php
+		/bin/mv ${HOME}/runtime/drupal_settings.php.$$ /var/www/html/sites/default/settings.php
+	fi
+fi
+
+if ( [ -f /var/www/html/sites/default/settings.php ] )
+then
+	/bin/chown www:data-www:data /var/www/html/sites/default/settings.php
+	/bin/chmod 600 /var/www/html/sites/default/settings.php
 fi
 
 if ( [ ! -f ${HOME}/runtime/DB_PREFIX_SET ] )
