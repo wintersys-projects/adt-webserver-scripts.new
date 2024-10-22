@@ -49,10 +49,21 @@ then
 	fi
  	
   	/bin/cp ${HOME}/runtime/moodle_config.php /var/www/html/moodle/config.php
-  	/bin/chown www:data-www:data /var/www/html/moodle/config.php
-   	/bin/chmod 600 /var/www/html/moodle/config.php
   	/bin/touch ${HOME}/runtime/MOODLE_CONFIG_SET
-   
+elif ( [ "`${HOME}/providerscripts/datastore/configwrapper/ListFromConfigDatastore.sh moodle_config.php`" != "" ] )
+then
+	${HOME}/providerscripts/datastore/configwrapper/GetFromConfigDatastore.sh moodle_config.php ${HOME}/runtime/moodle_config.php.$$
+	if ( [ "`/usr/bin/diff ${HOME}/runtime/moodle_config.php.$$ /var/www/html/moodle/config.php`" != "" ] )
+	then
+		/bin/cp ${HOME}/runtime/moodle_config.php.$$ ${HOME}/runtime/moodle_config.php
+		/bin/mv ${HOME}/runtime/moodle_config.php.$$ /var/www/html/moodle/config.php
+	fi
+fi
+
+if ( [ -f /var/www/html/moodle/config.php ] )
+then
+	/bin/chown www:data-www:data /var/www/html/moodle/config.php
+	/bin/chmod 600 /var/www/html/moodle/config.php
 fi
 
 if ( [ ! -f ${HOME}/runtime/DB_PREFIX_SET ] )
