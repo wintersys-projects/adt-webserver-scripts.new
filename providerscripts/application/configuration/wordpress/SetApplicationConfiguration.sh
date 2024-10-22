@@ -42,8 +42,6 @@ then
    		/bin/rm /var/www/html/wp-config.php
 	fi
 	/bin/cp ${HOME}/runtime/wordpress_config.php /var/www/html/wp-config.php
-	/bin/chown www:data-www:data /var/www/html/wp-config.php
-	/bin/chmod 600 /var/www/html/wp-config.php
 	/bin/touch ${HOME}/runtime/WP_CONFIG_SET
 elif ( [ "`${HOME}/providerscripts/datastore/configwrapper/ListFromConfigDatastore.sh wordpress_config.php`" != "" ] )
 then
@@ -55,8 +53,11 @@ then
         fi
 fi
 
-/bin/chown www:data-www:data /var/www/html/wp-config.php
-/bin/chmod 600 /var/www/html/wp-config.php
+if ( [ -f /var/www/html/wp-config.php ] )
+then
+	/bin/chown www:data-www:data /var/www/html/wp-config.php
+	/bin/chmod 600 /var/www/html/wp-config.php
+fi
 
 if ( [ ! -f ${HOME}/runtime/DB_PREFIX_SET ] )
 then
