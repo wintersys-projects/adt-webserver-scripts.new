@@ -45,7 +45,18 @@ then
 	/bin/chown www:data-www:data /var/www/html/wp-config.php
 	/bin/chmod 600 /var/www/html/wp-config.php
 	/bin/touch ${HOME}/runtime/WP_CONFIG_SET
+elif ( [ "`${HOME}/providerscripts/datastore/configwrapper/ListFromConfigDatastore.sh wordpress_config.php`" != "" ] )
+then
+	${HOME}/providerscripts/datastore/configwrapper/GetFromConfigDatastore.sh wordpress_config.php ${HOME}/runtime/wordpress_config.php.$$
+        if ( [ "`/usr/bin/diff ${HOME}/runtime/wordpress_config.php.$$ /var/www/html/wp-config.php`" != "" ] )
+        then
+                /bin/cp ${HOME}/runtime/wordpress_config.php.$$ ${HOME}/runtime/wordpress_config.php
+                /bin/mv ${HOME}/runtime/wordpress_config.php.$$ /var/www/html/wp-config.php
+        fi
 fi
+
+/bin/chown www:data-www:data /var/www/html/wp-config.php
+/bin/chmod 600 /var/www/html/wp-config.php
 
 if ( [ ! -f ${HOME}/runtime/DB_PREFIX_SET ] )
 then
