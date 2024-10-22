@@ -46,11 +46,11 @@ then
 elif ( [ "`${HOME}/providerscripts/datastore/configwrapper/ListFromConfigDatastore.sh wordpress_config.php`" != "" ] )
 then
 	${HOME}/providerscripts/datastore/configwrapper/GetFromConfigDatastore.sh wordpress_config.php ${HOME}/runtime/wordpress_config.php.$$
-        if ( [ "`/usr/bin/diff ${HOME}/runtime/wordpress_config.php.$$ /var/www/html/wp-config.php`" != "" ] )
-        then
-                /bin/cp ${HOME}/runtime/wordpress_config.php.$$ ${HOME}/runtime/wordpress_config.php
-                /bin/mv ${HOME}/runtime/wordpress_config.php.$$ /var/www/html/wp-config.php
-        fi
+	if ( [ "`/usr/bin/diff ${HOME}/runtime/wordpress_config.php.$$ /var/www/html/wp-config.php`" != "" ] )
+	then
+		/bin/cp ${HOME}/runtime/wordpress_config.php.$$ ${HOME}/runtime/wordpress_config.php
+		/bin/mv ${HOME}/runtime/wordpress_config.php.$$ /var/www/html/wp-config.php
+	fi
 fi
 
 if ( [ -f /var/www/html/wp-config.php ] )
