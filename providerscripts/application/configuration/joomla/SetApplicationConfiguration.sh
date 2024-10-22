@@ -54,8 +54,11 @@ then
         fi
 fi
 
-/bin/chown www:data-www:data /var/www/html/configuration.php
-/bin/chmod 600 /var/www/html/configuration.php
+if ( [ -f /var/www/html/configuration.php ] )
+then
+        /bin/chown www:data-www:data /var/www/html/configuration.php
+        /bin/chmod 600 /var/www/html/configuration.php
+fi
 
 if ( [ ! -f ${HOME}/runtime/DB_PREFIX_SET ] ||  [ ! -f ${HOME}/runtime/SECRET_SET ] )
 then
