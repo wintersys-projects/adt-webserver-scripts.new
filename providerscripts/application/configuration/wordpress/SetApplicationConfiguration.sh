@@ -50,6 +50,8 @@ then
 	then
 		/bin/cp ${HOME}/runtime/wordpress_config.php.$$ ${HOME}/runtime/wordpress_config.php
 		/bin/mv ${HOME}/runtime/wordpress_config.php.$$ /var/www/html/wp-config.php
+  	else
+   		/bin/rm ${HOME}/runtime/wordpress_config.php.$$
 	fi
 fi
 
