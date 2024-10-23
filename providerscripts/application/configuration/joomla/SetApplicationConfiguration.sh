@@ -51,6 +51,8 @@ then
         then
                 /bin/cp ${HOME}/runtime/joomla_configuration.php.$$ ${HOME}/runtime/joomla_configuration.php
                 /bin/mv ${HOME}/runtime/joomla_configuration.php.$$ /var/www/html/configuration.php
+        else
+                /bin/rm ${HOME}/runtime/joomla_configuration.php.$$
         fi
 fi
 
