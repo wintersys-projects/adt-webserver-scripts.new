@@ -57,6 +57,8 @@ then
 	then
 		/bin/cp ${HOME}/runtime/moodle_config.php.$$ ${HOME}/runtime/moodle_config.php
 		/bin/mv ${HOME}/runtime/moodle_config.php.$$ /var/www/html/moodle/config.php
+  	else
+   		/bin/rm ${HOME}/runtime/moodle_config.php.$$
 	fi
 fi
 
