@@ -58,7 +58,7 @@ fi
 
 if ( [ -f /var/www/html/configuration.php ] )
 then
-        /bin/chown www:data-www:data /var/www/html/configuration.php
+        /bin/chown www-data:www-data /var/www/html/configuration.php
         /bin/chmod 600 /var/www/html/configuration.php
 fi
 
