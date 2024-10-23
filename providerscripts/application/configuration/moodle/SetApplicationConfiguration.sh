@@ -64,7 +64,7 @@ fi
 
 if ( [ -f /var/www/html/moodle/config.php ] )
 then
-	/bin/chown www:data-www:data /var/www/html/moodle/config.php
+	/bin/chown www-data:www-data /var/www/html/moodle/config.php
 	/bin/chmod 600 /var/www/html/moodle/config.php
 fi
 
