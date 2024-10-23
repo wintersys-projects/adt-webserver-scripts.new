@@ -55,6 +55,8 @@ then
 	then
 		/bin/cp ${HOME}/runtime/drupal_settings.php.$$ ${HOME}/runtime/drupal_settings.php
 		/bin/mv ${HOME}/runtime/drupal_settings.php.$$ /var/www/html/sites/default/settings.php
+  	else
+   		/bin/rm ${HOME}/runtime/drupal_settings.php.$$
 	fi
 fi
 
