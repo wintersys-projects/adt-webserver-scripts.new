@@ -460,7 +460,6 @@ ${HOME}/providerscripts/utilities/CleanupAfterBuild.sh
 
 /bin/echo "${0} #######################################################################################" >> ${HOME}/logs/initialbuild/BUILD_PROCESS_MONITORING.log
 >&2 /bin/echo "${0} Rebooting post install...."
-/bin/echo "${0} `/bin/date`: Fake rebooting (to save build time) post install....." >> ${HOME}/logs/initialbuild/BUILD_PROCESS_MONITORING.log
 /bin/echo "${0} #######################################################################################" >> ${HOME}/logs/initialbuild/BUILD_PROCESS_MONITORING.log
 
 #Needs to be here so its not absent from the backup
