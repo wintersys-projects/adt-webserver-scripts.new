@@ -1,7 +1,6 @@
 By default the scrips will look for the files
 
 site-available.conf
-gatewayguardian.conf
 fastcgi.conf
 
 in this directory. You can drop in replace any of these files by moving them from this directory and replacing them with configurations that you keep in the offline directory.
