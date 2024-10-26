@@ -64,13 +64,6 @@ fi
 
 if ( [ -f /etc/lighttpd/lighttpd.conf ] )
 then
-	if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh GATEWAYGUARDIAN:1`" = "1" ] )
-	then
-		/bin/sed -i -e "/XXXXGATEWAYGUARDIANXXXX/{r ${HOME}/providerscripts/webserver/configuration/${APPLICATION}/lighttpd/online/repo/gatewayguardian.conf" -e "d}" /etc/lighttpd/lighttpd.conf
-	else
-		/bin/sed -i "s/XXXXGATEWAYGUARDIANXXXX//g" /etc/lighttpd/lighttpd.conf
-	fi
-
 	port="`${HOME}/providerscripts/utilities/ExtractBuildStyleValues.sh "PHP" "stripped" | /usr/bin/awk -F'|' '{print $NF}'`"
 
 	if ( [ "`/bin/echo ${port} | /bin/grep -o "^[0-9]*$"`" = "" ] )
