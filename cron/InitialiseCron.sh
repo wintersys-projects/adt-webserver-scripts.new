@@ -42,12 +42,6 @@ fi
 
 /bin/echo "*/10 * * * * export HOME="${HOMEDIR}" && ${HOME}/providerscripts/utilities/MonitorCron.sh" >> /var/spool/cron/crontabs/root
 
-#Each morning at 6:30 generate static site if we need to you can change this to be whatever periodicity you want if you are generating static sites
-if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh GENERATESTATIC:1`" = "1" ] )
-then
-	/bin/echo "30 6 * * * export HOME="${HOMEDIR}" && ${HOME}/providerscripts/datastore/GenerateStaticSite.sh" >> /var/spool/cron/crontabs/root
-fi
-
 /bin/echo "*/1 * * * * export HOME=${HOMEDIR} && ${HOME}/providerscripts/datastore/ObtainBuildClientIP.sh" >> /var/spool/cron/crontabs/root
 /bin/echo "*/1 * * * * export HOME="${HOMEDIR}" && ${HOME}/cron/SetupFirewallFromCron.sh" >> /var/spool/cron/crontabs/root
 /bin/echo "*/1 * * * * export HOME="${HOMEDIR}" && ${HOME}/providerscripts/utilities/MarkedForShutdown.sh" >> /var/spool/cron/crontabs/root
