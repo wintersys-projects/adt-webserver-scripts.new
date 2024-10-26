@@ -63,13 +63,6 @@ then
 	/usr/sbin/a2ensite /${WEBSITE_NAME}
 fi
 
-if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh GATEWAYGUARDIAN:1`" = "1" ] )
-then
-	/bin/sed -i -e "/XXXXGATEWAYGUARDIANXXXX/{r ${HOME}/providerscripts/webserver/configuration/${APPLICATION}/apache/online/repo/gatewayguardian.conf" -e "d}" /etc/apache2/sites-available/${WEBSITE_NAME}.conf
-else
-	/bin/sed -i "s/XXXXGATEWAYGUARDIANXXXX//g" /etc/apache2/sites-available/${WEBSITE_NAME}.conf
-fi
-
 port="`${HOME}/providerscripts/utilities/ExtractBuildStyleValues.sh "PHP" "stripped" | /usr/bin/awk -F'|' '{print $NF}'`"
 
 if ( [ "`/bin/echo ${port} | /bin/grep -o "^[0-9]*$"`" = "" ] )
