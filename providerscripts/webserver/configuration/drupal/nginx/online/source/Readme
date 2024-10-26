@@ -4,7 +4,6 @@ blockuseragents.rules
 fastcgi-php.conf
 fastcgi_port.conf
 fastcgi_socket.conf
-gatewayguardian.conf
 logrotate.conf
 nginx-service.conf
 nginx.conf
