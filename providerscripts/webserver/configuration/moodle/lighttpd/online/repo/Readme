@@ -2,7 +2,6 @@ By default the scrips will look for the files
 
 fastcgi_port.conf
 fastcgi_socket.conf
-gatewayguardian.conf
 lighttpd.conf
 mimetypes.conf
 modules.conf
