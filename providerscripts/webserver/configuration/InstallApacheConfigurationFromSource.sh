@@ -60,13 +60,6 @@ then
 	/bin/ln -s /etc/apache2/sites-available/${WEBSITE_NAME} /etc/apache2/sites-enabled/${WEBSITE_NAME}
 fi
 
-if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh GATEWAYGUARDIAN:1`" = "1" ] )
-then
-	/bin/sed -i -e "/XXXXGATEWAYGUARDIANXXXX/{r ${HOME}/providerscripts/webserver/configuration/${APPLICATION}/apache/online/source/gatewayguardian.conf" -e "d}" /etc/apache2/sites-available/${WEBSITE_NAME}
-else
-	/bin/sed -i "s/XXXXGATEWAYGUARDIANXXXX//g" /etc/apache2/sites-available/${WEBSITE_NAME}
-fi
-
 if ( [ -f /etc/apache2/httpd.conf ] )
 then
 	/bin/sed -i "s/XXXXWEBSITEURLXXXX/ServerName ${WEBSITE_URL}/g" /etc/apache2/httpd.conf
