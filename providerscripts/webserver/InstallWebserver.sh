@@ -26,14 +26,6 @@ WEBSITE_URL="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'WEBSITEUR
 WEBSITE_NAME="`/bin/echo ${WEBSITE_URL} | /usr/bin/awk -F'.' '{print $2}'`"
 SERVER_USER="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'SERVERUSER'`"
 
-if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh GATEWAYGUARDIAN:1`" = "1" ] )
-then
-	if ( [ ! -d /etc/basicauth ] )
-	then
-		/bin/mkdir /etc/basicauth
-	fi
-fi
-
 if ( [ "${WEBSERVER_TYPE}" = "NGINX" ] )
 then
 
