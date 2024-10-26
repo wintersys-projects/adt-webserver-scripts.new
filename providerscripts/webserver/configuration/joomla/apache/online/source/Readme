@@ -2,7 +2,6 @@ By default the scrips will look for the files
 
 httpd.conf
 site-available.conf
-gatewayguardian.conf
 fastcgi.conf
 envvars.conf
 ports.conf
