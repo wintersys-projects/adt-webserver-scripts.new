@@ -44,16 +44,6 @@ then
 	/bin/sed -i "s,XXXXHOMEXXXX,${HOME},g" /etc/nginx/sites-available/${WEBSITE_NAME}
 fi
 
-if ( [ -f ${HOME}/providerscripts/webserver/configuration/${APPLICATION}/nginx/online/source/gatewayguardian.conf ] )
-then
-	if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh GATEWAYGUARDIAN:1`" = "1" ] )
-	then
-		/bin/sed -i -e "/XXXXGATEWAYGUARDIANXXXX/{r ${HOME}/providerscripts/webserver/configuration/${APPLICATION}/nginx/online/source/gatewayguardian.conf" -e "d}" /etc/nginx/sites-available/${WEBSITE_NAME}
-	else
-		/bin/sed -i "s/XXXXGATEWAYGUARDIANXXXX//g" /etc/nginx/sites-available/${WEBSITE_NAME}
-	fi
-fi
-
 port="`${HOME}/providerscripts/utilities/ExtractBuildStyleValues.sh "PHP" "stripped" | /usr/bin/awk -F'|' '{print $NF}'`"
 
 if ( [ "`/bin/echo ${port} | /bin/grep -o "^[0-9]*$"`" = "" ] )
