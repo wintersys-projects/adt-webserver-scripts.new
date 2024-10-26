@@ -3,7 +3,6 @@ By default the scrips will look for the files
 blockuseragents.rules
 nginx.conf
 site-available.conf
-gatewayguardian.conf
 fastcgi_socket.conf
 fastsgi_port.conf
 
