@@ -186,13 +186,6 @@ then
 	/bin/echo "${0} `/bin/date`: setting dataroot to /var/www/html/moodledata" >> ${HOME}/logs/OPERATIONAL_MONITORING.log
 fi
 
-#/bin/echo "\$CFG->slasharguments = false;" >> ${HOME}/runtime/moodle_config.php 
-
-WEBSITE_DISPLAY_NAME="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'WEBSITEDISPLAYNAME'`"
-
-${HOME}/providerscripts/application/email/ActivateSMTPByApplication.sh "${WEBSITE_DISPLAY_NAME}" 
-/bin/echo "${0} `/bin/date`: setting up SMTP" >> ${HOME}/logs/OPERATIONAL_MONITORING.log
-
 if ( ( [ -f ${HOME}/runtime/moodle_config.php ] &&
 	[ "${NAME}" != "" ] && [ "${PASSWORD}" != "" ] && [ "${DATABASE}" != "" ] && [ "${HOST}" != "" ] &&
 	[ "`/bin/grep ${NAME} ${HOME}/runtime/moodle_config.php`" != "" ] &&
