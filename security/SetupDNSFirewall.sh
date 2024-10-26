@@ -119,25 +119,23 @@ then
 	fi
 fi
 
-if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh AUTHORISATIONSERVER:1`" = "0" ] )
+if ( [ "${DNS_CHOICE}" = "digitalocean" ] )
 then
-	if ( [ "${DNS_CHOICE}" = "digitalocean" ] )
-	then
-		/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow 443/tcp
-	fi
-
-	if ( [ "${DNS_CHOICE}" = "exoscale" ] )
-	then
-		/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow 443/tcp
-	fi
-
-	if ( [ "${DNS_CHOICE}" = "linode" ] )
-	then
-		/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow 443/tcp
-	fi
-
-	if ( [ "${DNS_CHOICE}" = "vultr" ] )
-	then
-		/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow 443/tcp
-	fi
+	/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow 443/tcp
 fi
+
+if ( [ "${DNS_CHOICE}" = "exoscale" ] )
+then
+	/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow 443/tcp
+fi
+
+if ( [ "${DNS_CHOICE}" = "linode" ] )
+then
+	/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow 443/tcp
+fi
+
+if ( [ "${DNS_CHOICE}" = "vultr" ] )
+then
+	/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow 443/tcp
+fi
+
