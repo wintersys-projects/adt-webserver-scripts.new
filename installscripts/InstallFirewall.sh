@@ -24,6 +24,8 @@ then
 	buildos="${1}"
 fi
 
+echo "${buildos} ${HOME}" > /home/X*X/DUMP
+
 firewall=""
 if ( [ "`${HOME}/providerscripts/utilities/ExtractBuildStyleValues.sh "FIREWALL" | /usr/bin/awk -F':' '{print $NF}'`" = "ufw" ] )
 then
@@ -40,3 +42,4 @@ elif ( [ "${firewall}" = "iptables" ] )
 then
 	${HOME}/installscripts/InstallIPTables.sh ${buildos}
 fi
+
