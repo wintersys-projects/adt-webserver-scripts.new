@@ -24,7 +24,16 @@
 
 DNS_CHOICE="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DNSCHOICE'`"
 
-if ( [ "${DNS_CHOICE}" = "cloudflare" ] )
+firewall=""
+if ( [ "`${HOME}/providerscripts/utilities/ExtractBuildStyleValues.sh "FIREWALL" | /usr/bin/awk -F':' '{print $NF}'`" = "ufw" ] )
+then
+	firewall="ufw"
+elif ( [ "`${HOME}/providerscripts/utilities/ExtractBuildStyleValues.sh "FIREWALL" | /usr/bin/awk -F':' '{print $NF}'`" = "iptables" ] )
+then
+	firewall="iptables"
+fi
+
+if ( [ "${firewall}" = "ufw" ] && [ "${DNS_CHOICE}" = "cloudflare" ] )
 then
 	#Allow cloudflare to connect to the webserver
 
@@ -121,21 +130,33 @@ fi
 
 if ( [ "${DNS_CHOICE}" = "digitalocean" ] )
 then
-	/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow 443/tcp
+	if ( [ "${firewall}" = "ufw" ] )
+ 	then
+		/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow 443/tcp
+	fi
 fi
 
 if ( [ "${DNS_CHOICE}" = "exoscale" ] )
 then
-	/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow 443/tcp
+	if ( [ "${firewall}" = "ufw" ] )
+ 	then
+		/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow 443/tcp
+	fi
 fi
 
 if ( [ "${DNS_CHOICE}" = "linode" ] )
 then
-	/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow 443/tcp
+	if ( [ "${firewall}" = "ufw" ] )
+ 	then
+		/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow 443/tcp
+	fi
 fi
 
 if ( [ "${DNS_CHOICE}" = "vultr" ] )
 then
-	/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow 443/tcp
+	if ( [ "${firewall}" = "ufw" ] )
+ 	then
+		/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow 443/tcp
+	fi
 fi
 
