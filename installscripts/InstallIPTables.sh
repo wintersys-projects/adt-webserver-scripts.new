@@ -51,5 +51,7 @@ then
 fi
 
 /usr/bin/systemctl enable netfilter-persistent
+/usr/sbin/iptables -N adt-webserver
+/usr/sbin/netfilter-persistent save
 
 
