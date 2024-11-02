@@ -45,9 +45,21 @@ then
 	exit
 fi
 
-if ( [ -f ${HOME}/runtime/BUILT_FROM_BACKUP ] && [ ! -f ${HOME}/runtime/AUTOSCALED_WEBSERVER_ONLINE ] )
+firewall=""
+if ( [ "`${HOME}/providerscripts/utilities/ExtractBuildStyleValues.sh "FIREWALL" | /usr/bin/awk -F':' '{print $NF}'`" = "ufw" ] )
 then
-	/usr/sbin/ufw reload
+	firewall="ufw"
+elif ( [ "`${HOME}/providerscripts/utilities/ExtractBuildStyleValues.sh "FIREWALL" | /usr/bin/awk -F':' '{print $NF}'`" = "iptables" ] )
+then
+	firewall="iptables"
+fi
+
+if ( [ "${firewall}" = "ufw" ] )
+then
+	if ( [ -f ${HOME}/runtime/BUILT_FROM_BACKUP ] && [ ! -f ${HOME}/runtime/AUTOSCALED_WEBSERVER_ONLINE ] )
+	then
+		/usr/sbin/ufw reload
+	fi
 fi
 
 . ${HOME}/providerscripts/utilities/SetupInfrastructureIPs.sh
@@ -63,98 +75,134 @@ updated="0"
 
 if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh BUILDMACHINEVPC:0`" = "1" ] )
 then
-	if ( [ "`/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw status | /bin/grep ${BUILD_CLIENT_IP} | /bin/grep ALLOW`" = "" ] )
+	if ( [ "${firewall}" = "ufw" ] )
 	then
-		/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow from ${BUILD_CLIENT_IP} to any port ${SSH_PORT}
-		updated="1"
-	fi
+		if ( [ "`/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw status | /bin/grep ${BUILD_CLIENT_IP} | /bin/grep ALLOW`" = "" ] )
+		then
+			/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow from ${BUILD_CLIENT_IP} to any port ${SSH_PORT}
+			updated="1"
+		fi
+  	fi
 fi
 
 if ( [ "${CLOUDHOST}" = "digitalocean" ] )
 then
-   if ( [ "`/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw status | /bin/grep "10.116.0.0/24" | /bin/grep ALLOW`" = "" ] )
-   then
-		/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow from 10.116.0.0/24 to any port ${SSH_PORT}
-		/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow from 10.116.0.0/24 to any port 443
-		updated="1"
+	if ( [ "${firewall}" = "ufw" ] )
+	then
+   		if ( [ "`/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw status | /bin/grep "10.116.0.0/24" | /bin/grep ALLOW`" = "" ] )
+   		then
+			/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow from 10.116.0.0/24 to any port ${SSH_PORT}
+			/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow from 10.116.0.0/24 to any port 443
+			updated="1"
+		fi
 	fi
 fi
 
 if ( [ "${CLOUDHOST}" = "exoscale" ] )
 then
-   if ( [ "`/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw status | /bin/grep "10.0.0.0/24" | /bin/grep ALLOW`" = "" ] )
-   then
-		/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow from 10.0.0.0/24 to any port ${SSH_PORT}
-		/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow from 10.0.0.0/24 to any port 443
-		updated="1"
-	fi
+	if ( [ "${firewall}" = "ufw" ] )
+	then
+		if ( [ "`/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw status | /bin/grep "10.0.0.0/24" | /bin/grep ALLOW`" = "" ] )
+   		then
+			/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow from 10.0.0.0/24 to any port ${SSH_PORT}
+			/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow from 10.0.0.0/24 to any port 443
+			updated="1"
+		fi
+  	fi
 fi
 
 if ( [ "${CLOUDHOST}" = "linode" ] )
 then
-   if ( [ "`/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw status | /bin/grep "10.0.1.0/24" | /bin/grep ALLOW`" = "" ] )
-   then
-		/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow from 10.0.1.0/24 to any port ${SSH_PORT}
-		/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow from 10.0.1.0/24 to any port 443
-		updated="1"
-	fi
+	if ( [ "${firewall}" = "ufw" ] )
+	then
+   		if ( [ "`/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw status | /bin/grep "10.0.1.0/24" | /bin/grep ALLOW`" = "" ] )
+   		then
+			/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow from 10.0.1.0/24 to any port ${SSH_PORT}
+			/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow from 10.0.1.0/24 to any port 443
+			updated="1"
+		fi
+  	fi
 fi
 
 if ( [ "${CLOUDHOST}" = "vultr" ] )
 then
-	if ( [ "`/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw status | /bin/grep "192.168.0.0/16" | /bin/grep ALLOW`" = "" ] )
+	if ( [ "${firewall}" = "ufw" ] )
 	then
-		/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow from 192.168.0.0/16 to any port ${SSH_PORT}
-		/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow from 192.168.0.0/16 to any port 443
-		updated="1"
+		if ( [ "`/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw status | /bin/grep "192.168.0.0/16" | /bin/grep ALLOW`" = "" ] )
+		then
+			/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow from 192.168.0.0/16 to any port ${SSH_PORT}
+			/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow from 192.168.0.0/16 to any port 443
+			updated="1"
+		fi
 	fi
 fi
 
 if ( [ "${DNS_CHOICE}" = "cloudflare" ] )
 then
-	for ip in `/usr/bin/curl https://www.cloudflare.com/ips-v4/#`
-	do
-		if ( [ "`/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw status | /bin/grep "${ip}" | /bin/grep ALLOW`" = "" ] )
-		then
-			/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow from ${ip} to any port 443
-			updated="1"
-		fi
-	done
+	if ( [ "${firewall}" = "ufw" ] )
+	then
+		for ip in `/usr/bin/curl https://www.cloudflare.com/ips-v4/#`
+		do
+			if ( [ "`/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw status | /bin/grep "${ip}" | /bin/grep ALLOW`" = "" ] )
+			then
+				/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow from ${ip} to any port 443
+				updated="1"
+			fi
+		done
+  	fi
 fi
 
 
 if ( [ "${DNS_CHOICE}" = "digitalocean" ] )
 then
-	/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow 443/tcp
-	updated="1"
+	if ( [ "${firewall}" = "ufw" ] )
+	then
+		/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow 443/tcp
+		updated="1"
+  	fi
 fi
 
 if ( [ "${DNS_CHOICE}" = "exoscale" ] )
 then
-	/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow 443/tcp
-	updated="1"
+	if ( [ "${firewall}" = "ufw" ] )
+	then
+		/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow 443/tcp
+		updated="1"
+  	fi
 fi
 
 if ( [ "${DNS_CHOICE}" = "linode" ] )
 then
-	/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow 443/tcp
-	updated="1"
+	if ( [ "${firewall}" = "ufw" ] )
+	then
+		/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow 443/tcp
+		updated="1"
+  	fi
 fi
 
 if ( [ "${DNS_CHOICE}" = "vultr" ] )
 then
-	/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow 443/tcp
-	updated="1"
+	if ( [ "${firewall}" = "ufw" ] )
+	then
+		/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow 443/tcp
+		updated="1"
+  	fi
 fi
 
 if ( [ "${updated}" = "1" ] )
 then
-	/usr/sbin/ufw -f enable
-	/usr/sbin/ufw reload
-	/usr/sbin/service networking restart
+	if ( [ "${firewall}" = "ufw" ] )
+	then
+		/usr/sbin/ufw -f enable
+		/usr/sbin/ufw reload
+		/usr/sbin/service networking restart
+	fi
 fi
 
-if ( [ "`/usr/bin/ufw status | /bin/grep 'inactive'`" = "" ] )
+if ( [ "${firewall}" = "ufw" ] )
 then
-	/bin/touch ${HOME}/runtime/FIREWALL-ACTIVE
-fi
+	if ( [ "`/usr/bin/ufw status | /bin/grep 'inactive'`" = "" ] )
+	then
+		/bin/touch ${HOME}/runtime/FIREWALL-ACTIVE
+	fi
+ fi
