@@ -60,6 +60,7 @@ then
 	then
 		/usr/sbin/ufw reload
 	fi
+ 	/usr/sbin/ufw logging off
 fi
 
 . ${HOME}/providerscripts/utilities/SetupInfrastructureIPs.sh
