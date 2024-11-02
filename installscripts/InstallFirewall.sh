@@ -24,7 +24,7 @@ then
 	buildos="${1}"
 fi
 
-echo "${buildos} ${HOME}" > /home/X*X/DUMP
+HOME="`/bin/cat /home/homedir.dat`"
 
 firewall=""
 if ( [ "`${HOME}/providerscripts/utilities/ExtractBuildStyleValues.sh "FIREWALL" | /usr/bin/awk -F':' '{print $NF}'`" = "ufw" ] )
