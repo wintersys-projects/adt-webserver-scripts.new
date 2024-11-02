@@ -215,8 +215,8 @@ ${HOME}/installscripts/InstallUnzip.sh ${BUILDOS}
 ${HOME}/installscripts/InstallSSHPass.sh ${BUILDOS}
 >&2 /bin/echo "${0} InstallSysStat.sh"
 ${HOME}/installscripts/InstallSysStat.sh ${BUILDOS}
->&2 /bin/echo "${0} InstallUFW.sh"
-${HOME}/installscripts/InstallUFW.sh ${BUILDOS}
+>&2 /bin/echo "${0} InstallFirewall.sh"
+${HOME}/installscripts/InstallFirewall.sh ${BUILDOS}
 >&2 /bin/echo "${0} InstallS3FS.sh"
 ${HOME}/installscripts/InstallS3FS.sh ${BUILDOS}
 >&2 /bin/echo "${0} InstallGoofyFS.sh"
