@@ -29,13 +29,15 @@ SERVER_USER="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'SERVERUSE
 /bin/chown ${SERVER_USER}:root ${HOME}/.ssh
 /bin/chmod 400 ${HOME}/super/Super.sh
 
-#/usr/bin/find /var/www -path /var/www/html -prune -o -exec /bin/chown www-data:www-data {} +
+/usr/bin/find /var/www -path /var/www/html -prune -o -exec /bin/chown www-data:www-data {} +
+/usr/bin/find /var/www -type d -path /var/www/html -prune -o -exec /bin/chmod 755 {} +
+/usr/bin/find /var/www -type f -path /var/www/html -prune -o -exec /bin/chmod 644 {} +
 
 if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh PERSISTASSETSTOCLOUD:0`" = "1" ] )
 then
-	/bin/chown -R www-data:www-data /var/www/html/${file}
-	/usr/bin/find /var/www/html/${file} -type d -print -exec chmod 755 {} \;
-	/usr/bin/find /var/www/html/${file} -type f -print -exec chmod 644 {} \;
+	/bin/chown -R www-data:www-data /var/www/html
+	/usr/bin/find /var/www/html -type d -print -exec chmod 755 {} \;
+	/usr/bin/find /var/www/html -type f -print -exec chmod 644 {} \;
 else
 	directoriestomiss="`${HOME}/providerscripts/utilities/ExtractConfigValues.sh 'DIRECTORIESTOMOUNT' 'stripped' | /bin/sed 's/\./\//g' | /usr/bin/tr '\n' ' ' | /bin/sed 's/  / /g'`"
 
