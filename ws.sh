@@ -242,15 +242,6 @@ then
 	export TZ=":${SERVER_TIMEZONE_CONTINENT}/${SERVER_TIMEZONE_CITY}"
 fi
 
-#Do rudimentary checks that the software has been installed correctly
-if ( [ -f /usr/bin/curl ] && [ -f /usr/bin/sendemail ] && [ -f /usr/bin/jq ] && [ -f /usr/bin/unzip ] )
-then
-	/bin/echo "${0} `/bin/date` : It looks like all the required software has installed correctly." >> ${HOME}/logs/initialbuild/BUILD_PROCESS_MONITORING.log
-else
-	/bin/echo "${0} `/bin/date` : It looks like all the required software hasn't installed correctly." >> ${HOME}/logs/initialbuild/BUILD_PROCESS_MONITORING.log
-	exit
-fi
-
 /bin/echo "${0} #######################################################################################" >> ${HOME}/logs/initialbuild/BUILD_PROCESS_MONITORING.log
 >&2 /bin/echo "${0} Installing Cloudhost Tools"
 /bin/echo "${0} Installing cloudhost tools" >> ${HOME}/logs/initialbuild/BUILD_PROCESS_MONITORING.log
