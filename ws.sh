@@ -460,9 +460,6 @@ ${HOME}/providerscripts/datastore/configwrapper/GetFromConfigDatastore.sh ssl/pr
 
 /bin/echo "${SERVER_USER} ALL= NOPASSWD:/usr/bin/rsync" >> /etc/sudoers
 
-#Switch logging off on the firewall
-/usr/sbin/ufw logging off
-
 if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh AUTOSCALED:1`" = "0" ] )
 then
 	/bin/touch ${HOME}/runtime/INITIAL_BUILD_WEBSERVER
