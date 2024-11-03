@@ -79,10 +79,13 @@ then
 		then
 			/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow from ${BUILD_CLIENT_IP} to any port ${SSH_PORT}
 			updated="1"
-   		elif ( [ 1 ] )
+   	elif ( [ "${firewall}" = "iptables" ] )
+    	then
+   		if ( [ "`/usr/sbin/iptables --list-rules | /bin/grep ACCEPT | /bin/grep ${SSH_PORT} | /bin/grep ${BUILD_CLIENT_IP}`" = "" ] )
      		then
        			/usr/sbin/iptables -I INPUT -s ${BUILD_CLIENT_IP} -p tcp --dport ${SSH_PORT} -j ACCEPT
 			/usr/sbin/iptables -I INPUT -s ${BUILD_CLIENT_IP} -p ICMP --icmp-type 8 -j ACCEPT
+   			updated="1"
 		fi
 	fi
 fi
@@ -96,6 +99,14 @@ then
 			/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow from 10.116.0.0/24 to any port ${SSH_PORT}
 			/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow from 10.116.0.0/24 to any port 443
 			updated="1"
+     	elif ( [ "${firewall}" = "iptables" ] )
+    	then
+   		if ( [ "`/usr/sbin/iptables --list-rules | /bin/grep ACCEPT | /bin/grep ${SSH_PORT} | /bin/grep 10.116.0.0`" = "" ] )
+     		then
+       			/usr/sbin/iptables -I INPUT -s 10.116.0.0/24 -p tcp --dport ${SSH_PORT} -j ACCEPT
+	         	/usr/sbin/iptables -I INPUT -s 10.116.0.0/24 -p tcp --dport 443 -j ACCEPT
+			/usr/sbin/iptables -I INPUT -s 10.116.0.0/24 -p ICMP --icmp-type 8 -j ACCEPT
+   			updated="1"
 		fi
 	fi
 fi
@@ -109,6 +120,14 @@ then
 			/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow from 10.0.0.0/24 to any port ${SSH_PORT}
 			/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow from 10.0.0.0/24 to any port 443
 			updated="1"
+     	elif ( [ "${firewall}" = "iptables" ] )
+    	then
+      		if ( [ "`/usr/sbin/iptables --list-rules | /bin/grep ACCEPT | /bin/grep ${SSH_PORT} | /bin/grep 10.0.0.0`" = "" ] )
+     		then
+       			/usr/sbin/iptables -I INPUT -s 10.0.0.0/24 -p tcp --dport ${SSH_PORT} -j ACCEPT
+	         	/usr/sbin/iptables -I INPUT -s 10.0.0.0/24 -p tcp --dport 443 -j ACCEPT
+			/usr/sbin/iptables -I INPUT -s 10.0.0.0/24 -p ICMP --icmp-type 8 -j ACCEPT
+   			updated="1"
 		fi
 	fi
 fi
@@ -122,6 +141,14 @@ then
 			/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow from 10.0.1.0/24 to any port ${SSH_PORT}
 			/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow from 10.0.1.0/24 to any port 443
 			updated="1"
+     	elif ( [ "${firewall}" = "iptables" ] )
+    	then
+     		if ( [ "`/usr/sbin/iptables --list-rules | /bin/grep ACCEPT | /bin/grep ${SSH_PORT} | /bin/grep 10.0.1.0`" = "" ] )
+     		then
+       			/usr/sbin/iptables -I INPUT -s 10.0.1.0/24 -p tcp --dport ${SSH_PORT} -j ACCEPT
+	         	/usr/sbin/iptables -I INPUT -s 10.0.1.0/24 -p tcp --dport 443 -j ACCEPT
+			/usr/sbin/iptables -I INPUT -s 10.0.1.0/24 -p ICMP --icmp-type 8 -j ACCEPT
+   			updated="1"
 		fi
 	fi
 fi
@@ -135,6 +162,14 @@ then
 			/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow from 192.168.0.0/16 to any port ${SSH_PORT}
 			/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow from 192.168.0.0/16 to any port 443
 			updated="1"
+     	elif ( [ "${firewall}" = "iptables" ] )
+    	then
+     		if ( [ "`/usr/sbin/iptables --list-rules | /bin/grep ACCEPT | /bin/grep ${SSH_PORT} | /bin/grep 192.168.0.0`" = "" ] )
+     		then
+       			/usr/sbin/iptables -I INPUT -s 192.168.0.0/16 -p tcp --dport ${SSH_PORT} -j ACCEPT
+	         	/usr/sbin/iptables -I INPUT -s 192.168.0.0/16 -p tcp --dport 443 -j ACCEPT
+			/usr/sbin/iptables -I INPUT -s 192.168.0.0/16 -p ICMP --icmp-type 8 -j ACCEPT
+   			updated="1"
 		fi
 	fi
 fi
@@ -151,6 +186,16 @@ then
 				updated="1"
 			fi
 		done
+	elif ( [ "${firewall}" = "iptables" ] )
+	then
+		for ip in `/usr/bin/curl https://www.cloudflare.com/ips-v4/#`
+		do
+			if ( [ "`/usr/sbin/iptables --list-rules | /bin/grep ACCEPT | /bin/grep 443 | /bin/grep ${ip}`" = "" ] )
+			then
+				/usr/sbin/iptables -I INPUT -s ${ip} -p tcp --dport 443 -j ACCEPT
+				updated="1"
+			fi
+		done
 	fi
 fi
 
@@ -161,6 +206,10 @@ then
 	then
 		/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow 443/tcp
 		updated="1"
+  	elif ( [ "${firewall}" = "iptables" ] )
+	then
+		/usr/sbin/iptables -I INPUT -s ${ip} -p tcp --dport 443 -j ACCEPT
+		updated="1" 
 	fi
 fi
 
@@ -170,6 +219,10 @@ then
 	then
 		/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow 443/tcp
 		updated="1"
+  	elif ( [ "${firewall}" = "iptables" ] )
+	then
+		/usr/sbin/iptables -I INPUT -s ${ip} -p tcp --dport 443 -j ACCEPT
+		updated="1" 
 	fi
 fi
 
@@ -179,6 +232,10 @@ then
 	then
 		/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow 443/tcp
 		updated="1"
+  	elif ( [ "${firewall}" = "iptables" ] )
+	then
+		/usr/sbin/iptables -I INPUT -s ${ip} -p tcp --dport 443 -j ACCEPT
+		updated="1" 
 	fi
 fi
 
@@ -188,6 +245,10 @@ then
 	then
 		/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow 443/tcp
 		updated="1"
+  	elif ( [ "${firewall}" = "iptables" ] )
+	then
+		/usr/sbin/iptables -I INPUT -s ${ip} -p tcp --dport 443 -j ACCEPT
+		updated="1" 
 	fi
 fi
 
@@ -198,6 +259,10 @@ then
 		/usr/sbin/ufw -f enable
 		/usr/sbin/ufw reload
 		/usr/sbin/service networking restart
+  	elif ( [ "${firewall}" = "iptables" ] )
+   	then
+		/usr/sbin/netfilter-persistent save
+		/usr/sbin/netfilter-persistent reload
 	fi
 fi
 
@@ -207,4 +272,16 @@ then
 	then
 		/bin/touch ${HOME}/runtime/FIREWALL-ACTIVE
 	fi
+elif ( [ "${firewall}" = "iptables" ] )
+then
+	if ( [ "`/usr/sbin/service netfilter-persistent status | /bin/grep Loaded | /bin/grep enabled`" != "" ] )
+ 	then
+  		if ( [ "`/usr/sbin/service netfilter-persistent status | /bin/grep active`" != "" ] )
+    		then
+      			/bin/touch ${HOME}/runtime/FIREWALL-ACTIVE
+	 	fi
+   	fi
+fi
+
+      
 fi
