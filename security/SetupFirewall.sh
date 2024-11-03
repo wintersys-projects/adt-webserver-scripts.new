@@ -58,6 +58,18 @@ then
 		exit
 	fi
 	/usr/sbin/ufw logging off
+elif { [ "${firewall}" = "iptables" ] )
+then
+	if ( [ -f ${HOME}/runtime/FIREWALL-ACTIVE ] )
+ 	then
+		if ( [ "`/usr/sbin/service netfilter-persistent status | /bin/grep Loaded | /bin/grep enabled`" != "" ] )
+ 		then
+  			if ( [ "`/usr/sbin/service netfilter-persistent status | /bin/grep active`" != "" ] )
+    			then
+       				exit
+	   		fi
+      		fi
+	fi
 fi
 
 . ${HOME}/providerscripts/utilities/SetupInfrastructureIPs.sh
