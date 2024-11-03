@@ -114,6 +114,7 @@ then
 		if ( [ "`/usr/sbin/iptables -L | /bin/grep ACCEPT | /bin/grep 10.116.0.0/24 | /bin/grep ${SSH_PORT}`" = "" ] )
  		then
 			/usr/sbin/iptables -I INPUT --src 10.116.0.0/24 -m tcp -p tcp --dport ${SSH_PORT} -j ACCEPT
+   			/usr/sbin/iptables -I INPUT --src 10.116.0.0/24 -m tcp -p tcp --dport 443 -j ACCEPT
 			updated="1"
 		fi
 	fi
@@ -134,6 +135,7 @@ then
 		if ( [ "`/usr/sbin/iptables -L | /bin/grep ACCEPT | /bin/grep 10.0.0.0/24 | /bin/grep ${SSH_PORT}`" = "" ] )
  		then
 			/usr/sbin/iptables -I INPUT --src 10.0.0.0/24 -m tcp -p tcp --dport ${SSH_PORT} -j ACCEPT
+   			/usr/sbin/iptables -I INPUT --src 10.0.0.0/24 -m tcp -p tcp --dport 443 -j ACCEPT
 			updated="1"
 		fi
 	fi
