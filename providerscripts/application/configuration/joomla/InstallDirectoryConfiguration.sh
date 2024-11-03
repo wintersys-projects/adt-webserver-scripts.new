@@ -91,6 +91,7 @@ then
 fi
 
 if ( [ ! -f ${HOME}/runtime/CACHE_CLEANED ] &&  [ -f /var/www/html/cli/joomla.php ] )
+then
 	/usr/bin/php /var/www/html/cli/joomla.php cache:clean
  	/bin/touch ${HOME}/runtime/CACHE_CLEANED
 fi
