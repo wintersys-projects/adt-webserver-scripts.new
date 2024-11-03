@@ -79,6 +79,10 @@ then
 		then
 			/bin/echo ${SERVER_USER_PASSWORD} | /usr/bin/sudo -S -E /usr/sbin/ufw allow from ${BUILD_CLIENT_IP} to any port ${SSH_PORT}
 			updated="1"
+   		elif ( [ 1 ] )
+     		then
+       			/usr/sbin/iptables -I INPUT -s ${BUILD_CLIENT_IP} -p tcp --dport ${SSH_PORT} -j ACCEPT
+			/usr/sbin/iptables -I INPUT -s ${BUILD_CLIENT_IP} -p ICMP --icmp-type 8 -j ACCEPT
 		fi
 	fi
 fi
