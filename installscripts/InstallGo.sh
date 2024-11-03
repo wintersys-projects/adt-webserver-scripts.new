@@ -24,12 +24,24 @@ then
 	buildos="${1}"
 fi
 
-if ( [ "${buildos}" = "ubuntu" ] )
+apt=""
+if ( [ "`${HOME}/providerscripts/utilities/ExtractBuildStyleValues.sh "PACKAGEMANAGER" | /usr/bin/awk -F':' '{print $NF}'`" = "apt" ] )
 then
-	DEBIAN_FRONTEND=noninteractive /usr/bin/apt-get -o DPkg::Lock::Timeout=-1 -qq -y install golang-go
+	apt="/usr/bin/apt-get"
+elif ( [ "`${HOME}/providerscripts/utilities/ExtractBuildStyleValues.sh "PACKAGEMANAGER" | /usr/bin/awk -F':' '{print $NF}'`" = "apt-fast" ] )
+then
+	apt="/usr/sbin/apt-fast"
 fi
 
-if ( [ "${buildos}" = "debian" ] )
+if ( [ "${apt}" != "" ] )
 then
-	DEBIAN_FRONTEND=noninteractive /usr/bin/apt-get -o DPkg::Lock::Timeout=-1 -qq -y install golang-go
+	if ( [ "${buildos}" = "ubuntu" ] )
+	then
+		DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=-1 -qq -y install golang-go
+	fi
+
+	if ( [ "${buildos}" = "debian" ] )
+	then
+		DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=-1 -qq -y install golang-go
+	fi
 fi
