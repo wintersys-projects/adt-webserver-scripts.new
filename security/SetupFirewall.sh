@@ -56,11 +56,17 @@ fi
 
 if ( [ "${firewall}" = "ufw" ] )
 then
-	if ( [ -f ${HOME}/runtime/BUILT_FROM_BACKUP ] && [ ! -f ${HOME}/runtime/AUTOSCALED_WEBSERVER_ONLINE ] )
+	if ( [ -f ${HOME}/runtime/FIREWALL-ACTIVE ] && [ "`/usr/bin/ufw status | /bin/grep 'inactive'`" = "" ] )
 	then
-		/usr/sbin/ufw reload
+		exit
 	fi
- 	/usr/sbin/ufw logging off
+	/usr/sbin/ufw logging off
+elif ( [ "${firewall}" = "iptables" ] )
+then
+	if ( [ -f ${HOME}/runtime/FIREWALL-ACTIVE ] )
+ 	then
+  		exit
+	fi
 fi
 
 . ${HOME}/providerscripts/utilities/SetupInfrastructureIPs.sh
