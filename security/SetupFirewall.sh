@@ -38,8 +38,6 @@ exec >${HOME}/logs/firewall/FIREWALL_CONFIGURATION.log
 exec 2>&1
 ##################################################################################
 
-/usr/sbin/ufw logging off
-
 if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh ACTIVEFIREWALLS:1`" = "0" ] && [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh ACTIVEFIREWALLS:3`" = "0" ] )
 then
 	exit
@@ -61,7 +59,7 @@ then
 		exit
 	fi
 	/usr/sbin/ufw logging off
-elif { [ "${firewall}" = "iptables" ] )
+elif ( [ "${firewall}" = "iptables" ] )
 then
 	if ( [ -f ${HOME}/runtime/FIREWALL-ACTIVE ] )
  	then
