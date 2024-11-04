@@ -41,10 +41,7 @@ then
    		/bin/touch ${HOME}/runtime/KNICKERS_ARE_UP
 	elif ( [ "${firewall}" = "iptables" ] )
  	then
-	#	buildmachine_ip="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'BUILDCLIENTIP'`"
-  	#	buildmachine_ssh_port="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'SSHPORT'`"
 		/usr/sbin/iptables -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
-		#/usr/sbin/iptables -A INPUT -p tcp -s ${buildmachine_ip} --dport ${buildmachine_ssh_port} -j ACCEPT
 		/usr/sbin/iptables -A INPUT -p icmp -m icmp --icmp-type 8 -j DROP
 		/usr/sbin/iptables -A INPUT -i lo -j ACCEPT
 		/usr/sbin/iptables -A OUTPUT -o lo -j ACCEPT
@@ -55,5 +52,6 @@ then
 		/usr/sbin/ip6tables -P FORWARD DROP
 		/usr/sbin/ip6tables -P OUTPUT DROP
 		/usr/sbin/service netfilter-persistent save
+   		/bin/touch ${HOME}/runtime/KNICKERS_ARE_UP
   	fi
 fi
