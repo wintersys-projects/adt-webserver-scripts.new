@@ -33,13 +33,13 @@ PHP_VERSION="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'PHPVERSIO
 
 if ( [ "${WEBSERVER_CHOICE}" = "NGINX" ] )
 then
-	/usr/sbin/service php${PHP_VERSION}-fpm restart
-	/usr/sbin/service nginx restart
+ 	${HOME}/providerscripts/utilities/RunServiceCommand.sh php${PHP_VERSION}-fpm restart
+ 	${HOME}/providerscripts/utilities/RunServiceCommand.sh nginx restart
 fi
 if ( [ "${WEBSERVER_CHOICE}" = "APACHE" ] )
 then
-	/usr/sbin/service php${PHP_VERSION}-fpm restart
-	/usr/sbin/service apache2 restart 
+ 	${HOME}/providerscripts/utilities/RunServiceCommand.sh php${PHP_VERSION}-fpm restart
+ 	${HOME}/providerscripts/utilities/RunServiceCommand.sh apache2 restart
 	
 	if ( [ "`/usr/bin/ps -ef | /bin/grep apache2 | /bin/grep -v grep`" = "" ] )
 	then
@@ -48,8 +48,8 @@ then
 fi
 if ( [ "${WEBSERVER_CHOICE}" = "LIGHTTPD" ] )
 then
-	/usr/sbin/service php${PHP_VERSION}-fpm restart
-	/usr/sbin/service lighttpd restart
+ 	${HOME}/providerscripts/utilities/RunServiceCommand.sh php${PHP_VERSION}-fpm restart
+ 	${HOME}/providerscripts/utilities/RunServiceCommand.sh lighttpd restart
 	if ( [ "`/usr/bin/ps -ef | /bin/grep lighttpd | /bin/grep -v grep`" = "" ] )
 	then
 		/sbin/lighttpd -f /etc/lighttpd/lighttpd.conf
