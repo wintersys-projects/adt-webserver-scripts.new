@@ -354,7 +354,6 @@ ClientAliveInterval 200
 ClientAliveCountMax 10" >> /etc/ssh/sshd_config
 fi
 
-${HOME}/providerscripts/utilities/RunServiceCommand.sh sshd restart
 ${HOME}/providerscripts/utilities/RunServiceCommand.sh ssh restart
 
 if ( [ ! -d /var/www/html ] )
