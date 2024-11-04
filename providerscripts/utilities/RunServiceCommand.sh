@@ -29,7 +29,7 @@ if ( [ "${buildos}" = "ubuntu" ] )
 then
     if ( [ "${service_type}" = "ssh" ] )
     then
-        /usr/bin/systemctl daemon-reload
+        /usr/bin/systemctl daemon-restart
     fi
     if ( [ "${service_type}" = "php-service=" ] )
     then
@@ -42,7 +42,7 @@ if ( [ "${buildos}" = "debian" ] )
 then
     if ( [ "${service_type}" = "ssh" ] )
     then
-        /usr/bin/systemctl daemon-reload
+        /usr/bin/systemctl daemon-restart
     fi
     if ( [ "${service_type}" = "php-service=" ] )
     then
