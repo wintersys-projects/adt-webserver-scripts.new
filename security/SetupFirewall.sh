@@ -225,7 +225,7 @@ then
                 updated="1"
         elif ( [ "${firewall}" = "iptables" ] )
         then
-                /usr/sbin/iptables -I INPUT -s ${ip} -p tcp --dport 443 -j ACCEPT
+                /usr/sbin/iptables -I INPUT -p tcp --dport 443 -j ACCEPT
                 updated="1" 
         fi
 fi
@@ -238,7 +238,7 @@ then
                 updated="1"
         elif ( [ "${firewall}" = "iptables" ] )
         then
-                /usr/sbin/iptables -I INPUT -s ${ip} -p tcp --dport 443 -j ACCEPT
+                /usr/sbin/iptables -I INPUT -p tcp --dport 443 -j ACCEPT
                 updated="1" 
         fi
 fi
@@ -251,7 +251,7 @@ then
                 updated="1"
         elif ( [ "${firewall}" = "iptables" ] )
         then
-                /usr/sbin/iptables -I INPUT -s ${ip} -p tcp --dport 443 -j ACCEPT
+                /usr/sbin/iptables -I INPUT -p tcp --dport 443 -j ACCEPT
                 updated="1" 
         fi
 fi
@@ -264,7 +264,7 @@ then
                 updated="1"
         elif ( [ "${firewall}" = "iptables" ] )
         then
-                /usr/sbin/iptables -I INPUT -s ${ip} -p tcp --dport 443 -j ACCEPT
+                /usr/sbin/iptables -I INPUT -p tcp --dport 443 -j ACCEPT
                 updated="1" 
         fi
 fi
