@@ -278,9 +278,9 @@ then
                 /usr/sbin/service networking restart
         elif ( [ "${firewall}" = "iptables" ] )
         then
-                #/usr/sbin/iptables-save
-                /usr/sbin/netfilter-persistent save
-                /usr/sbin/netfilter-persistent reload
+                /usr/sbin/iptables-save
+                #/usr/sbin/netfilter-persistent save
+                #/usr/sbin/netfilter-persistent reload
         fi
 fi
 
