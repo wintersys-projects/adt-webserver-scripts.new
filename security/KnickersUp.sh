@@ -51,7 +51,9 @@ then
 		/usr/sbin/iptables -P INPUT DROP
 		/usr/sbin/iptables -P FORWARD DROP
 		/usr/sbin/iptables -P OUTPUT ACCEPT
-		/usr/sbin/netfilter-persistent save
-		/usr/sbin/netfilter-persistent reload
+  		/usr/sbin/ip6tables -P INPUT DROP
+		/usr/sbin/ip6tables -P FORWARD DROP
+		/usr/sbin/ip6tables -P OUTPUT DROP
+		/usr/sbin/service netfilter-persistent save
   	fi
 fi
