@@ -19,7 +19,7 @@
 ##################################################################################
 ##################################################################################
 #set -x #THIS MUST NOT BE SWITCHED ON DURING NORMAL USE, SCRIPT BREAK
-##################################################################################
+###################################################################################
 
 export HOME="`/bin/cat /home/homedir.dat`"
 
@@ -80,7 +80,7 @@ SSH_PORT="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'SSHPORT'`"
 CLOUDHOST="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'CLOUDHOST'`"
 DNS_CHOICE="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DNSCHOICE'`"
 
-${HOME}/security/KnickersUp.sh
+#${HOME}/security/KnickersUp.sh
 
 updated="0"
 
