@@ -38,7 +38,7 @@ then
 
 	if ( [ "${buildos}" = "ubuntu" ] )
 	then
-		/usr/sbin/service cron stop
+  		${HOME}/providerscripts/utilities/RunServiceCommand.sh cron stop
 		DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=-1 -qq -y update
 		DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=-1 -qq -y install php-cli unzip
 		cd ~
@@ -46,12 +46,12 @@ then
 		HASH=`/usr/bin/curl -sS https://composer.github.io/installer.sig`
 		/usr/bin/php -r "if (hash_file('SHA384', '/tmp/composer-setup.php') === '$HASH') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
 		/usr/bin/php /tmp/composer-setup.php --install-dir=/usr/local/bin --filename=composer
-		/usr/sbin/service cron start
+  		${HOME}/providerscripts/utilities/RunServiceCommand.sh cron start
 	fi
 
 	if ( [ "${buildos}" = "debian" ] )
 	then
-		/usr/sbin/service cron stop
+  		${HOME}/providerscripts/utilities/RunServiceCommand.sh cron stop
 		DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=-1 -qq  -y update
 		DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=-1 -qq  -y install php-cli unzip
 		cd ~
@@ -59,6 +59,6 @@ then
 		HASH=`/usr/bin/curl -sS https://composer.github.io/installer.sig`
 		/usr/bin/php -r "if (hash_file('SHA384', '/tmp/composer-setup.php') === '$HASH') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
 		/usr/bin/php /tmp/composer-setup.php --install-dir=/usr/local/bin --filename=composer
-		/usr/sbin/service cron start	
+  		${HOME}/providerscripts/utilities/RunServiceCommand.sh cron start
 	fi
 fi
