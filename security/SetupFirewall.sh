@@ -275,7 +275,6 @@ then
         then
                 /usr/sbin/ufw -f enable
                 /usr/sbin/ufw reload
-                /usr/sbin/service networking restart
                 ${HOME}/providerscripts/utilities/RunServiceCommand.sh networking restart
         elif ( [ "${firewall}" = "iptables" ] )
         then
