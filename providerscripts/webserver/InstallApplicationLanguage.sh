@@ -83,9 +83,7 @@ then
 		done
 	fi
 
-	php_service="`/usr/sbin/service --status-all | /bin/grep php | /usr/bin/awk '{print $NF}'`"
-
-	/usr/sbin/service ${php_service} restart
+ 	${HOME}/providerscripts/utilities/RunServiceCommand.sh php-service restart
 
 	if ( [ "`/bin/ps -ef | /bin/grep php | /bin/grep -v grep`" = "" ] )
 	then
