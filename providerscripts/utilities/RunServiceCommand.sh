@@ -31,6 +31,10 @@ then
     then
         /usr/bin/systemctl daemon-reload
     fi
+    if ( [ "${service_type}" = "php-service=" ] )
+    then
+        service_type="`/usr/sbin/service --status-all | /bin/grep php | /usr/bin/awk '{print $NF}'`"
+    fi
     /usr/sbin/service ${service_type} ${service_function}
 fi
 
@@ -39,6 +43,10 @@ then
     if ( [ "${service_type}" = "ssh" ] )
     then
         /usr/bin/systemctl daemon-reload
+    fi
+    if ( [ "${service_type}" = "php-service=" ] )
+    then
+        service_type="`/usr/sbin/service --status-all | /bin/grep php | /usr/bin/awk '{print $NF}'`"
     fi
     /usr/sbin/service ${service_type} ${service_function}
 fi
