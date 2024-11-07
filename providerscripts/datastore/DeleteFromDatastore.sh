@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh 
 ####################################################################################
 # Author: Peter Winter
 # Date :  9/4/2016
@@ -25,5 +25,8 @@ file_to_delete="$2"
 
 if ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'DATASTORETOOL:s3cmd'`" = "1" ] )
 then
-	/usr/bin/s3cmd del --force --recursive s3://${file_to_delete}
+        datastore_tool="/usr/bin/s3cmd"
 fi
+
+${datastore_tool} del --force --recursive s3://${file_to_delete}
+
