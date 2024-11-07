@@ -24,15 +24,20 @@ datastore_to_mount="$1"
 
 if ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'DATASTORETOOL:s3cmd'`" = "1" ] )
 then
-	if ( [ "`/usr/bin/s3cmd ls s3://${datastore_to_mount} 2>/dev/null`" != "" ] )
-	then
-		exit
-	fi
-	/usr/bin/s3cmd mb s3://${datastore_to_mount}
-	if ( [ "$?" = "0" ] )
-	then
-		exit
-	fi
+        datastore_tool="/usr/bin/s3cmd"
 fi
+
+if ( [ "`${datastore_tool} ls s3://${datastore_to_mount} 2>/dev/null`" != "" ] )
+then
+	exit
+fi
+
+${datastore_tool} mb s3://${datastore_to_mount}
+
+if ( [ "$?" = "0" ] )
+then
+	exit
+fi
+
 
 
