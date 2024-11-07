@@ -225,6 +225,8 @@ ${HOME}/installscripts/InstallGoofyFS.sh ${BUILDOS}
 ${HOME}/installscripts/InstallRsync.sh ${BUILDOS}
 >&2 /bin/echo "${0} InstallCron.sh"
 ${HOME}/installscripts/InstallCron.sh ${BUILDOS}
+>&2 /bin/echo "${0} InstallGo.sh"
+${HOME}/installscripts/InstallGo.sh ${BUILDOS}
 
 ${HOME}/installscripts/InstallMonitoringGear.sh
 
