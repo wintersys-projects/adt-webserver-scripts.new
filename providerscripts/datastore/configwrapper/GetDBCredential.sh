@@ -27,8 +27,10 @@ configbucket="${configbucket}-config"
 
 if ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'DATASTORETOOL:s3cmd'`" = "1" ] )
 then
-	 /usr/bin/s3cmd --force get s3://${configbucket}/$1 /tmp 1>/dev/null
+        datastore_tool="/usr/bin/s3cmd"
 fi
+
+${datastore_tool} --force get s3://${configbucket}/$1 /tmp 1>/dev/null
 
 file="`/bin/echo ${1} | /usr/bin/awk -F'/' '{print $NF}'`" 
 
