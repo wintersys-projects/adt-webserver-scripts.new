@@ -27,17 +27,20 @@ staticbucket="${staticbucket}-static"
 
 if ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'DATASTORETOOL:s3cmd'`" = "1" ] )
 then
-	/usr/bin/s3cmd mb s3://${staticbucket}
-
-	if ( [ ! -d ${HOME}/static ] )
-	then
-	   /bin/mkdir ${HOME}/static
-	fi
-
-	/bin/rm -r ${HOME}/static/*
-	cd ${HOME}/static
-
-	/usr/bin/wget --no-check-certificate -e robots=no -k -K  -E -r -l 10 -p -N -F -nH https://${WEBSITE_URL}
-	/usr/bin/s3cmd ws-create --ws-index=index.html s3://${staticbucket}
-	/usr/bin/s3cmd --no-mime-magic --acl-public --delete-removed sync * s3://${staticbucket}
+        datastore_tool="/usr/bin/s3cmd"
 fi
+
+${datastore_tool} mb s3://${staticbucket}
+
+if ( [ ! -d ${HOME}/static ] )
+then
+	/bin/mkdir ${HOME}/static
+fi
+
+/bin/rm -r ${HOME}/static/*
+cd ${HOME}/static
+
+/usr/bin/wget --no-check-certificate -e robots=no -k -K  -E -r -l 10 -p -N -F -nH https://${WEBSITE_URL}
+${datastore_tool} ws-create --ws-index=index.html s3://${staticbucket}
+${datastore_tool} --no-mime-magic --acl-public --delete-removed sync * s3://${staticbucket}
+
