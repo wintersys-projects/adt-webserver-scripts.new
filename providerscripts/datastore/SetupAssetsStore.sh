@@ -113,9 +113,6 @@ do
 	if ( [ "`/bin/mount | /bin/grep "/var/www/html/${asset_directory}"`" = "" ] )
 	then
 		${HOME}/providerscripts/datastore/MountDatastore.sh ${assetbucket}
-
-		#Notice I use an S3FS mount to copy the assets to S3 this is because S3FS has difficulty reading from S3 if the objects in S3
-		#have been written there using another tool that it itself, for example, s3cmd
 			
 		/bin/rm -r ${HOME}/tmp/hold.$$
 			
