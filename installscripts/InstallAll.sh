@@ -34,8 +34,6 @@ ${HOME}/installscripts/InstallCron.sh ${BUILDOS}
 ${HOME}/installscripts/InstallGo.sh ${BUILDOS}
 
 ${HOME}/installscripts/InstallMonitoringGear.sh
->&2 /bin/echo "${0} Installing Cloudhost Tools"
-/bin/echo "${0} Installing cloudhost tools" >> ${HOME}/logs/initialbuild/BUILD_PROCESS_MONITORING.log
 >&2 /bin/echo "${0} Installing Datastore tools"
 /bin/echo "${0} Installing Datastore tools" >> ${HOME}/logs/initialbuild/BUILD_PROCESS_MONITORING.log
 . ${HOME}/installscripts/InstallDatastoreTools.sh
