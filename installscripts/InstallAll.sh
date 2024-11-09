@@ -32,3 +32,17 @@ ${HOME}/installscripts/InstallRsync.sh ${BUILDOS}
 ${HOME}/installscripts/InstallCron.sh ${BUILDOS}
 >&2 /bin/echo "${0} InstallGo.sh"
 ${HOME}/installscripts/InstallGo.sh ${BUILDOS}
+
+${HOME}/installscripts/InstallMonitoringGear.sh
+>&2 /bin/echo "${0} Installing Cloudhost Tools"
+/bin/echo "${0} Installing cloudhost tools" >> ${HOME}/logs/initialbuild/BUILD_PROCESS_MONITORING.log
+>&2 /bin/echo "${0} Installing Datastore tools"
+/bin/echo "${0} Installing Datastore tools" >> ${HOME}/logs/initialbuild/BUILD_PROCESS_MONITORING.log
+. ${HOME}/installscripts/InstallDatastoreTools.sh
+# Install the language engine for whatever language your application is written in
+>&2 /bin/echo "${0} Installing Application Language"
+/bin/echo "${0} Installing Application Language: ${APPLICATION_LANGUAGE}" >> ${HOME}/logs/initialbuild/BUILD_PROCESS_MONITORING.log
+${HOME}/providerscripts/webserver/InstallApplicationLanguage.sh "${APPLICATION_LANGUAGE}"
+>&2 /bin/echo "${0} Installing Webserver"
+/bin/echo "${0} Installing Webserver: ${WEBSERVER_CHOICE} for ${WEBSITE_NAME} at: ${WEBSITE_URL}" >> ${HOME}/logs/initialbuild/BUILD_PROCESS_MONITORING.log
+${HOME}/providerscripts/webserver/InstallWebserver.sh 
