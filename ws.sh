@@ -193,6 +193,8 @@ kernel.panic=10" >> /etc/sysctl.conf
 #Install the software packages that we need
 
 
+. ${HOME}/installscripts/InstallAll.sh ${BUILDOS}
+
 #>&2 /bin/echo "${0} Update.sh"
 #${HOME}/installscripts/Update.sh ${BUILDOS}
 
