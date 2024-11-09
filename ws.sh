@@ -193,42 +193,39 @@ kernel.panic=10" >> /etc/sysctl.conf
 #Install the software packages that we need
 
 
->&2 /bin/echo "${0} Update.sh"
-${HOME}/installscripts/Update.sh ${BUILDOS}
+#>&2 /bin/echo "${0} Update.sh"
+#${HOME}/installscripts/Update.sh ${BUILDOS}
 
-#>&2 /bin/echo "${0} Upgrade.sh"
-#${HOME}/installscripts/Upgrade.sh ${BUILDOS}
+#>&2 /bin/echo "${0} InstallCurl.sh"
+#${HOME}/installscripts/InstallCurl.sh ${BUILDOS}
+#>&2 /bin/echo "${0} InstallLibioSocketSSL.sh"
+#${HOME}/installscripts/InstallLibioSocketSSL.sh ${BUILDOS}
+#>&2 /bin/echo "${0} InstallLibnetSSLLeay.sh"
+#${HOME}/installscripts/InstallLibnetSSLLeay.sh ${BUILDOS}
+#>&2 /bin/echo "${0} InstallSendEmail.sh"
+#${HOME}/installscripts/InstallSendEmail.sh ${BUILDOS}
+#>&2 /bin/echo "${0} InstallJQ.sh"
+#${HOME}/installscripts/InstallJQ.sh ${BUILDOS}
+#>&2 /bin/echo "${0} InstallUnzip.sh"
+#${HOME}/installscripts/InstallUnzip.sh ${BUILDOS}
+#>&2 /bin/echo "${0} InstallSSHPass.sh"
+#${HOME}/installscripts/InstallSSHPass.sh ${BUILDOS}
+#>&2 /bin/echo "${0} InstallSysStat.sh"
+#${HOME}/installscripts/InstallSysStat.sh ${BUILDOS}
+#>&2 /bin/echo "${0} InstallFirewall.sh"
+#${HOME}/installscripts/InstallFirewall.sh ${BUILDOS}
+#>&2 /bin/echo "${0} InstallS3FS.sh"
+#${HOME}/installscripts/InstallS3FS.sh ${BUILDOS}
+#>&2 /bin/echo "${0} InstallGoofyFS.sh"
+#${HOME}/installscripts/InstallGoofyFS.sh ${BUILDOS}
+#>&2 /bin/echo "${0} InstallRsync.sh"
+#${HOME}/installscripts/InstallRsync.sh ${BUILDOS}
+#>&2 /bin/echo "${0} InstallCron.sh"
+#${HOME}/installscripts/InstallCron.sh ${BUILDOS}
+#>&2 /bin/echo "${0} InstallGo.sh"
+#${HOME}/installscripts/InstallGo.sh ${BUILDOS}
 
->&2 /bin/echo "${0} InstallCurl.sh"
-${HOME}/installscripts/InstallCurl.sh ${BUILDOS}
->&2 /bin/echo "${0} InstallLibioSocketSSL.sh"
-${HOME}/installscripts/InstallLibioSocketSSL.sh ${BUILDOS}
->&2 /bin/echo "${0} InstallLibnetSSLLeay.sh"
-${HOME}/installscripts/InstallLibnetSSLLeay.sh ${BUILDOS}
->&2 /bin/echo "${0} InstallSendEmail.sh"
-${HOME}/installscripts/InstallSendEmail.sh ${BUILDOS}
->&2 /bin/echo "${0} InstallJQ.sh"
-${HOME}/installscripts/InstallJQ.sh ${BUILDOS}
->&2 /bin/echo "${0} InstallUnzip.sh"
-${HOME}/installscripts/InstallUnzip.sh ${BUILDOS}
->&2 /bin/echo "${0} InstallSSHPass.sh"
-${HOME}/installscripts/InstallSSHPass.sh ${BUILDOS}
->&2 /bin/echo "${0} InstallSysStat.sh"
-${HOME}/installscripts/InstallSysStat.sh ${BUILDOS}
->&2 /bin/echo "${0} InstallFirewall.sh"
-${HOME}/installscripts/InstallFirewall.sh ${BUILDOS}
->&2 /bin/echo "${0} InstallS3FS.sh"
-${HOME}/installscripts/InstallS3FS.sh ${BUILDOS}
->&2 /bin/echo "${0} InstallGoofyFS.sh"
-${HOME}/installscripts/InstallGoofyFS.sh ${BUILDOS}
->&2 /bin/echo "${0} InstallRsync.sh"
-${HOME}/installscripts/InstallRsync.sh ${BUILDOS}
->&2 /bin/echo "${0} InstallCron.sh"
-${HOME}/installscripts/InstallCron.sh ${BUILDOS}
->&2 /bin/echo "${0} InstallGo.sh"
-${HOME}/installscripts/InstallGo.sh ${BUILDOS}
-
-${HOME}/installscripts/InstallMonitoringGear.sh
+#${HOME}/installscripts/InstallMonitoringGear.sh
 
 /bin/echo "${0} #######################################################################################" >> ${HOME}/logs/initialbuild/BUILD_PROCESS_MONITORING.log
 >&2 /bin/echo "${0} Setting Timezone"
@@ -244,18 +241,13 @@ then
 	export TZ=":${SERVER_TIMEZONE_CONTINENT}/${SERVER_TIMEZONE_CITY}"
 fi
 
-/bin/echo "${0} #######################################################################################" >> ${HOME}/logs/initialbuild/BUILD_PROCESS_MONITORING.log
->&2 /bin/echo "${0} Installing Cloudhost Tools"
-/bin/echo "${0} Installing cloudhost tools" >> ${HOME}/logs/initialbuild/BUILD_PROCESS_MONITORING.log
-/bin/echo "${0} #######################################################################################" >> ${HOME}/logs/initialbuild/BUILD_PROCESS_MONITORING.log
-
 cd ${HOME}
 
 /bin/echo "${0} #######################################################################################" >> ${HOME}/logs/initialbuild/BUILD_PROCESS_MONITORING.log
 >&2 /bin/echo "${0} Installing Datastore tools"
 /bin/echo "${0} Installing Datastore tools" >> ${HOME}/logs/initialbuild/BUILD_PROCESS_MONITORING.log
 /bin/echo "${0} #######################################################################################" >> ${HOME}/logs/initialbuild/BUILD_PROCESS_MONITORING.log
-. ${HOME}/installscripts/InstallDatastoreTools.sh
+#. ${HOME}/installscripts/InstallDatastoreTools.sh
 . ${HOME}/providerscripts/datastore/InitialiseDatastoreConfig.sh
 
 # Install the language engine for whatever language your application is written in
@@ -263,14 +255,14 @@ cd ${HOME}
 >&2 /bin/echo "${0} Installing Application Language"
 /bin/echo "${0} Installing Application Language: ${APPLICATION_LANGUAGE}" >> ${HOME}/logs/initialbuild/BUILD_PROCESS_MONITORING.log
 /bin/echo "${0} #######################################################################################" >> ${HOME}/logs/initialbuild/BUILD_PROCESS_MONITORING.log
-${HOME}/providerscripts/webserver/InstallApplicationLanguage.sh "${APPLICATION_LANGUAGE}"
+#${HOME}/providerscripts/webserver/InstallApplicationLanguage.sh "${APPLICATION_LANGUAGE}"
 
 /bin/echo "${0} #######################################################################################" >> ${HOME}/logs/initialbuild/BUILD_PROCESS_MONITORING.log
 >&2 /bin/echo "${0} Installing Webserver"
 /bin/echo "${0} Installing Webserver: ${WEBSERVER_CHOICE} for ${WEBSITE_NAME} at: ${WEBSITE_URL}" >> ${HOME}/logs/initialbuild/BUILD_PROCESS_MONITORING.log
 /bin/echo "${0} #######################################################################################" >> ${HOME}/logs/initialbuild/BUILD_PROCESS_MONITORING.log
 /bin/echo "`${HOME}/providerscripts/utilities/GetIP.sh` ${WEBSITE_NAME}WS" >> /etc/hosts
-${HOME}/providerscripts/webserver/InstallWebserver.sh 
+#${HOME}/providerscripts/webserver/InstallWebserver.sh 
 
 cd ${HOME}
 
