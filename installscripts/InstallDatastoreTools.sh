@@ -46,8 +46,17 @@ then
 		fi
 	elif ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'DATASTORETOOL:s5cmd'`" = "1" ] )
  	then
-  		/usr/bin/go install github.com/peak/s5cmd/v2@latest
-		/bin/cp ${HOME}/go/bin/s5cmd /usr/bin/s5cmd
+  		if ( [ "${BUILDOS}" = "ubuntu" ] )
+		then
+  			/usr/bin/go install github.com/peak/s5cmd/v2@latest
+			/bin/cp ${HOME}/go/bin/s5cmd /usr/bin/s5cmd
+   		fi
+
+     		if ( [ "${BUILDOS}" = "debian" ] )
+		then
+  			/usr/bin/go install github.com/peak/s5cmd/v2@latest
+			/bin/cp ${HOME}/go/bin/s5cmd /usr/bin/s5cmd
+   		fi
   	fi
 fi
 
