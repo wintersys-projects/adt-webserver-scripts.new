@@ -39,10 +39,10 @@ then
 	then
 		if ( [ ! -f /usr/bin/s3fs ] )
 		then
-			if ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'S3FS:repo'`" = "1" ] )
+			if ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'DATASTOREMOUNTTOOL:s3fs:repo'`" = "1" ] )
 			then
 				DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=-1  -qq -y install s3fs
-			elif ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'S3FS:source'`" = "1" ] )
+			elif ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'DATASTOREMOUNTTOOL:s3fs:source'`" = "1" ] )
 			then
 				DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=-1  -qq -y install build-essential git libfuse-dev libcurl4-openssl-dev libxml2-dev automake libtool
 				DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=-1  -qq -y install pkg-config libssl-dev
@@ -60,10 +60,10 @@ then
 	then
 		if ( [ ! -f /usr/bin/s3fs ] )
 		then
-			if ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'S3FS:repo'`" = "1" ] )
+			if ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'DATASTOREMOUNTTOOL:s3fs:repo'`" = "1" ] )
 			then
 				DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=-1  -qq -y install s3fs
-			elif ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'S3FS:source'`" = "1" ] )
+			elif ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'DATASTOREMOUNTTOOL:s3fs:source'`" = "1" ] )
 			then
 				DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=-1  -qq -y install build-essential git libfuse-dev libcurl4-openssl-dev libxml2-dev automake libtool
 				DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=-1  -qq -y install pkg-config libssl-dev
