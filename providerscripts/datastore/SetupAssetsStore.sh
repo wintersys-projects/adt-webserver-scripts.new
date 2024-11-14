@@ -130,7 +130,7 @@ do
 		if ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'S3FS:repo'`" = "1" ] ||  [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'S3FS:source'`" = "1" ] )
 		then
 			/usr/bin/s3fs -o umask=0022 -o uid="${s3fs_uid}" -o gid="${s3fs_gid}" -o allow_other,nonempty,kernel_cache,use_path_request_style,max_stat_cache_size=10000,stat_cache_expire=20,multireq_max=3 -ourl=https://${endpoint} ${assetbucket} /var/www/html/${asset_directory}
-		elif ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'GOOF:binaries'`" = "1" ] || [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'GOOF:source'`" = "1" ] )
+		elif ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'DATASTOREMOUNTTOOL:goof:binary'`" = "1" ] || [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'DATASTOREMOUNTTOOL:goof:source'`" = "1" ] )
 		then
 			/bin/mkdir ~/.aws
 			/bin/chmod 755 ~/.aws
