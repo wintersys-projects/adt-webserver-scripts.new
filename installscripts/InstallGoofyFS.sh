@@ -26,12 +26,12 @@ fi
 
 if ( [ "${buildos}" = "ubuntu" ] )
 then
-	if ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'GOOF:binaries'`" = "1" ] )
+	if ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'DATASTOREMOUNTTOOL:goof:binary'`" = "1" ] )
 	then
 		/usr/bin/wget https://github.com/kahing/goofys/releases/latest/download/goofys
 		/bin/mv goofys /usr/bin
 		/bin/chmod 755 /usr/bin/goofys
-	elif ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'GOOF:source'`" = "1" ] )
+	elif ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'DATASTOREMOUNTTOOL:goof:source'`" = "1" ] )
 	then
 		${HOME}/installscripts/InstallGo.sh ${buildos}
 		DEBIAN_FRONTEND=noninteractive /usr/bin/apt-get -o DPkg::Lock::Timeout=-1  -qq -y install make
@@ -48,12 +48,12 @@ fi
 
 if ( [ "${buildos}" = "debian" ] )
 then
-	if ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'GOOF:binaries'`" = "1" ] )
+	if ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'DATASTOREMOUNTTOOL:goof:binary'`" = "1" ] )
 	then
 		/usr/bin/wget https://github.com/kahing/goofys/releases/latest/download/goofys
 		/bin/mv goofys /usr/bin
 		/bin/chmod 755 /usr/bin/goofys
-	elif ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'GOOF:source'`" = "1" ] )
+	elif ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'DATASTOREMOUNTTOOL:goof:source'`" = "1" ] )
 	then
 		${HOME}/installscripts/InstallGo.sh ${buildos}
 		DEBIAN_FRONTEND=noninteractive /usr/bin/apt-get -o DPkg::Lock::Timeout=-1  -qq -y install make
