@@ -30,7 +30,7 @@ then
 	cwd="`/usr/bin/pwd`"					#####UBUNTU-LEGO-SOURCE#####
 	/bin/mkdir -p /usr/local/src/lego			#####UBUNTU-LEGO-SOURCE#####
 	cd /usr/local/src/lego					#####UBUNTU-LEGO-SOURCE#####
-	version="`/usr/bin/wget -O- -q https://github.com/go-acme/lego/releases/latest | /bin/grep -oP 'Release\K.*' | /usr/bin/head -1 | /usr/bin/awk '{print $1}' | /bin/sed "s/[^[:digit:].-]//g"`"	#####UBUNTU-LEGO-SOURCE##### 
+	version="`/usr/bin/wget -O- -q https://github.com/go-acme/lego/releases/latest | /bin/grep -oP 'Release\K.*' | /usr/bin/head -1 | /usr/bin/awk '{print $1}' | /bin/sed "s/[^[:digit:].-]//g"`"	#####UBUNTU-LEGO-SOURCE-SKIP##### 
 	/usr/bin/wget https://github.com/xenolf/lego/releases/download/v${version}/lego_v${version}_linux_amd64.tar.gz    #####UBUNTU-LEGO-SOURCE#####
 	/bin/tar xvfz lego*tar.gz				#####UBUNTU-LEGO-SOURCE#####
 	/bin/rm *lego*tar.gz					#####UBUNTU-LEGO-SOURCE#####
@@ -43,7 +43,7 @@ then
 	cwd="`/usr/bin/pwd`"					#####DEBIAN-LEGO-SOURCE#####
 	/bin/mkdir -p /usr/local/src/lego			#####DEBIAN-LEGO-SOURCE#####
 	cd /usr/local/src/lego					#####DEBIAN-LEGO-SOURCE#####
-	version="`/usr/bin/wget -O- -q https://github.com/go-acme/lego/releases/latest | /bin/grep -oP 'Release\K.*' | /usr/bin/head -1 | /usr/bin/awk '{print $1}' | /bin/sed "s/[^[:digit:].-]//g"`" 	#####DEBIAN-LEGO-SOURCE#####
+	version="`/usr/bin/wget -O- -q https://github.com/go-acme/lego/releases/latest | /bin/grep -oP 'Release\K.*' | /usr/bin/head -1 | /usr/bin/awk '{print $1}' | /bin/sed "s/[^[:digit:].-]//g"`" 	#####DEBIAN-LEGO-SOURCE-SKIP#####
 	/usr/bin/wget https://github.com/xenolf/lego/releases/download/v${version}/lego_v${version}_linux_amd64.tar.gz    #####DEBIAN-LEGO-SOURCE#####
 	/bin/tar xvfz lego*tar.gz				#####DEBIAN-LEGO-SOURCE#####
 	/bin/rm *lego*tar.gz					#####DEBIAN-LEGO-SOURCE#####
