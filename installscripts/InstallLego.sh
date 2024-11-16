@@ -35,7 +35,7 @@ then
 	/bin/tar xvfz lego*tar.gz				#####UBUNTU-LEGO-SOURCE#####
 	/bin/rm *lego*tar.gz					#####UBUNTU-LEGO-SOURCE#####
 	/bin/cp lego /usr/bin/					#####UBUNTU-LEGO-SOURCE#####
-	cd ${cwd}						#####UBUNTU-LEGO-SOURCE#####
+	cd ${cwd}						#####UBUNTU-LEGO-SOURCE-SKIP#####
 fi
 
 if ( [ "${buildos}" = "debian" ] )
@@ -48,5 +48,5 @@ then
 	/bin/tar xvfz lego*tar.gz				#####DEBIAN-LEGO-SOURCE#####
 	/bin/rm *lego*tar.gz					#####DEBIAN-LEGO-SOURCE#####
 	/bin/cp lego /usr/bin/					#####DEBIAN-LEGO-SOURCE#####
-	cd ${cwd}						#####DEBIAN-LEGO-SOURCE#####
+	cd ${cwd}						#####DEBIAN-LEGO-SOURCE-SKIP#####
 fi
