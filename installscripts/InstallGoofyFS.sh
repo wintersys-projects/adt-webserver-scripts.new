@@ -39,7 +39,7 @@ then
 		cd goofys											#####UBUNTU-GOOFYS-SOURCE#####
 		make install											#####UBUNTU-GOOFYS-SOURCE#####
 		goofys="`/usr/bin/find / -type f -name "goofys" -print`"					#####UBUNTU-GOOFYS-SOURCE#####
-		/bin/mv ${goofys} /usr/bin									#####UBUNTU-GOOFYS-SOURCE#####
+		/bin/mv ${goofys} /usr/bin									#####UBUNTU-GOOFYS-SOURCE-SKIP#####
 		/bin/chmod 755 /usr/bin/goofys									#####UBUNTU-GOOFYS-SOURCE#####
 		cd ..												#####UBUNTU-GOOFYS-SOURCE#####
 		rm -r ./goofys											#####UBUNTU-GOOFYS-SOURCE#####
@@ -61,7 +61,7 @@ then
 		cd goofys											#####DEBIAN-GOOFYS-SOURCE#####
 		make install											#####DEBIAN-GOOFYS-SOURCE#####
 		goofys="`/usr/bin/find / -type f -name "goofys" -print`"					#####DEBIAN-GOOFYS-SOURCE#####
-		/bin/mv ${goofys} /usr/bin									#####DEBIAN-GOOFYS-SOURCE#####
+		/bin/mv ${goofys} /usr/bin									#####DEBIAN-GOOFYS-SOURCE-SKIP#####
 		/bin/chmod 755 /usr/bin/goofys									#####DEBIAN-GOOFYS-SOURCE#####
 		cd ..												#####DEBIAN-GOOFYS-SOURCE#####
 		rm -r ./goofys											#####DEBIAN-GOOFYS-SOURCE#####
