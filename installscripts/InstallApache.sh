@@ -46,12 +46,12 @@ then
 			/bin/touch /etc/apache2/BUILT_FROM_SOURCE
 		elif ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'APACHE:repo'`" = "1" ] )
 		then
-			DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=-1 -qq -y install apache2    
-			DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=-1 -qq -y install apache2-utils    
+			DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=-1 -qq -y install apache2    	#####UBUNTU-APACHE-SOURCE#####
+			DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=-1 -qq -y install apache2-utils    #####UBUNTU-APACHE-SOURCE#####
 		
 			if ( [  "`${HOME}/providerscripts/utilities/CheckConfigValue.sh APPLICATIONLANGUAGE:PHP`" = "1" ] )
 			then
-				DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=-1 -qq -y install libapache2-mod-php${PHP_VERSION}
+				DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=-1 -qq -y install libapache2-mod-php${PHP_VERSION} #####UBUNTU-APACHE-REPO#####
 			fi
 		
 			/bin/touch /etc/apache2/BUILT_FROM_REPO
@@ -63,16 +63,16 @@ then
  
 		if ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'APACHE:source'`" = "1" ] )
 		then
-			${HOME}/installscripts/apache/BuildApacheFromSource.sh  Debian
-			/bin/touch /etc/apache2/BUILT_FROM_SOURCE
+			${HOME}/installscripts/apache/BuildApacheFromSource.sh  Debian		#####DEBIAN-APACHE-SOURCE#####
+			/bin/touch /etc/apache2/BUILT_FROM_SOURCE				#####DEBIAN-APACHE-SOURCE#####
 		elif ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'APACHE:repo'`" = "1" ] )
 		then
-			DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=-1 -qq -y install apache2
-			DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=-1 -qq -y install apache2-utils    
+			DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=-1 -qq -y install apache2		#####DEBIAN-APACHE-REPO#####
+			DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=-1 -qq -y install apache2-utils    #####DEBIAN-APACHE-REPO#####
 
 			if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh APPLICATIONLANGUAGE:PHP`" = "1" ] )
 			then
-				DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=-1  -qq -y install libapache2-mod-php${PHP_VERSION}
+				DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=-1  -qq -y install libapache2-mod-php${PHP_VERSION} #####DEBIAN-APACHE-REPO#####
 			fi
 		
 			/bin/touch /etc/apache2/BUILT_FROM_REPO
