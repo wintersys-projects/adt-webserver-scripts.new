@@ -37,13 +37,13 @@ if ( [ "${apt}" != "" ] )
 then
 	if ( [ "${buildos}" = "ubuntu" ] )
 	then
-		DEBIAN_FRONTEND=noninteractive ${apt}  -o DPkg::Lock::Timeout=-1 -qq -y install perl
-		DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=-1  -qq -y install libfcgi-perl fcgiwrap spawn-fcgi
+		DEBIAN_FRONTEND=noninteractive ${apt}  -o DPkg::Lock::Timeout=-1 -qq -y install perl 					#####UBUNTU-PERL-REPO#####
+		DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=-1  -qq -y install libfcgi-perl fcgiwrap spawn-fcgi	#####UBUNTU-PERL-REPO#####
 	fi
 
 	if ( [ "${buildos}" = "debian" ] )
 	then
-		DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=-1  -qq -y install perl
-		DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=-1  -qq -y install libfcgi-perl fcgiwrap spawn-fcgi
+		DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=-1  -qq -y install perl					#####DEBIAN-PERL-REPO#####
+		DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=-1  -qq -y install libfcgi-perl fcgiwrap spawn-fcgi	#####DEBIAN-PERL-REPO#####
 	fi
 fi
