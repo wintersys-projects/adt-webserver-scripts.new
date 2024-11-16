@@ -40,12 +40,12 @@ then
 	then
 		if ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'LIGHTTPD:source'`" = "1" ] )
 		then
-			${HOME}/installscripts/lighttpd/BuildLighttpdFromSource.sh 		#####UBUNTUN-LIGHTTPD-SOURCE#####
-			/bin/touch /etc/lighttpd/BUILT_FROM_SOURCE				#####UBUNTUN-LIGHTTPD-SOURCE#####
+			${HOME}/installscripts/lighttpd/BuildLighttpdFromSource.sh 		#####UBUNTU-LIGHTTPD-SOURCE#####
+			/bin/touch /etc/lighttpd/BUILT_FROM_SOURCE				#####UBUNTU-LIGHTTPD-SOURCE#####
 		elif ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'LIGHTTPD:repo'`" = "1" ] )
 		then
-			DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=-1 -y -qq install lighttpd	#####UBUNTUN-LIGHTTPD-REPO#####
-			/bin/touch /etc/lighttpd/BUILT_FROM_REPO						#####UBUNTUN-LIGHTTPD-REPO#####
+			DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=-1 -y -qq install lighttpd	#####UBUNTU-LIGHTTPD-REPO#####
+			/bin/touch /etc/lighttpd/BUILT_FROM_REPO						#####UBUNTU-LIGHTTPD-REPO#####
 		fi
 	fi
 
@@ -53,12 +53,12 @@ then
 	then
 		if ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'LIGHTTPD:source'`" = "1" ] )
 		then
-			${HOME}/installscripts/lighttpd/BuildLighttpdFromSource.sh 		#####UBUNTUN-LIGHTTPD-SOURCE#####
-			/bin/touch /etc/lighttpd/BUILT_FROM_SOURCE				#####UBUNTUN-LIGHTTPD-SOURCE#####
+			${HOME}/installscripts/lighttpd/BuildLighttpdFromSource.sh 		#####DEBIAN-LIGHTTPD-SOURCE#####
+			/bin/touch /etc/lighttpd/BUILT_FROM_SOURCE				#####DEBIAN-LIGHTTPD-SOURCE#####
 		elif ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'LIGHTTPD:repo'`" = "1" ] )
 		then
-			DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=-1 -y -qq install lighttpd	#####UBUNTUN-LIGHTTPD-REPO#####
-			/bin/touch /etc/lighttpd/BUILT_FROM_REPO						#####UBUNTUN-LIGHTTPD-REPO#####
+			DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=-1 -y -qq install lighttpd	#####DEBIAN-LIGHTTPD-REPO#####
+			/bin/touch /etc/lighttpd/BUILT_FROM_REPO						#####DEBIAN-LIGHTTPD-REPO#####
 		fi
 	fi
 fi
