@@ -37,15 +37,15 @@ if ( [ "${apt}" != "" ] )
 then
 	if ( [ "${buildos}" = "ubuntu" ] )
 	then
-		version="`${HOME}/providerscripts/utilities/ExtractBuildStyleValues.sh "MARIADB" | /usr/bin/awk -F':' '{print $NF}'`"
-		/usr/bin/curl -LsS https://downloads.mariadb.com/MariaDB/mariadb_repo_setup | sudo bash -s -- --mariadb-server-version="mariadb-${version}"
-		DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=69  -qq -y install mariadb-client
+		version="`${HOME}/providerscripts/utilities/ExtractBuildStyleValues.sh "MARIADB" | /usr/bin/awk -F':' '{print $NF}'`"	#####UBUNTU-MARIADBCLIENT-REPO#####
+		/usr/bin/curl -LsS https://downloads.mariadb.com/MariaDB/mariadb_repo_setup | sudo bash -s -- --mariadb-server-version="mariadb-${version}"	#####UBUNTUN-MARIADBCLIENT-REPO#####
+		DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=69  -qq -y install mariadb-client				#####UBUNTU-MARIADBCLIENT-REPO#####
 	fi
 
 	if ( [ "${buildos}" = "debian" ] )
 	then
-		version="`${HOME}/providerscripts/utilities/ExtractBuildStyleValues.sh "MARIADB" | /usr/bin/awk -F':' '{print $NF}'`"
-		/usr/bin/curl -LsS https://downloads.mariadb.com/MariaDB/mariadb_repo_setup | sudo bash -s -- --mariadb-server-version="mariadb-${version}"
-		DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=60  -qq -y install mariadb-client
+		version="`${HOME}/providerscripts/utilities/ExtractBuildStyleValues.sh "MARIADB" | /usr/bin/awk -F':' '{print $NF}'`"	#####DEBIAN-MARIADBCLIENT-REPO#####
+		/usr/bin/curl -LsS https://downloads.mariadb.com/MariaDB/mariadb_repo_setup | sudo bash -s -- --mariadb-server-version="mariadb-${version}"	#####UBUNTUN-MARIADBCLIENT-REPO#####
+		DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=60  -qq -y install mariadb-client				#####DEBIAN-MARIADBCLIENT-REPO#####
 	fi
 fi
