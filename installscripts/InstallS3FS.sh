@@ -41,17 +41,17 @@ then
 		then
 			if ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'DATASTOREMOUNTTOOL:s3fs:repo'`" = "1" ] )
 			then
-				DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=-1  -qq -y install s3fs
+				DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=-1  -qq -y install s3fs	#####UBUNTU-S3FS-REPO#####
 			elif ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'DATASTOREMOUNTTOOL:s3fs:source'`" = "1" ] )
 			then
-				DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=-1  -qq -y install build-essential git libfuse-dev libcurl4-openssl-dev libxml2-dev automake libtool
-				DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=-1  -qq -y install pkg-config libssl-dev
-				/usr/bin/git clone https://github.com/s3fs-fuse/s3fs-fuse
-				cd s3fs-fuse/
-				./autogen.sh
-				./configure --prefix=/usr --with-openssl
-				/usr/bin/make
-				/usr/bin/make install
+				DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=-1  -qq -y install build-essential git libfuse-dev libcurl4-openssl-dev libxml2-dev automake libtool	#####UBUNTU-S3FS-SOURCE#####
+				DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=-1  -qq -y install pkg-config libssl-dev									#####UBUNTU-S3FS-SOURCE#####
+				/usr/bin/git clone https://github.com/s3fs-fuse/s3fs-fuse														#####UBUNTU-S3FS-SOURCE#####
+				cd s3fs-fuse/							#####UBUNTU-S3FS-SOURCE#####
+				./autogen.sh							#####UBUNTU-S3FS-SOURCE#####
+				./configure --prefix=/usr --with-openssl			#####UBUNTU-S3FS-SOURCE#####
+				/usr/bin/make							#####UBUNTU-S3FS-SOURCE#####
+				/usr/bin/make install						#####UBUNTU-S3FS-SOURCE#####
 			fi
 		fi
 	fi
@@ -62,17 +62,17 @@ then
 		then
 			if ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'DATASTOREMOUNTTOOL:s3fs:repo'`" = "1" ] )
 			then
-				DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=-1  -qq -y install s3fs
+				DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=-1  -qq -y install s3fs		#####DEBIAN-S3FS-SOURCE#####
 			elif ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'DATASTOREMOUNTTOOL:s3fs:source'`" = "1" ] )
 			then
-				DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=-1  -qq -y install build-essential git libfuse-dev libcurl4-openssl-dev libxml2-dev automake libtool
-				DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=-1  -qq -y install pkg-config libssl-dev
-				/usr/bin/git clone https://github.com/s3fs-fuse/s3fs-fuse
-				cd s3fs-fuse/
-				./autogen.sh
-				./configure --prefix=/usr --with-openssl
-				/usr/bin/make
-				/usr/bin/make install
+				DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=-1  -qq -y install build-essential git libfuse-dev libcurl4-openssl-dev libxml2-dev automake libtool	#####DEBIAN-S3FS-SOURCE#####
+				DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=-1  -qq -y install pkg-config libssl-dev									#####DEBIAN-S3FS-SOURCE#####
+				/usr/bin/git clone https://github.com/s3fs-fuse/s3fs-fuse		#####DEBIAN-S3FS-SOURCE#####
+				cd s3fs-fuse/								#####DEBIAN-S3FS-SOURCE#####
+				./autogen.sh								#####DEBIAN-S3FS-SOURCE#####
+				./configure --prefix=/usr --with-openssl				#####DEBIAN-S3FS-SOURCE#####
+				/usr/bin/make								#####DEBIAN-S3FS-SOURCE#####
+				/usr/bin/make install							#####DEBIAN-S3FS-SOURCE#####
 			fi
 		fi
 	fi
