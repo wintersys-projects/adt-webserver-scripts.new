@@ -60,7 +60,7 @@ then
 			for module in ${modules}									#####UBUNTU-PHP-REPO#####
 			do												#####UBUNTU-PHP-REPO#####
 				DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=-1 -qq -y install php${PHP_VERSION}-${module}	#####UBUNTU-PHP-REPO#####
-			done
+			done												#####UBUNTU-PHP-REPO#####
 
 			/usr/bin/update-alternatives --set php /usr/bin/php${PHP_VERSION}				#####UBUNTU-PHP-REPO#####
 	   
