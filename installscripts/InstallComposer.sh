@@ -46,7 +46,7 @@ then
 		HASH=`/usr/bin/curl -sS https://composer.github.io/installer.sig`				#####UBUNTU-COMPOSER-REPO#####
 		/usr/bin/php -r "if (hash_file('SHA384', '/tmp/composer-setup.php') === '$HASH') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"		#####UBUNTU-COMPOSER-REPO#####
 		/usr/bin/php /tmp/composer-setup.php --install-dir=/usr/local/bin --filename=composer		#####UBUNTU-COMPOSER-REPO#####
-  		${HOME}/providerscripts/utilities/RunServiceCommand.sh cron start				#####UBUNTU-COMPOSER-REPO#####
+  		${HOME}/providerscripts/utilities/RunServiceCommand.sh cron start				
 	fi
 
 	if ( [ "${buildos}" = "debian" ] )
@@ -59,6 +59,6 @@ then
 		HASH=`/usr/bin/curl -sS https://composer.github.io/installer.sig`				#####DEBIAN-COMPOSER-REPO#####
 		/usr/bin/php -r "if (hash_file('SHA384', '/tmp/composer-setup.php') === '$HASH') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"		#####DEBIAN-COMPOSER-REPO#####
 		/usr/bin/php /tmp/composer-setup.php --install-dir=/usr/local/bin --filename=composer		#####DEBIAN-COMPOSER-REPO#####
-  		${HOME}/providerscripts/utilities/RunServiceCommand.sh cron start				#####DEBIAN-COMPOSER-REPO#####
+  		${HOME}/providerscripts/utilities/RunServiceCommand.sh cron start				
 	fi
 fi
