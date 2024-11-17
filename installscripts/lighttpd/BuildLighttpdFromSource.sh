@@ -38,15 +38,20 @@ then
 fi
 
 #Get the latest version of lighttpd
-release_series="1"
-version_name="`/usr/bin/wget -O- - https://github.com/lighttpd | /bin/grep -o lighttpd[${release_series}].[0-9][0-9] | /bin/grep lighttpd | /usr/bin/head -1`"
-if ( [ "${version_name}" = "" ] )
-then
-	version_name="`/usr/bin/wget -O- - https://github.com/lighttpd | /bin/grep -o lighttpd[${release_series}].[0-9] | /bin/grep lighttpd | /usr/bin/head -1`"
-fi
+#release_series="1"
+#version_name="`/usr/bin/wget -O- - https://github.com/lighttpd | /bin/grep -o lighttpd[${release_series}].[0-9][0-9] | /bin/grep lighttpd | /usr/bin/head -1`"
+#if ( [ "${version_name}" = "" ] )
+#then
+#	version_name="`/usr/bin/wget -O- - https://github.com/lighttpd | /bin/grep -o lighttpd[${release_series}].[0-9] | /bin/grep lighttpd | /usr/bin/head -1`"
+#fi
 
-/usr/bin/git clone https://github.com/lighttpd/${version_name}.git
-cd ${version_name}
+minor_version="`/usr/bin/curl -L https://api.github.com/repos/lighttpd/lighttpd1.4/tags | /usr/bin/jq -r '.[] | .name' | /usr/bin/awk -F'-' '{print $2}' | /usr/bin/head -1`"
+major_version="`/bin/echo ${minor_version} | /usr/bin/awk -F'.' '{print $1.$2}'
+
+/usr/bin/wget https://github.com/lighttpd/lighttpd${major_version}/archive/refs/tags/lighttpd-${minor_version}.tar.gz
+
+#/usr/bin/git clone https://github.com/lighttpd/${version_name}.git
+#cd ${version_name}
 
 ./autogen.sh
 
