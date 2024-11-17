@@ -30,8 +30,8 @@ then
 	cwd="`/usr/bin/pwd`"					#####UBUNTU-LEGO-SOURCE#####
 	/bin/mkdir -p /usr/local/src/lego			#####UBUNTU-LEGO-SOURCE#####
 	cd /usr/local/src/lego					#####UBUNTU-LEGO-SOURCE#####
-	version="`/usr/bin/wget -O- -q https://github.com/go-acme/lego/releases/latest | /bin/grep -oP 'Release\K.*' | /usr/bin/head -1 | /usr/bin/awk '{print $1}' | /bin/sed "s/[^[:digit:].-]//g"`"	#####UBUNTU-LEGO-SOURCE-SKIP##### 
-	/usr/bin/wget https://github.com/xenolf/lego/releases/download/v${version}/lego_v${version}_linux_amd64.tar.gz    #####UBUNTU-LEGO-SOURCE-SKIP#####
+ 	version="`/usr/bin/curl -L https://api.github.com/repos/go-acme/lego/releases/latest | /usr/bin/jq -r '.name'`" #####UBUNTU-LEGO-SOURCE#####
+	/usr/bin/wget https://github.com/xenolf/lego/releases/download/${version}/lego_${version}_linux_amd64.tar.gz    #####UBUNTU-LEGO-SOURCE-SKIP#####
 	/bin/tar xvfz lego*tar.gz				#####UBUNTU-LEGO-SOURCE#####
 	/bin/rm *lego*tar.gz					#####UBUNTU-LEGO-SOURCE#####
 	/bin/cp lego /usr/bin/					#####UBUNTU-LEGO-SOURCE#####
@@ -43,8 +43,8 @@ then
 	cwd="`/usr/bin/pwd`"					#####DEBIAN-LEGO-SOURCE#####
 	/bin/mkdir -p /usr/local/src/lego			#####DEBIAN-LEGO-SOURCE#####
 	cd /usr/local/src/lego					#####DEBIAN-LEGO-SOURCE#####
-	version="`/usr/bin/wget -O- -q https://github.com/go-acme/lego/releases/latest | /bin/grep -oP 'Release\K.*' | /usr/bin/head -1 | /usr/bin/awk '{print $1}' | /bin/sed "s/[^[:digit:].-]//g"`" 	#####DEBIAN-LEGO-SOURCE-SKIP#####
-	/usr/bin/wget https://github.com/xenolf/lego/releases/download/v${version}/lego_v${version}_linux_amd64.tar.gz    #####DEBIAN-LEGO-SOURCE-SKIP#####
+ 	version="`/usr/bin/curl -L https://api.github.com/repos/go-acme/lego/releases/latest | /usr/bin/jq -r '.name'`"	#####DEBIAN-LEGO-SOURCE#####
+  	/usr/bin/wget https://github.com/xenolf/lego/releases/download/${version}/lego_${version}_linux_amd64.tar.gz    #####DEBIAN-LEGO-SOURCE-SKIP#####
 	/bin/tar xvfz lego*tar.gz				#####DEBIAN-LEGO-SOURCE#####
 	/bin/rm *lego*tar.gz					#####DEBIAN-LEGO-SOURCE#####
 	/bin/cp lego /usr/bin/					#####DEBIAN-LEGO-SOURCE#####
