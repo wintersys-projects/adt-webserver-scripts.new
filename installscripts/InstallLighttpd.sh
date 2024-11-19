@@ -42,7 +42,7 @@ then
 		then
   			source_home="${HOME}"
 			${source_home}/installscripts/lighttpd/BuildLighttpdFromSource.sh 		#####UBUNTU-LIGHTTPD-SOURCE-INLINE#####
-			/bin/touch /etc/lighttpd/BUILT_FROM_SOURCE				#####UBUNTU-LIGHTTPD-SOURCE#####
+			/bin/touch /etc/lighttpd/BUILT_FROM_SOURCE				
 		elif ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'LIGHTTPD:repo'`" = "1" ] )
 		then
 			DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=-1 -y -qq install lighttpd	#####UBUNTU-LIGHTTPD-REPO#####
@@ -56,7 +56,7 @@ then
 		then
   			source_home="${HOME}
 			${source_home}/installscripts/lighttpd/BuildLighttpdFromSource.sh 		#####DEBIAN-LIGHTTPD-SOURCE_INLINE#####
-			/bin/touch /etc/lighttpd/BUILT_FROM_SOURCE				#####DEBIAN-LIGHTTPD-SOURCE#####
+			/bin/touch /etc/lighttpd/BUILT_FROM_SOURCE				
 		elif ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'LIGHTTPD:repo'`" = "1" ] )
 		then
 			DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=-1 -y -qq install lighttpd	#####DEBIAN-LIGHTTPD-REPO#####
