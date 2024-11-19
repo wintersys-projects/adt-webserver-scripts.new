@@ -43,7 +43,7 @@ then
 		then
   			source_home=${HOME}
 			 ${source_home}/installscripts/nginx/BuildNginxFromSource.sh Ubuntu 			#####UBUNTU-NGINX-SOURCE-INLINE#####
-			 /bin/touch /etc/nginx/BUILT_FROM_SOURCE					#####UBUNTU-NGINX-SOURCE#####
+			 /bin/touch /etc/nginx/BUILT_FROM_SOURCE					
 		elif ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'NGINX:repo'`" = "1" ] )
 		then
 			DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=-1 -qq -y install nginx	#####UBUNTU-NGINX-REPO#####
@@ -58,7 +58,7 @@ then
 		then
   			source_home="${HOME}"
 			${source_home}/installscripts/nginx/BuildNginxFromSource.sh Debian        		#####DEBIAN-NGINX-SOURCE-INLINE#####
-			/bin/touch /etc/nginx/BUILT_FROM_SOURCE						#####DEBIAN-NGINX-SOURCE#####
+			/bin/touch /etc/nginx/BUILT_FROM_SOURCE						
 		elif ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'NGINX:repo'`" = "1" ] )
 		then    
 			DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=-1 -qq -y install nginx	#####DEBIAN-NGINX-REPO#####
