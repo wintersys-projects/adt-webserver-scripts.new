@@ -40,7 +40,7 @@ then
 	then
 		if ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'LIGHTTPD:source'`" = "1" ] )
 		then
-			${HOME}/installscripts/lighttpd/BuildLighttpdFromSource.sh 		#####UBUNTU-LIGHTTPD-SOURCE#####
+			${HOME}/installscripts/lighttpd/BuildLighttpdFromSource.sh 		#####UBUNTU-LIGHTTPD-SOURCE-INLINE#####
 			/bin/touch /etc/lighttpd/BUILT_FROM_SOURCE				#####UBUNTU-LIGHTTPD-SOURCE#####
 		elif ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'LIGHTTPD:repo'`" = "1" ] )
 		then
@@ -53,7 +53,7 @@ then
 	then
 		if ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'LIGHTTPD:source'`" = "1" ] )
 		then
-			${HOME}/installscripts/lighttpd/BuildLighttpdFromSource.sh 		#####DEBIAN-LIGHTTPD-SOURCE#####
+			${HOME}/installscripts/lighttpd/BuildLighttpdFromSource.sh 		#####DEBIAN-LIGHTTPD-SOURCE_INLINE#####
 			/bin/touch /etc/lighttpd/BUILT_FROM_SOURCE				#####DEBIAN-LIGHTTPD-SOURCE#####
 		elif ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'LIGHTTPD:repo'`" = "1" ] )
 		then
