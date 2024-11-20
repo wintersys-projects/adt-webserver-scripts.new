@@ -55,9 +55,9 @@ then
 			DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=-1 -qq -y update			#####UBUNTU-PHP-REPO#####
 			DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=-1 -qq -y upgrade			#####UBUNTU-PHP-REPO#####			DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=-1  -qq -y install php${PHP_VERSION}	#####UBUNTU-PHP-REPO#####
    
-			modules="`${HOME}/providerscripts/utilities/ExtractBuildStyleValues.sh "PHP" "stripped" | /bin/sed 's/|.*//g' | /bin/sed 's/:/ /g'`"
+			php_modules="`${HOME}/providerscripts/utilities/ExtractBuildStyleValues.sh "PHP" "stripped" | /bin/sed 's/|.*//g' | /bin/sed 's/:/ /g'`"
 	
-			for module in ${modules}									#####UBUNTU-PHP-REPO#####
+			for module in ${php_modules}									#####UBUNTU-PHP-REPO#####
 			do												#####UBUNTU-PHP-REPO#####
 				DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=-1 -qq -y install php${PHP_VERSION}-${module}	#####UBUNTU-PHP-REPO-SKIP#####
 			done												#####UBUNTU-PHP-REPO#####
@@ -78,9 +78,9 @@ then
 			DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=-1 -qq -y upgrade							#####DEBIAN-PHP-REPO#####
 			DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=-1 -qq -y install php${PHP_VERSION}				#####DEBIAN-PHP-REPO#####
   	
-			modules="`${HOME}/providerscripts/utilities/ExtractBuildStyleValues.sh "PHP" "stripped" | /bin/sed 's/|.*//g' | /bin/sed 's/:/ /g'`"
+			php_modules="`${HOME}/providerscripts/utilities/ExtractBuildStyleValues.sh "PHP" "stripped" | /bin/sed 's/|.*//g' | /bin/sed 's/:/ /g'`"
 	
-			for module in ${modules}													#####DEBIAN-PHP-REPO#####
+			for module in ${php_modules}													#####DEBIAN-PHP-REPO#####
 			do																#####DEBIAN-PHP-REPO#####
 				DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=-1  -qq -y install php${PHP_VERSION}-${module}		#####DEBIAN-PHP-REPO-SKIP#####
 			done																#####DEBIAN-PHP-REPO#####
