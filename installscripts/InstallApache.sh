@@ -42,8 +42,11 @@ then
    
 		if ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'APACHE:source'`" = "1" ] )
 		then
-			${HOME}/installscripts/apache/BuildApacheFromSource.sh  Ubuntu 					#####UBUNTU-APACHE-SOURCE-INLINE#####
-			/bin/touch /etc/apache2/BUILT_FROM_SOURCE							
+  			if ( [ ! -f /etc/apache2/BUILT_FROM_SOURCE ] )
+     			then
+				${HOME}/installscripts/apache/BuildApacheFromSource.sh  Ubuntu 			#####UBUNTU-APACHE-SOURCE-INLINE#####
+				/bin/touch /etc/apache2/BUILT_FROM_SOURCE					#####UBUNTU-APACHE-SOURCE#####
+    			fi
 		elif ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'APACHE:repo'`" = "1" ] )
 		then
 			DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=-1 -qq -y install apache2    	#####UBUNTU-APACHE-REPO#####
@@ -63,8 +66,11 @@ then
  
 		if ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'APACHE:source'`" = "1" ] )
 		then
-			${HOME}/installscripts/apache/BuildApacheFromSource.sh  Debian		#####DEBIAN-APACHE-SOURCE-INLINE#####
-			/bin/touch /etc/apache2/BUILT_FROM_SOURCE				
+    			if ( [ ! -f /etc/apache2/BUILT_FROM_SOURCE ] )
+     			then
+				${HOME}/installscripts/apache/BuildApacheFromSource.sh  Debian		#####DEBIAN-APACHE-SOURCE-INLINE#####
+				/bin/touch /etc/apache2/BUILT_FROM_SOURCE				#####DEBIAN-APACHE-SOURCE#####
+    			fi
 		elif ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'APACHE:repo'`" = "1" ] )
 		then
 			DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=-1 -qq -y install apache2		#####DEBIAN-APACHE-REPO#####
