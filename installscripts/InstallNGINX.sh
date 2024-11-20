@@ -41,8 +41,11 @@ then
 	then
 		if ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'NGINX:source'`" = "1" ] )
 		then
-			 ${HOME}/installscripts/nginx/BuildNginxFromSource.sh Ubuntu 			#####UBUNTU-NGINX-SOURCE-INLINE#####
-			 /bin/touch /etc/nginx/BUILT_FROM_SOURCE					
+    			if ( [ ! -f /etc/nginx/BUILT_FROM_SOURCE ] )
+     			then
+			 	${HOME}/installscripts/nginx/BuildNginxFromSource.sh Ubuntu 			#####UBUNTU-NGINX-SOURCE-INLINE#####
+			 	/bin/touch /etc/nginx/BUILT_FROM_SOURCE						#####UBUNTU-NGINX-SOURCE#####
+     			fi
 		elif ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'NGINX:repo'`" = "1" ] )
 		then
 			DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=-1 -qq -y install nginx	#####UBUNTU-NGINX-REPO#####
@@ -55,8 +58,11 @@ then
 	then
 		if ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'NGINX:source'`" = "1" ] )
 		then
-			${HOME}/installscripts/nginx/BuildNginxFromSource.sh Debian        		#####DEBIAN-NGINX-SOURCE-INLINE#####
-			/bin/touch /etc/nginx/BUILT_FROM_SOURCE						
+  			if ( [ ! -f /etc/nginx/BUILT_FROM_SOURCE ] )
+     			then
+				${HOME}/installscripts/nginx/BuildNginxFromSource.sh Debian        		#####DEBIAN-NGINX-SOURCE-INLINE#####
+				/bin/touch /etc/nginx/BUILT_FROM_SOURCE						#####DEBIAN-NGINX-SOURCE#####
+    			fi
 		elif ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'NGINX:repo'`" = "1" ] )
 		then    
 			DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=-1 -qq -y install nginx	#####DEBIAN-NGINX-REPO#####
