@@ -351,8 +351,11 @@ cd /var/www/html
 >&2 /bin/echo "${0} Applying application specific customisations"
 /bin/echo "${0} Applying application specific customisations" >> ${HOME}/logs/initialbuild/BUILD_PROCESS_MONITORING.log
 /bin/echo "${0} #######################################################################################" >> ${HOME}/logs/initialbuild/BUILD_PROCESS_MONITORING.log
-. ${HOME}/providerscripts/application/branding/ApplyApplicationBranding.sh
-. ${HOME}/providerscripts/application/customise/CustomiseApplication.sh
+if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh BUILDARCHIVECHOICE:baseline`" = "1" ] )
+then
+	. ${HOME}/providerscripts/application/branding/ApplyApplicationBranding.sh
+	. ${HOME}/providerscripts/application/customise/CustomiseApplication.sh
+fi
 ${HOME}/providerscripts/application/customise/AdjustApplicationInstallationByApplication.sh
 
 /bin/echo "${0} #######################################################################################" >> ${HOME}/logs/initialbuild/BUILD_PROCESS_MONITORING.log
