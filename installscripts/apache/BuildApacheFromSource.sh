@@ -64,10 +64,10 @@ cd /usr/local/src/httpd-${apache_latest_version}
 
 #Get the list of custom modules we are building, if any at all
 
-modules="`${HOME}/providerscripts/utilities/ExtractBuildStyleValues.sh "APACHE" "stripped" | /bin/sed 's/:/ /g' | /bin/sed 's/source//g'`"
+apache_modules="`${HOME}/providerscripts/utilities/ExtractBuildStyleValues.sh "APACHE" "stripped" | /bin/sed 's/:/ /g' | /bin/sed 's/source//g'`"
 
 #If we are configured with a custom list of modules, build with the modules otherwise perform our default build
-if ( [ "${modules}" != "" ] )
+if ( [ "${apache_modules}" != "" ] )
 then
    options=" --host=x86_64-pc-linux-gnu --target=x86_64-pc-linux-gnu --build=x86_64-pc-linux-gnu --prefix /usr/local/apache2 --sysconfdir=/etc/apache2 --enable-mods-shared=\"${modules}\" --enable-nonportable-atomics=yes --with-nghttp2 --enable-ssl --enable-so --enable-http2"
 else
