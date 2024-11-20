@@ -46,6 +46,13 @@ then
 			 	${HOME}/installscripts/nginx/BuildNginxFromSource.sh Ubuntu 			#####UBUNTU-NGINX-SOURCE-INLINE#####
 			 	/bin/touch /etc/nginx/BUILT_FROM_SOURCE						#####UBUNTU-NGINX-SOURCE#####
      			fi
+	      		#Make sure nginx avaiable as a service and enable and start it
+			if ( [ ! -f /lib/systemd/system/nginx.service ] )
+   			then
+				/bin/cp ${HOME}/installscripts/nginx/nginx.service /lib/systemd/system/nginx.service
+				/usr/bin/systemctl enable nginx
+    				/usr/bin/systemctl restart nginx
+    			fi
 		elif ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'NGINX:repo'`" = "1" ] )
 		then
 			DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=-1 -qq -y install nginx	#####UBUNTU-NGINX-REPO#####
@@ -63,6 +70,14 @@ then
 				${HOME}/installscripts/nginx/BuildNginxFromSource.sh Debian        		#####DEBIAN-NGINX-SOURCE-INLINE#####
 				/bin/touch /etc/nginx/BUILT_FROM_SOURCE						#####DEBIAN-NGINX-SOURCE#####
     			fi
+      			 #Make sure nginx avaiable as a service and enable and start it
+			if ( [ ! -f /lib/systemd/system/nginx.service ] )
+   			then
+				/bin/cp ${HOME}/installscripts/nginx/nginx.service /lib/systemd/system/nginx.service
+				/usr/bin/systemctl enable nginx
+				/usr/bin/systemctl restart nginx
+    			fi
+    
 		elif ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'NGINX:repo'`" = "1" ] )
 		then    
 			DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=-1 -qq -y install nginx	#####DEBIAN-NGINX-REPO#####
