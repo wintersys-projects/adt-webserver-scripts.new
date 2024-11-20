@@ -45,12 +45,12 @@ nginx_latest_version="`/usr/bin/curl 'http://nginx.org/download/' |   /bin/egrep
 cd nginx-${nginx_latest_version}
 
 #Get the list of any custom modules that we want to compile with, if there are none, perform a default build
-modules="`${HOME}/providerscripts/utilities/ExtractBuildStyleValues.sh "NGINX" "stripped" | /bin/sed 's/:/ /g' | /bin/sed 's/source//g'`"
+nginx_modules="`${HOME}/providerscripts/utilities/ExtractBuildStyleValues.sh "NGINX" "stripped" | /bin/sed 's/:/ /g' | /bin/sed 's/source//g'`"
 
-if ( [ "${modules}" != "" ] )
+if ( [ "${nginx_modules}" != "" ] )
 then
 	with_modules=""
-	for module in ${modules}
+	for module in ${nginx_modules}
 	do
 		with_modules=${with_modules}" --with-${module}_module"
 	done
