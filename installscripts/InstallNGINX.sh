@@ -41,8 +41,7 @@ then
 	then
 		if ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'NGINX:source'`" = "1" ] )
 		then
-  			source_home=${HOME}
-			 ${source_home}/installscripts/nginx/BuildNginxFromSource.sh Ubuntu 			#####UBUNTU-NGINX-SOURCE-INLINE#####
+			 ${HOME}/installscripts/nginx/BuildNginxFromSource.sh Ubuntu 			#####UBUNTU-NGINX-SOURCE-INLINE#####
 			 /bin/touch /etc/nginx/BUILT_FROM_SOURCE					
 		elif ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'NGINX:repo'`" = "1" ] )
 		then
@@ -56,8 +55,7 @@ then
 	then
 		if ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'NGINX:source'`" = "1" ] )
 		then
-  			source_home="${HOME}"
-			${source_home}/installscripts/nginx/BuildNginxFromSource.sh Debian        		#####DEBIAN-NGINX-SOURCE-INLINE#####
+			${HOME}/installscripts/nginx/BuildNginxFromSource.sh Debian        		#####DEBIAN-NGINX-SOURCE-INLINE#####
 			/bin/touch /etc/nginx/BUILT_FROM_SOURCE						
 		elif ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'NGINX:repo'`" = "1" ] )
 		then    
