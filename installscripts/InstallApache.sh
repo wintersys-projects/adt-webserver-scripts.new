@@ -42,8 +42,7 @@ then
    
 		if ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'APACHE:source'`" = "1" ] )
 		then
-  			source_home="${HOME}"
-			${source_home}/installscripts/apache/BuildApacheFromSource.sh  Ubuntu 					#####UBUNTU-APACHE-SOURCE-INLINE#####
+			${HOME}/installscripts/apache/BuildApacheFromSource.sh  Ubuntu 					#####UBUNTU-APACHE-SOURCE-INLINE#####
 			/bin/touch /etc/apache2/BUILT_FROM_SOURCE							
 		elif ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'APACHE:repo'`" = "1" ] )
 		then
@@ -64,8 +63,7 @@ then
  
 		if ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'APACHE:source'`" = "1" ] )
 		then
-    			source_home="${HOME}"
-			${source_home}/installscripts/apache/BuildApacheFromSource.sh  Debian		#####DEBIAN-APACHE-SOURCE-INLINE#####
+			${HOME}/installscripts/apache/BuildApacheFromSource.sh  Debian		#####DEBIAN-APACHE-SOURCE-INLINE#####
 			/bin/touch /etc/apache2/BUILT_FROM_SOURCE				
 		elif ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'APACHE:repo'`" = "1" ] )
 		then
