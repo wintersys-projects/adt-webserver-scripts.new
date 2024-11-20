@@ -294,8 +294,8 @@ if ( [ "`/bin/grep '^#Port' /etc/ssh/sshd_config`" != "" ] || [ "`/bin/grep '^Po
 then
 	/bin/sed -i "s/^Port.*/Port ${SSH_PORT}/g" /etc/ssh/sshd_config
 	/bin/sed -i "s/^#Port.*/Port ${SSH_PORT}/g" /etc/ssh/sshd_config
-else
-	/bin/echo "PermitRootLogin no" >> /etc/ssh/sshd_config
+#else
+#	/bin/echo "PermitRootLogin no" >> /etc/ssh/sshd_config
 fi
 
 /bin/echo "${0} #######################################################################################" >> ${HOME}/logs/initialbuild/BUILD_PROCESS_MONITORING.log
