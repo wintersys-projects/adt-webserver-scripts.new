@@ -54,7 +54,7 @@ then
 		
 			if ( [  "`${HOME}/providerscripts/utilities/CheckConfigValue.sh APPLICATIONLANGUAGE:PHP`" = "1" ] )
 			then
-				DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=-1 -qq -y install libapache2-mod-php${PHP_VERSION} #####UBUNTU-APACHE-REPO#####
+				DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=-1 -qq -y install libapache2-mod-php #####UBUNTU-APACHE-REPO#####
 			fi
 		
 			/bin/touch /etc/apache2/BUILT_FROM_REPO
@@ -78,7 +78,7 @@ then
 
 			if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh APPLICATIONLANGUAGE:PHP`" = "1" ] )
 			then
-				DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=-1  -qq -y install libapache2-mod-php${PHP_VERSION} #####DEBIAN-APACHE-REPO#####
+				DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=-1  -qq -y install libapache2-mod-php #####DEBIAN-APACHE-REPO#####
 			fi
 		
 			/bin/touch /etc/apache2/BUILT_FROM_REPO
