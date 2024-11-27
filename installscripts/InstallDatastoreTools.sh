@@ -74,5 +74,5 @@ fi
 
 if ( [ -f ${HOME}/.s3cfg ] )
 then
-	bin/cp ${HOME}/.s3cfg /root
+	/bin/cp ${HOME}/.s3cfg /root
 fi
