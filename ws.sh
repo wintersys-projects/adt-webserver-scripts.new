@@ -235,6 +235,8 @@ ${HOME}/providerscripts/utilities/RunServiceCommand.sh ssh restart
 
 . ${HOME}/installscripts/InstallAll.sh
 
+${HOME}/security/SetupFirewall.sh
+
 #>&2 /bin/echo "${0} Update.sh"
 #${HOME}/installscripts/Update.sh ${BUILDOS}
 
@@ -443,7 +445,7 @@ ${HOME}/providerscripts/email/SendEmail.sh "A WEBSERVER HAS BEEN SUCCESSFULLY BU
 
 /bin/touch ${HOME}/runtime/DONT_MESS_WITH_THESE_FILES-SYSTEM_BREAK
 
-${HOME}/security/SetupFirewall.sh
+#${HOME}/security/SetupFirewall.sh
 
 ${HOME}/providerscripts/utilities/CleanupAfterBuild.sh
 
