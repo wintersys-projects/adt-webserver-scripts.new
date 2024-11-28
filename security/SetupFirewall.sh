@@ -23,18 +23,23 @@
 
 export HOME="`/bin/cat /home/homedir.dat`"
 
+if ( [ -f ${HOME}/runtime/FIREWALL-ACTIVE ] )
+then
+        exit
+fi
+
 if ( [ ! -d ${HOME}/logs/firewall ] )
 then
         /bin/mkdir -p ${HOME}/logs/firewall
 fi
 
-if ( [ ! -f ${HOME}/runtime/WEBSERVER_READY ] )
-then
-   exit
-fi
+#if ( [ ! -f ${HOME}/runtime/WEBSERVER_READY ] )
+#then
+#   exit
+#fi
 
-exec >${HOME}/logs/firewall/FIREWALL_CONFIGURATION.log
-exec 2>&1
+#exec >${HOME}/logs/firewall/FIREWALL_CONFIGURATION.log
+#exec 2>&1
 ##################################################################################
 
 if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh ACTIVEFIREWALLS:1`" = "0" ] && [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh ACTIVEFIREWALLS:3`" = "0" ] )
