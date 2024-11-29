@@ -26,14 +26,12 @@ fi
 
 if ( [ "${buildos}" = "ubuntu" ] )
 then
-	/usr/bin/curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
-	/bin/chmod +x wp-cli.phar
-	/bin/mv wp-cli.phar /usr/local/bin/wp
+	/usr/bin/wget -O /usr/local/bin/wp https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar 	
+ 	/bin/chmod +x /usr/local/bin/wp
 fi
 
 if ( [ "${buildos}" = "debian" ] )
 then
-	/usr/bin/curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
-	/bin/chmod +x wp-cli.phar
-	/bin/mv wp-cli.phar /usr/local/bin/wp
+	/usr/bin/wget -O /usr/local/bin/wp https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar 	
+ 	/bin/chmod +x /usr/local/bin/wp
 fi
