@@ -38,7 +38,7 @@ if ( [ "${apt}" != "" ] )
 then
 	if ( [ "${buildos}" = "ubuntu" ] )
 	then
-		mysql_apt_config="`/usr/bin/wget -O- https://dev.mysql.com/downloads/repo/apt/ | /bin/grep -o mysql-apt-config.* | /usr/bin/head -1 | /bin/sed 's/deb.*/deb/g'`"	#####UBUNTU-MYSQLCLIENT-REPO#####
+ 		mysql_apt_config="`/usr/bin/wget -O- -q https://dev.mysql.com/downloads/repo/apt/ | grep mysql-apt-config | grep -o '([^)]*)' | /bin/sed -e 's/(//' -e 's/)//'`"	#####UBUNTU-MYSQLCLIENT-REPO#####
 		/usr/bin/wget https://dev.mysql.com/get/${mysql_apt_config} 					#####UBUNTU-MYSQLCLIENT-REPO-SKIP#####
 		DEBIAN_FRONTEND=noninteractive /usr/bin/dpkg -i ${mysql_apt_config}				#####UBUNTU-MYSQLCLIENT-REPO-SKIP#####
 		/bin/rm ${mysql_apt_config}									#####UBUNTU-MYSQLCLIENT-REPO-SKIP#####
@@ -48,7 +48,7 @@ then
 
 	if ( [ "${buildos}" = "debian" ] )
 	then
-		mysql_apt_config="`/usr/bin/wget -O- https://dev.mysql.com/downloads/repo/apt/ | /bin/grep -o mysql-apt-config.* | /usr/bin/head -1 | /bin/sed 's/deb.*/deb/g'`"	#####DEBIAN-MYSQLCLIENT-REPO#####
+ 		mysql_apt_config="`/usr/bin/wget -O- -q https://dev.mysql.com/downloads/repo/apt/ | grep mysql-apt-config | grep -o '([^)]*)' | /bin/sed -e 's/(//' -e 's/)//'`"	#####DEBIAN-MYSQLCLIENT-REPO#####
 		/usr/bin/wget https://dev.mysql.com/get/${mysql_apt_config} 					#####DEBIAN-MYSQLCLIENT-REPO-SKIP#####
 		DEBIAN_FRONTEND=noninteractive /usr/bin/dpkg -i ${mysql_apt_config}				#####DEBIAN-MYSQLCLIENT-REPO-SKIP#####
 		/bin/rm ${mysql_apt_config}									#####DEBIAN-MYSQLCLIENT-REPO-SKIP#####
