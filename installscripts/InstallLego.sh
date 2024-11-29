@@ -27,26 +27,20 @@ fi
 
 if ( [ "${buildos}" = "ubuntu" ] )
 then
-	cwd="`/usr/bin/pwd`"					#####UBUNTU-LEGO-SOURCE#####
-	/bin/mkdir -p /usr/local/src/lego			#####UBUNTU-LEGO-SOURCE#####
-	cd /usr/local/src/lego					#####UBUNTU-LEGO-SOURCE#####
- 	version="`/usr/bin/curl -L https://api.github.com/repos/go-acme/lego/releases/latest | /usr/bin/jq -r '.name'`" #####UBUNTU-LEGO-SOURCE#####
-	/usr/bin/wget https://github.com/xenolf/lego/releases/download/${version}/lego_${version}_linux_amd64.tar.gz    #####UBUNTU-LEGO-SOURCE-SKIP#####
-	/bin/tar xvfz lego*tar.gz				#####UBUNTU-LEGO-SOURCE#####
-	/bin/rm *lego*tar.gz					#####UBUNTU-LEGO-SOURCE#####
-	/bin/cp lego /usr/bin/					#####UBUNTU-LEGO-SOURCE#####
-	cd ${cwd}						#####UBUNTU-LEGO-SOURCE-SKIP#####
+        version="`/usr/bin/curl -L https://api.github.com/repos/go-acme/lego/releases/latest | /usr/bin/jq -r '.name'`" #####UBUNTU-LEGO-REPO#####
+        if ( [ -f /usr/bin/lego ] )                                                                                     #####UBUNTU-LEGO-REPO#####
+        then                                                                                                            #####UBUNTU-LEGO-REPO#####
+                /bin/rm /usr/bin/lego                                                                                   #####UBUNTU-LEGO-REPO#####
+        fi                                                                                                              #####UBUNTU-LEGO-REPO#####
+        /usr/bin/wget -c https://github.com/xenolf/lego/releases/download/${version}/lego_${version}_linux_amd64.tar.gz -O- | /usr/bin/tar -xz -C /usr/bin      #####UBUNTU-LEGO-REPO-SKIP##### 
 fi
 
 if ( [ "${buildos}" = "debian" ] )
 then
-	cwd="`/usr/bin/pwd`"					#####DEBIAN-LEGO-SOURCE#####
-	/bin/mkdir -p /usr/local/src/lego			#####DEBIAN-LEGO-SOURCE#####
-	cd /usr/local/src/lego					#####DEBIAN-LEGO-SOURCE#####
- 	version="`/usr/bin/curl -L https://api.github.com/repos/go-acme/lego/releases/latest | /usr/bin/jq -r '.name'`"	#####DEBIAN-LEGO-SOURCE#####
-  	/usr/bin/wget https://github.com/xenolf/lego/releases/download/${version}/lego_${version}_linux_amd64.tar.gz    #####DEBIAN-LEGO-SOURCE-SKIP#####
-	/bin/tar xvfz lego*tar.gz				#####DEBIAN-LEGO-SOURCE#####
-	/bin/rm *lego*tar.gz					#####DEBIAN-LEGO-SOURCE#####
-	/bin/cp lego /usr/bin/					#####DEBIAN-LEGO-SOURCE#####
-	cd ${cwd}						#####DEBIAN-LEGO-SOURCE-SKIP#####
+        version="`/usr/bin/curl -L https://api.github.com/repos/go-acme/lego/releases/latest | /usr/bin/jq -r '.name'`" #####DEBIAN-LEGO-REPO#####
+        if ( [ -f /usr/bin/lego ] )                                                                                     #####DEBIAN-LEGO-REPO#####
+        then                                                                                                            #####DEBIAN-LEGO-REPO#####
+                /bin/rm /usr/bin/lego                                                                                   #####DEBIAN-LEGO-REPO#####
+        fi                                                                                                              #####DEBIAN-LEGO-REPO#####
+        /usr/bin/wget -c https://github.com/xenolf/lego/releases/download/${version}/lego_${version}_linux_amd64.tar.gz -O- | /usr/bin/tar -xz -C /usr/bin      #####DEBIAN-LEGO-REPO-SKIP##### 
 fi
