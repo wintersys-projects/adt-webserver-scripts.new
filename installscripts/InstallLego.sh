@@ -27,6 +27,7 @@ fi
 
 if ( [ "${buildos}" = "ubuntu" ] )
 then
+	${HOME}/installscripts/InstallJQ.sh ${buildos}
         version="`/usr/bin/curl -L https://api.github.com/repos/go-acme/lego/releases/latest | /usr/bin/jq -r '.name'`" #####UBUNTU-LEGO-REPO#####
         if ( [ -f /usr/bin/lego ] )                                                                                     #####UBUNTU-LEGO-REPO#####
         then                                                                                                            #####UBUNTU-LEGO-REPO#####
@@ -37,6 +38,7 @@ fi
 
 if ( [ "${buildos}" = "debian" ] )
 then
+	${HOME}/installscripts/InstallJQ.sh ${buildos}
         version="`/usr/bin/curl -L https://api.github.com/repos/go-acme/lego/releases/latest | /usr/bin/jq -r '.name'`" #####DEBIAN-LEGO-REPO#####
         if ( [ -f /usr/bin/lego ] )                                                                                     #####DEBIAN-LEGO-REPO#####
         then                                                                                                            #####DEBIAN-LEGO-REPO#####
