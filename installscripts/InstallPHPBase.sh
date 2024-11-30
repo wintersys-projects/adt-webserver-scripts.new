@@ -90,5 +90,5 @@ then
 fi
 
 /usr/bin/find /etc/php -mindepth 1 ! -regex "^/etc/php/${PHP_VERSION}\(/.*\)?" -delete
-/bin/touch ${HOME}/runtime/installedsoftware/PHP				
+/bin/touch ${HOME}/runtime/installedsoftware/InstallPHPBase.sh				
 
