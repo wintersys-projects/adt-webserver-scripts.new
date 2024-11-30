@@ -37,13 +37,9 @@ then
 	DEBIAN_FRONTEND=noninteractive /usr/bin/apt-get install -o DPkg::Lock::Timeout=-1 -qq -y bzip2 libgeoip-dev gnutls-bin gnutls-dev libmaxminddb-dev libxml2 libmariadb-dev libpq-dev zlib1g-dev libssl-dev libpcre3-dev
 fi
 
-#Get the latest version of lighttpd
-#release_series="1"
-#version_name="`/usr/bin/wget -O- - https://github.com/lighttpd | /bin/grep -o lighttpd[${release_series}].[0-9][0-9] | /bin/grep lighttpd | /usr/bin/head -1`"
-#if ( [ "${version_name}" = "" ] )
-#then
-#	version_name="`/usr/bin/wget -O- - https://github.com/lighttpd | /bin/grep -o lighttpd[${release_series}].[0-9] | /bin/grep lighttpd | /usr/bin/head -1`"
-#fi
+cwd ="`/usr/bin/pwd`"
+
+cd /usr/local/src/
 
 minor_version="`/usr/bin/curl -L https://api.github.com/repos/lighttpd/lighttpd1.4/tags | /usr/bin/jq -r '.[] | .name' | /usr/bin/awk -F'-' '{print $2}' | /usr/bin/head -1`"
 major_version="`/bin/echo ${minor_version} | /usr/bin/awk -F'.' -v OFS="." '{print $1,$2}'`"
@@ -51,10 +47,6 @@ major_version="`/bin/echo ${minor_version} | /usr/bin/awk -F'.' -v OFS="." '{pri
 /bin/tar xvfz lighttpd-${minor_version}.tar.gz
 cd lighttpd${major_version}-lighttpd-${minor_version}
 
-#/usr/bin/wget https://github.com/lighttpd/lighttpd${major_version}/archive/refs/tags/lighttpd-${minor_version}.tar.gz
-
-#/usr/bin/git clone https://github.com/lighttpd/${version_name}.git
-#cd ${version_name}
 
 /bin/sed -i 's/trap/#trap/g' ./autogen.sh #was getting a "bad trap error from this script
 ./autogen.sh
@@ -81,3 +73,5 @@ fi
 /bin/chown www-data:www-data /var/log/lighttpd
 
 /bin/mv ${HOME}/light* /usr/share/lighttpd
+
+cd ${cwd}
