@@ -45,5 +45,6 @@ then
 	then
   		DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=-1 -qq -y install -qq -y postgresql-client #####DEBIAN-POSTGRESCLIENT-REPO#####
 	fi
+      	/bin/touch ${HOME}/runtime/installedsoftware/POSTGRES_CLIENT				
 fi
 
