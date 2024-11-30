@@ -105,5 +105,5 @@ then
 		fi
    		
         fi
-	/bin/touch ${HOME}/runtime/installedsoftware/GOOFYS				
+	/bin/touch ${HOME}/runtime/installedsoftware/InstallGoofyFS.sh			
 fi
