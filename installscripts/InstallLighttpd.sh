@@ -67,6 +67,6 @@ then
 			/bin/touch /etc/lighttpd/BUILT_FROM_REPO						#####DEBIAN-LIGHTTPD-REPO#####
 		fi
 	fi
-      	/bin/touch ${HOME}/runtime/installedsoftware/LIGHTTPD				
+      	/bin/touch ${HOME}/runtime/installedsoftware/InstallLighttpd.sh				
 fi
 
