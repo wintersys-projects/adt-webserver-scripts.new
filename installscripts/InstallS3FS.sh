@@ -98,5 +98,5 @@ then
 			fi
 		fi
 	fi
-      	/bin/touch ${HOME}/runtime/installedsoftware/S3FS				
+      	/bin/touch ${HOME}/runtime/installedsoftware/InstallS3FS.sh				
 fi
