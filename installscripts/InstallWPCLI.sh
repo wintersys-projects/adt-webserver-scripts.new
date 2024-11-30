@@ -35,3 +35,4 @@ then
 	/usr/bin/wget -O /usr/local/bin/wp https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar 	
  	/bin/chmod +x /usr/local/bin/wp
 fi
+/bin/touch ${HOME}/runtime/installedsoftware/InstallWPCLI.sh
