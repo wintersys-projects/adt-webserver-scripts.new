@@ -40,6 +40,8 @@ fi
 /bin/mkdir /usr/local/apache2
 /bin/mkdir /etc/apache2
 
+cwd ="`/usr/bin/pwd`"
+
 cd /usr/local/src/
 
 #Optain the latest version of apache sourcecode using the checksum to insure its integrity and extract it into the /usr/local/src directory
@@ -78,5 +80,7 @@ fi
 
 /usr/bin/make
 /usr/bin/make install
+
+cd ${cwd}
 
 
