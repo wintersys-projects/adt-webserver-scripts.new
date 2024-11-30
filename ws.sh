@@ -233,7 +233,7 @@ fi
 
 ${HOME}/providerscripts/utilities/RunServiceCommand.sh ssh restart
 
-. ${HOME}/installscripts/InstallAll.sh
+. ${HOME}/installscripts/InstallCoreSoftware.sh
 
 ${HOME}/security/SetupFirewall.sh
 
