@@ -25,6 +25,7 @@ WEBSITE_URL="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'WEBSITEUR
 SERVER_USER="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'SERVERUSER'`"
 TOKEN="`/bin/echo ${SERVER_USER} | /usr/bin/fold -w 4 | /usr/bin/head -n 1 | /usr/bin/tr '[:upper:]' '[:lower:]'`"
 configbucket="`/bin/echo "${WEBSITE_URL}"-config | /bin/sed 's/\./-/g'`-${TOKEN}"
+file_to_list="${1}"
 
 if ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'DATASTORETOOL:s3cmd'`" = "1" ] )
 then
@@ -35,12 +36,6 @@ then
         datastore_tool="/usr/bin/s5cmd --credentials-file /root/.s5cfg --endpoint-url https://${host_base} "
 fi
 
-value="`${datastore_tool} ls s3://${configbucket}/$1 | /usr/bin/awk -F'/' '{print $NF}' | /bin/sed '/^$/d'`"
+${datastore_tool} s3://${file_to_list} | /usr/bin/awk '{print $NF}'
 
-if ( [ "`/bin/echo ${value} | /usr/bin/grep 's3://'`" != "" ] )
-then
-        ${datastore_tool} ls s3://${configbucket}/$1 | /usr/bin/awk -F' ' '{print $NF}' | /bin/sed '/^$/d'
-else
-        /bin/echo ${value}
-fi
 
