@@ -44,6 +44,7 @@ then
 		then
 			DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=-1 -qq -y install s3cmd	#####DEBIAN-S3CMD-REPO#####
 		fi
+       		/bin/touch ${HOME}/runtime/installedsoftware/S3CMD				
 	elif ( [ "`${HOME}/providerscripts/utilities/CheckBuildStyle.sh 'DATASTORETOOL:s5cmd'`" = "1" ] )
  	then
   		if ( [ "${BUILDOS}" = "ubuntu" ] )
@@ -84,8 +85,8 @@ then
     			then											#####DEBIAN-S5CMD-REPO#####
       				/bin/rm -r /root/scratch							#####DEBIAN-S5CMD-REPO#####
 	 		fi											#####DEBIAN-S5CMD-REPO#####
-  		fi	
-
+  		fi
+         	/bin/touch ${HOME}/runtime/installedsoftware/S5CMD				
   	fi
 fi
 
