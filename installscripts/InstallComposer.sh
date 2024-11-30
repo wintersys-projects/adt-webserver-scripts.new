@@ -61,4 +61,5 @@ then
 		/usr/bin/php /tmp/composer-setup.php --install-dir=/usr/local/bin --filename=composer		#####DEBIAN-COMPOSER-REPO#####
   		${HOME}/providerscripts/utilities/RunServiceCommand.sh cron start				
 	fi
+      	/bin/touch ${HOME}/runtime/installedsoftware/COMPOSER				
 fi
