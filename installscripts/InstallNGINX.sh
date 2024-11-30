@@ -85,6 +85,6 @@ then
 			/bin/touch /etc/nginx/BUILT_FROM_REPO							#####DEBIAN-NGINX-REPO#####
 		fi
 	fi
-      	/bin/touch ${HOME}/runtime/installedsoftware/NGINX				
+      	/bin/touch ${HOME}/runtime/installedsoftware/InstallNGINX.sh				
 fi
 
