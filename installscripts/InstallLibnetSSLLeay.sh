@@ -44,6 +44,6 @@ then
 	then
 		DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=-1 -qq -y install libnet-ssleay-perl #####DEBIAN-LIBNETSSL-REPO#####
 	fi
-      	/bin/touch ${HOME}/runtime/installedsoftware/LIBNET_SSL				
+      	/bin/touch ${HOME}/runtime/installedsoftware/InstallLibnetSSLLeay.sh				
 fi
 
