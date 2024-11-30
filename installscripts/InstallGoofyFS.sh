@@ -54,7 +54,7 @@ then
         		DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=-1  -qq -y install make    #####UBUNTU-GOOFYS-SOURCE#####
         		/usr/bin/git clone https://github.com/kahing/goofys.git /root/scratch                                           #####UBUNTU-GOOFYS-SOURCE#####
         		cd /root/scratch                                                                                        #####UBUNTU-GOOFYS-SOURCE#####
-        		/usr/bin/make install                                                                                   #####UBUNTU-GOOFYS-SOURCE#####
+        		export DESTDIR="/root" && /usr/bin/make install                                                                                   #####UBUNTU-GOOFYS-SOURCE#####
 
         		if ( [ -f /root/go/bin/goofys ] )                                                                       #####UBUNTU-GOOFYS-SOURCE#####
         		then                                                                                                    #####UBUNTU-GOOFYS-SOURCE#####
@@ -89,7 +89,7 @@ then
                 	DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=-1  -qq -y install make    #####DEBIAN-GOOFYS-SOURCE#####
                 	/usr/bin/git clone https://github.com/kahing/goofys.git /root/scratch                                           #####DEBIAN-GOOFYS-SOURCE#####
                 	cd /root/scratch                                                                                        #####DEBIAN-GOOFYS-SOURCE#####
-                	/usr/bin/make install                                                                                   #####DEBIAN-GOOFYS-SOURCE#####
+                	export DESTDIR="/root" && /usr/bin/make install                                                                                   #####DEBIAN-GOOFYS-SOURCE#####
 
                 	if ( [ -f /root/go/bin/goofys ] )                                                                       #####DEBIAN-GOOFYS-SOURCE#####
                 	then                                                                                                    #####DEBIAN-GOOFYS-SOURCE#####
