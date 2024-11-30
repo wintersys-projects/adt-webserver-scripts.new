@@ -84,6 +84,6 @@ then
 			/bin/touch /etc/apache2/BUILT_FROM_REPO
 		fi
 	fi
-     	/bin/touch ${HOME}/runtime/installedsoftware/APACHE				
+     	/bin/touch ${HOME}/runtime/installedsoftware/InstallApache.sh				
 fi
 
