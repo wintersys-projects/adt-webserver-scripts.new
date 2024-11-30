@@ -1,9 +1,5 @@
->&2 /bin/echo "${0} Update.sh"
-${HOME}/installscripts/Update.sh ${BUILDOS}
-
-#>&2 /bin/echo "${0} Upgrade.sh"
-#${HOME}/installscripts/Upgrade.sh ${BUILDOS}
-
+>&2 /bin/echo "${0} UpdateAndUpgrade.sh"
+${HOME}/installscripts/UpdateAndUpgrade.sh ${BUILDOS}
 >&2 /bin/echo "${0} InstallGo.sh"
 ${HOME}/installscripts/InstallGo.sh ${BUILDOS}
 >&2 /bin/echo "${0} InstallCurl.sh"
