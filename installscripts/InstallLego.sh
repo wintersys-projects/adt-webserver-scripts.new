@@ -57,5 +57,5 @@ then
         	fi                                                                                                              #####DEBIAN-LEGO-REPO#####
         	/usr/bin/wget -c https://github.com/xenolf/lego/releases/download/${version}/lego_${version}_linux_amd64.tar.gz -O- | /usr/bin/tar -xz -C /usr/bin      #####DEBIAN-LEGO-REPO-SKIP##### 
 	fi
-      	/bin/touch ${HOME}/runtime/installedsoftware/LEGO				
+      	/bin/touch ${HOME}/runtime/installedsoftware/InstallLego.sh				
  fi
