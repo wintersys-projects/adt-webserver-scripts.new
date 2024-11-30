@@ -44,6 +44,6 @@ then
 	then
 		DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=-1  -qq -y install sshpass		#####DEBIAN-SSHPASS-REPO#####
 	fi
-      	/bin/touch ${HOME}/runtime/installedsoftware/SSH_PASS				
+      	/bin/touch ${HOME}/runtime/installedsoftware/InstallSSHPass.sh			
 fi
 
