@@ -4,6 +4,8 @@ ${HOME}/installscripts/Update.sh ${BUILDOS}
 #>&2 /bin/echo "${0} Upgrade.sh"
 #${HOME}/installscripts/Upgrade.sh ${BUILDOS}
 
+>&2 /bin/echo "${0} InstallGo.sh"
+${HOME}/installscripts/InstallGo.sh ${BUILDOS}
 >&2 /bin/echo "${0} InstallCurl.sh"
 ${HOME}/installscripts/InstallCurl.sh ${BUILDOS}
 >&2 /bin/echo "${0} InstallLibioSocketSSL.sh"
@@ -30,8 +32,6 @@ ${HOME}/installscripts/InstallGoofyFS.sh ${BUILDOS}
 ${HOME}/installscripts/InstallRsync.sh ${BUILDOS}
 >&2 /bin/echo "${0} InstallCron.sh"
 ${HOME}/installscripts/InstallCron.sh ${BUILDOS}
->&2 /bin/echo "${0} InstallGo.sh"
-${HOME}/installscripts/InstallGo.sh ${BUILDOS}
 
 ${HOME}/installscripts/InstallMonitoringGear.sh
 >&2 /bin/echo "${0} Installing Datastore tools"
