@@ -204,4 +204,6 @@ then
 			 fi   
 		 fi  
 	 fi
+       	/bin/touch ${HOME}/runtime/installedsoftware/MONITORING_GEAR				
+
 fi
