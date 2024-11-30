@@ -54,11 +54,11 @@ then
         		DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=-1  -qq -y install make    #####UBUNTU-GOOFYS-SOURCE#####
         		/usr/bin/git clone https://github.com/kahing/goofys.git /root/scratch                                           #####UBUNTU-GOOFYS-SOURCE#####
         		cd /root/scratch                                                                                        #####UBUNTU-GOOFYS-SOURCE#####
-        		export DESTDIR="/root" && /usr/bin/make install                                                                                   #####UBUNTU-GOOFYS-SOURCE#####
+        		/usr/bin/make install                                                                                   #####UBUNTU-GOOFYS-SOURCE#####
 
-        		if ( [ -f /root/go/bin/goofys ] )                                                                       #####UBUNTU-GOOFYS-SOURCE#####
+        		if ( [ -f ${HOME}/go/bin/goofys ] )                                                                       #####UBUNTU-GOOFYS-SOURCE#####
         		then                                                                                                    #####UBUNTU-GOOFYS-SOURCE#####
-                		/bin/mv /root/go/bin/goofys /usr/bin                                                                    #####UBUNTU-GOOFYS-SOURCE-SKIP#####
+                		/bin/mv ${HOME}/go/bin/goofys /usr/bin                                                                    #####UBUNTU-GOOFYS-SOURCE-SKIP#####
                 		/bin/chmod 755 /usr/bin/goofys                                                                  #####UBUNTU-GOOFYS-SOURCE#####
         		fi                                                                                                      #####UBUNTU-GOOFYS-SOURCE#####
 
@@ -89,11 +89,11 @@ then
                 	DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=-1  -qq -y install make    #####DEBIAN-GOOFYS-SOURCE#####
                 	/usr/bin/git clone https://github.com/kahing/goofys.git /root/scratch                                           #####DEBIAN-GOOFYS-SOURCE#####
                 	cd /root/scratch                                                                                        #####DEBIAN-GOOFYS-SOURCE#####
-                	export DESTDIR="/root" && /usr/bin/make install                                                                                   #####DEBIAN-GOOFYS-SOURCE#####
+                	/usr/bin/make install                                                                                   #####DEBIAN-GOOFYS-SOURCE#####
 
-                	if ( [ -f /root/go/bin/goofys ] )                                                                       #####DEBIAN-GOOFYS-SOURCE#####
+                	if ( [ -f ${HOME}/go/bin/goofys ] )                                                                       #####DEBIAN-GOOFYS-SOURCE#####
                 	then                                                                                                    #####DEBIAN-GOOFYS-SOURCE#####
-                        	/bin/mv /root/go/bin/goofys /usr/bin                                                            #####DEBIAN-GOOFYS-SOURCE-SKIP#####
+                        	/bin/mv ${HOME}/go/bin/goofys /usr/bin                                                            #####DEBIAN-GOOFYS-SOURCE-SKIP#####
                         	/bin/chmod 755 /usr/bin/goofys                                                                  #####DEBIAN-GOOFYS-SOURCE#####
                 	fi                                                                                                      #####DEBIAN-GOOFYS-SOURCE#####
 
