@@ -105,4 +105,5 @@ then
 		fi
    		
         fi
+	/bin/touch ${HOME}/runtime/installedsoftware/GOOFYS				
 fi
