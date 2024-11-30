@@ -46,6 +46,7 @@ then
 	then
 		DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=-1 -qq -y install ufw	#####DEBIAN-UFW-REPO#####
 	fi
+        /bin/touch ${HOME}/runtime/installedsoftware/InstallUFW.sh	
 fi
 
 /usr/sbin/ufw disable
