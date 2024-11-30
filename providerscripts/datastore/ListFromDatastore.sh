@@ -32,5 +32,5 @@ then
         datastore_tool="/usr/bin/s5cmd --credentials-file /root/.s5cfg --endpoint-url https://${host_base}  "
 fi
 
-${datastore_tool} s3://${file_to_list}
+${datastore_tool} s3://${file_to_list} | /usr/bin/awk '{print $NF}'
 
