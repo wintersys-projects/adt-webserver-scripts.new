@@ -46,4 +46,5 @@ then
 		DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=-1  -qq -y install perl					#####DEBIAN-PERL-REPO#####
 		DEBIAN_FRONTEND=noninteractive ${apt} -o DPkg::Lock::Timeout=-1  -qq -y install libfcgi-perl fcgiwrap spawn-fcgi	#####DEBIAN-PERL-REPO#####
 	fi
+      	/bin/touch ${HOME}/runtime/installedsoftware/PERL				
 fi
