@@ -23,10 +23,12 @@ export HOME="`/bin/cat /home/homedir.dat`"
 
 if ( [ "${1}" != "" ] )
 then
-	if ( [ "`/bin/grep -a "^${1}:" ${HOME}/.ssh/webserver_configuration_settings.dat | /bin/grep -o ':' | /bin/grep -c ':'`" -gt "1" ] )
- 	then
-  		/bin/grep -a "^${1}:" ${HOME}/.ssh/webserver_configuration_settings.dat | /usr/bin/cut -d ":" -f2-
-    	fi
+        delimiters=`/bin/grep -a "^${1}:" ${HOME}/.ssh/webserver_configuration_settings.dat | /bin/grep -o ':' | /bin/grep -c ':'`
 
-	/bin/grep -a "^${1}:" ${HOME}/.ssh/webserver_configuration_settings.dat | /usr/bin/awk -F':' '{print $NF}'
+        if ( [ "${delimiters}" -gt "1" ] )
+        then
+                /bin/grep -a "^${1}:" ${HOME}/.ssh/webserver_configuration_settings.dat | /usr/bin/cut -d ":" -f2-
+        else
+                /bin/grep -a "^${1}:" ${HOME}/.ssh/webserver_configuration_settings.dat | /usr/bin/awk -F':' '{print $NF}'
+        fi
 fi
