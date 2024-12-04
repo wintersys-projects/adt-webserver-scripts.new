@@ -23,5 +23,10 @@ export HOME="`/bin/cat /home/homedir.dat`"
 
 if ( [ "${1}" != "" ] )
 then
+	if ( [ "`/bin/grep -a "^${1}:" ${HOME}/.ssh/webserver_configuration_settings.dat | /bin/grep -o ':' | /bin/grep -c ':'`" -gt "1" ] )
+ 	then
+  		/bin/grep -a "^${1}:" ${HOME}/.ssh/webserver_configuration_settings.dat | /usr/bin/cut -d ":" -f2-
+    	fi
+
 	/bin/grep -a "^${1}:" ${HOME}/.ssh/webserver_configuration_settings.dat | /usr/bin/awk -F':' '{print $NF}'
 fi
