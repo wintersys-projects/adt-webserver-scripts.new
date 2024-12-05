@@ -24,7 +24,12 @@
 /bin/echo "*/1 * * * * export HOME="${HOMEDIR}" && ${HOME}/providerscripts/webserver/CheckWebserverIsUp.sh ${WEBSERVER_CHOICE}" >> /var/spool/cron/crontabs/root
 /bin/echo "*/1 * * * * export HOME="${HOMEDIR}" && ${HOME}/providerscripts/application/configuration/InstallDirectoryConfigurationByApplication.sh" >> /var/spool/cron/crontabs/root
 /bin/echo "*/1 * * * * export HOME="${HOMEDIR}" && ${HOME}/providerscripts/application/configuration/InitialiseVirginInstallByApplication.sh" >> /var/spool/cron/crontabs/root
+
 /bin/echo "*/1 * * * * export HOME="${HOMEDIR}" && ${HOME}/providerscripts/application/configuration/SetApplicationConfiguration.sh" >> /var/spool/cron/crontabs/root
+/bin/echo "*/1 * * * * export HOME="${HOMEDIR}" && /bin/sleep 15 && ${HOME}/providerscripts/application/configuration/SetApplicationConfiguration.sh" >> /var/spool/cron/crontabs/root
+/bin/echo "*/1 * * * * export HOME="${HOMEDIR}" && /bin/sleep 30 && ${HOME}/providerscripts/application/configuration/SetApplicationConfiguration.sh" >> /var/spool/cron/crontabs/root
+/bin/echo "*/1 * * * * export HOME="${HOMEDIR}" && /bin/sleep 45 && ${HOME}/providerscripts/application/configuration/SetApplicationConfiguration.sh" >> /var/spool/cron/crontabs/root
+
 /bin/echo "*/1 * * * * export HOME="${HOMEDIR}" && ${HOME}/providerscripts/utilities/AcknowledgeBuildCompletion.sh" >> /var/spool/cron/crontabs/root
 /bin/echo "*/1 * * * * export HOME="${HOMEDIR}" && /bin/sleep 30 && ${HOME}/providerscripts/utilities/UpdateIP.sh" >> /var/spool/cron/crontabs/root
 /bin/echo "*/1 * * * * export HOME="${HOMEDIR}" && ${HOME}/security/MonitorForNewSSLCertificate.sh" >> /var/spool/cron/crontabs/root
