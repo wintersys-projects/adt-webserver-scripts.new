@@ -51,6 +51,11 @@ then
    exit
 fi
 
+if ( [ -f ${HOME}/runtime/SNAPSHOT_BUILT ] && [ ! -f ${HOME}/runtime/APPLICATION_UPDATED_FOR_SNAPSHOT ] )
+then
+        exit
+fi
+
 if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh AUTOSCALED:1`" = "1" ] )
 then
 	if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh SNAPPED:0`" != "1" ] )
