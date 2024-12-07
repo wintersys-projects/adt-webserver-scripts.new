@@ -1,7 +1,8 @@
 #!/bin/sh
 ###########################################################################################################
-# Description: This script will  install an application sourcecode. First of all it looks in the git repo
-# and then in the datastore.
+# Description: If you are building from a snapshot this will restore the latest version of your application
+# from your datastore because the snapshot you are building off (including the application code) could be
+# weeks or even months old so we want our application sourcecode to be up to date
 # Author: Peter Winter
 # Date: 05/02/2017
 ###########################################################################################################
