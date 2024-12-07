@@ -454,6 +454,7 @@ ${HOME}/providerscripts/utilities/CleanupAfterBuild.sh
 /bin/echo "${0} #######################################################################################" >> ${HOME}/logs/initialbuild/BUILD_PROCESS_MONITORING.log
 
 #Needs to be here so its not absent from the backup
+/usr/bin/touch ${HOME}/runtime/INITIAL_BUILD
 /usr/bin/touch ${HOME}/runtime/WEBSERVER_READY
 
 if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh AUTOSCALEFROMBACKUP:1`" = "1" ] )
