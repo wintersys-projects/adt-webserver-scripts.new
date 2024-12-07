@@ -74,13 +74,13 @@ fi
 /bin/mkdir /tmp/backup
 cd /tmp/backup
    
-DISTOOMIT="`${HOME}/providerscripts/utilities/ExtractConfigValues.sh 'DIRECTORIESTOMOUNT' 'stripped' | /bin/sed 's/\./\//g' | /usr/bin/tr '\n' ' ' | /bin/sed 's/  / /g'`"
+DIRSTOOMIT="`${HOME}/providerscripts/utilities/ExtractConfigValues.sh 'DIRECTORIESTOMOUNT' 'stripped' | /bin/sed 's/\./\//g' | /usr/bin/tr '\n' ' ' | /bin/sed 's/  / /g'`"
 	
 command="/usr/bin/rsync -av --exclude='"
 
 if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh PERSISTASSETSTOCLOUD:1`" = "1" ] )
 then
-	for dir in ${DISTOOMIT}
+	for dir in ${DIRSTOOMIT}
 	do
 		command="${command}/${dir}' --exclude='"
 	done
