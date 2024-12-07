@@ -1,4 +1,4 @@
-if ( [ -f ${HOME}/runtime/WEBSERVER_READY ] && [ ! -f ${HOME}/runtime/SNAPSHOT_RPIMED ] )
+if ( [ -f ${HOME}/runtime/WEBSERVER_READY ] && [ ! -f ${HOME}/runtime/SNAPSHOT_PRIMED ] )
 then
 	/bin/rm ${HOME}/runtime/CONFIG_PRIMED
 
@@ -20,5 +20,5 @@ then
 	/usr/bin/find /var/www -type f -exec chmod 644 {} \;
 	/bin/chmod 755 /var/www/html
 	/bin/chown www-data:www-data /var/www/html
- 	/bin/touch ${HOME}/runtime/SNAPSHOT_RPIMED
+ 	/bin/touch ${HOME}/runtime/SNAPSHOT_PRIMED
 fi
