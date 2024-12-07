@@ -22,7 +22,7 @@
 #######################################################################################################
 #set -x
 
-if ( [ -f /home/${SERVER_USER}/runtime/BUILT_FROM_SNAPSHOT ] && [ ! -f ${HOME}/runtime/APPLICATION_UPDATED_FOR_SNAPSHOT ] )
+if ( [ ! -f /home/${SERVER_USER}/runtime/GENERATING_SNAPSHOT ] && [ ! -f ${HOME}/runtime/APPLICATION_UPDATED_FOR_SNAPSHOT ] )
 then
         WEBSITE_URL="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'WEBSITEURL'`"
         WEBSITE_NAME="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'WEBSITENAME'`"
