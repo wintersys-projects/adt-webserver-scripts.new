@@ -111,7 +111,6 @@ SERVER_TIMEZONE_CITY="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh '
 BUILDOS="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'BUILDOS'`"
 SSH_PORT="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'SSHPORT'`"
 MACHINE_TYPE="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'MACHINETYPE'`"
-GENERATE_SNAPSHOT="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'GENERATESNAPSHOT'`"
 
 /bin/touch ${HOME}/${MACHINE_TYPE}
 
@@ -455,11 +454,7 @@ ${HOME}/providerscripts/utilities/CleanupAfterBuild.sh
 >&2 /bin/echo "${0} Rebooting post install...."
 /bin/echo "${0} #######################################################################################" >> ${HOME}/logs/initialbuild/BUILD_PROCESS_MONITORING.log
 
-#Needs to be here so its not absent from the backup
-if ( [ "${GENERATE_SNAPSHOT}" = "1" ] )
-then
-	/usr/bin/touch ${HOME}/runtime/SNAPSHOT_GENERATOR
-fi
+
 /usr/bin/touch ${HOME}/runtime/WEBSERVER_READY
 
 if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh AUTOSCALEFROMBACKUP:1`" = "1" ] )
