@@ -27,6 +27,8 @@ then
         exit
 fi
 
+/bin/touch ${HOME}/runtime/APPLICATION_UPDATED_FOR_SNAPSHOT
+
 WEBSITE_URL="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'WEBSITEURL'`"
 WEBSITE_NAME="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'WEBSITENAME'`"
 WEBSITE_SUBDOMAIN="`/bin/echo ${WEBSITE_URL} | /usr/bin/awk -F'.' '{print $1}'`"
@@ -36,13 +38,12 @@ BUILD_ARCHIVE_CHOICE="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh '
 
 if ( [ -d /var/www/html ] )
 then
-        /bin/rm -r /var/www/html/* 
-        /bin/rm -r /var/www/html/.*
+        /bin/mkdir /var/www/html-backup.$$
+        /bin/mv /var/www/html/* /var/www/html-backup.$$
 else
         /bin/mkdir -p /var/www/html
 fi
 
-cd /var/www/html
 cd ${HOME}
 
 application_datastore="`/bin/echo ${WEBSITE_URL} | /bin/sed 's/\./-/g'`-${BUILD_ARCHIVE_CHOICE}/applicationsourcecode.tar.gz"
@@ -51,5 +52,10 @@ ${HOME}/providerscripts/datastore/GetFromDatastore.sh "${DATASTORE_CHOICE}" ${ap
 /bin/rm ${HOME}/applicationsourcecode.tar.gz
 /bin/mv ${HOME}/tmp/backup/* /var/www/html
 /bin/rm -rf ${HOME}/tmp
-/bin/touch ${HOME}/runtime/APPLICATION_UPDATED_FOR_SNAPSHOT
+/bin/chown -R www-data:www-data /var/www/* > /dev/null 2>&1
+/usr/bin/find /var/www -type d -exec chmod 755 {} \;
+/usr/bin/find /var/www -type f -exec chmod 644 {} \;
+/bin/chmod 755 /var/www/html
+/bin/chown www-data:www-data /var/www/html
+
 
