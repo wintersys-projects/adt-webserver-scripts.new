@@ -22,37 +22,34 @@
 #######################################################################################################
 #set -x
 
-if ( [ -f ${HOME}/runtime/SNAPSHOT_GENERATOR ] || [ -f ${HOME}/runtime/REGULAR_BUILD ] )
+if ( [ -f ${HOME}/runtime/GENERATING_SNAPSHOT ] || [ ! -f ${HOME}/runtime/SNAPSHOT_BUILT ] || [ -f ${HOME}/runtime/APPLICATION_UPDATED_FOR_SNAPSHOT ] )
 then
         exit
 fi
 
-if ( [ ! -f /home/${SERVER_USER}/runtime/GENERATING_SNAPSHOT ] && [ ! -f ${HOME}/runtime/APPLICATION_UPDATED_FOR_SNAPSHOT ] )
+WEBSITE_URL="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'WEBSITEURL'`"
+WEBSITE_NAME="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'WEBSITENAME'`"
+WEBSITE_SUBDOMAIN="`/bin/echo ${WEBSITE_URL} | /usr/bin/awk -F'.' '{print $1}'`"
+DATASTORE_CHOICE="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DATASTORECHOICE'`"
+BUILD_IDENTIFIER="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'BUILD_IDENTIFIER'`"
+BUILD_ARCHIVE_CHOICE="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'BUILDARCHIVECHOICE'`"
+
+if ( [ -d /var/www/html ] )
 then
-        WEBSITE_URL="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'WEBSITEURL'`"
-        WEBSITE_NAME="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'WEBSITENAME'`"
-        WEBSITE_SUBDOMAIN="`/bin/echo ${WEBSITE_URL} | /usr/bin/awk -F'.' '{print $1}'`"
-        DATASTORE_CHOICE="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DATASTORECHOICE'`"
-        BUILD_IDENTIFIER="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'BUILD_IDENTIFIER'`"
-        BUILD_ARCHIVE_CHOICE="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'BUILDARCHIVECHOICE'`"
-
-        if ( [ -d /var/www/html ] )
-        then
-                /bin/rm -r /var/www/html/* 
-                /bin/rm -r /var/www/html/.*
-        else
-                /bin/mkdir -p /var/www/html
-        fi
-
-        cd /var/www/html
-
-        cd ${HOME}
-
-        application_datastore="`/bin/echo ${WEBSITE_URL} | /bin/sed 's/\./-/g'`-${BUILD_ARCHIVE_CHOICE}/applicationsourcecode.tar.gz"
-        ${HOME}/providerscripts/datastore/GetFromDatastore.sh "${DATASTORE_CHOICE}" ${application_datastore}
-        /bin/tar xvfz ${HOME}/applicationsourcecode.tar.gz
-        /bin/rm ${HOME}/applicationsourcecode.tar.gz
-        /bin/mv ${HOME}/tmp/backup/* /var/www/html
-        /bin/rm -rf ${HOME}/tmp
-        /bin/touch ${HOME}/runtime/APPLICATION_UPDATED_FOR_SNAPSHOT
+        /bin/rm -r /var/www/html/* 
+        /bin/rm -r /var/www/html/.*
+else
+        /bin/mkdir -p /var/www/html
 fi
+
+cd /var/www/html
+cd ${HOME}
+
+application_datastore="`/bin/echo ${WEBSITE_URL} | /bin/sed 's/\./-/g'`-${BUILD_ARCHIVE_CHOICE}/applicationsourcecode.tar.gz"
+${HOME}/providerscripts/datastore/GetFromDatastore.sh "${DATASTORE_CHOICE}" ${application_datastore}
+/bin/tar xvfz ${HOME}/applicationsourcecode.tar.gz
+/bin/rm ${HOME}/applicationsourcecode.tar.gz
+/bin/mv ${HOME}/tmp/backup/* /var/www/html
+/bin/rm -rf ${HOME}/tmp
+/bin/touch ${HOME}/runtime/APPLICATION_UPDATED_FOR_SNAPSHOT
+
