@@ -60,11 +60,11 @@ fi
 #Time based backups are not taken for virgin CMS installs. Instead, make a baseline if you want to save a copy of your work and work it out from there once your application is ready
 
 /bin/echo "30 1 * * * export HOME="${HOMEDIR}" && ${HOME}/providerscripts/utilities/EnforcePermissions.sh" >> /var/spool/cron/crontabs/root
-/bin/echo "2 * * * * export HOME="${HOMEDIR}" && ${HOME}/cron/BackupFromCron.sh 'HOURLY' ${BUILD_IDENTIFIER}" >> /var/spool/cron/crontabs/root
-/bin/echo "30 2 * * * export HOME="${HOMEDIR}" && ${HOME}/cron/BackupFromCron.sh 'DAILY' ${BUILD_IDENTIFIER}" >> /var/spool/cron/crontabs/root
-/bin/echo "30 3 * * 7 export HOME="${HOMEDIR}" && ${HOME}/cron/BackupFromCron.sh 'WEEKLY' ${BUILD_IDENTIFIER}" >> /var/spool/cron/crontabs/root
-/bin/echo "30 4 1 * * export HOME="${HOMEDIR}" && ${HOME}/cron/BackupFromCron.sh 'MONTHLY' ${BUILD_IDENTIFIER}" >> /var/spool/cron/crontabs/root
-/bin/echo "30 5 1 Jan,Mar,May,Jul,Sep,Nov * export HOME="${HOMEDIR}" && ${HOME}/cron/BackupFromCron.sh 'BIMONTHLY' ${BUILD_IDENTIFIER}" >> /var/spool/cron/crontabs/root
+/bin/echo "2 * * * * export HOME="${HOMEDIR}" && ${HOME}/cron/BackupFromCron.sh 'HOURLY'" >> /var/spool/cron/crontabs/root
+/bin/echo "30 2 * * * export HOME="${HOMEDIR}" && ${HOME}/cron/BackupFromCron.sh 'DAILY'" >> /var/spool/cron/crontabs/root
+/bin/echo "30 3 * * 7 export HOME="${HOMEDIR}" && ${HOME}/cron/BackupFromCron.sh 'WEEKLY'" >> /var/spool/cron/crontabs/root
+/bin/echo "30 4 1 * * export HOME="${HOMEDIR}" && ${HOME}/cron/BackupFromCron.sh 'MONTHLY'" >> /var/spool/cron/crontabs/root
+/bin/echo "30 5 1 Jan,Mar,May,Jul,Sep,Nov * export HOME="${HOMEDIR}" && ${HOME}/cron/BackupFromCron.sh 'BIMONTHLY'" >> /var/spool/cron/crontabs/root
 
 #On a daily basis, check if the ssl certificate has expired. Once it has expired, we will try and issue a new one
 /bin/echo "00 4 * * * export HOME="${HOMEDIR}" && ${HOME}/cron/InstallSSLCertificateFromCron.sh" >> /var/spool/cron/crontabs/root
