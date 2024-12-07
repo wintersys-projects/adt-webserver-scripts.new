@@ -13,11 +13,6 @@ then
 
 	. ${HOME}/providerscripts/application/InstallApplication.sh
 
-	if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh BUILDARCHIVECHOICE:baseline`" = "1" ] )
-	then
-		. ${HOME}/providerscripts/application/branding/ApplyApplicationBranding.sh
-		. ${HOME}/providerscripts/application/customise/CustomiseApplication.sh
-	fi
 	${HOME}/providerscripts/application/customise/AdjustApplicationInstallationByApplication.sh
 
 	/bin/chown -R www-data:www-data /var/www/* > /dev/null 2>&1
