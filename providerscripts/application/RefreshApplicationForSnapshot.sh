@@ -22,6 +22,11 @@
 #######################################################################################################
 #set -x
 
+if ( [ -f ${HOME}/runtime/INITIAL_BUILD ] )
+then
+        exit
+fi
+
 if ( [ ! -f /home/${SERVER_USER}/runtime/GENERATING_SNAPSHOT ] && [ ! -f ${HOME}/runtime/APPLICATION_UPDATED_FOR_SNAPSHOT ] )
 then
         WEBSITE_URL="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'WEBSITEURL'`"
