@@ -334,6 +334,8 @@ cd ${HOME}
 #/bin/systemctl disable --now ssh.socket
 #/bin/systemctl enable --now ssh.service
 
+/bin/touch ${HOME}/runtime/REGULAR_BUILD
+
 if ( [ ! -d /var/www/html ] )
 then
 	/bin/mkdir -p /var/www/html > /dev/null 2>&1
