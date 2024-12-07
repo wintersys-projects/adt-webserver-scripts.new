@@ -22,7 +22,7 @@
 #######################################################################################################
 #set -x
 
-if ( [ -f ${HOME}/runtime/INITIAL_BUILD ] )
+if ( [ -f ${HOME}/runtime/SNAPSHOT_GENERATOR] )
 then
         exit
 fi
