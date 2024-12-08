@@ -104,11 +104,18 @@ then
         /bin/cp /tmp/backup/index.php.backup /tmp/backup/index.php
 fi
 
-${HOME}/providerscripts/datastore/MountDatastore.sh "`/bin/echo ${WEBSITE_URL} | /bin/sed 's/\./-/g'`-${period}"
+datastore="`/bin/echo ${WEBSITE_URL} | /bin/sed 's/\./-/g'`-${period}"
+backup_file="${datastore}/applicationsourcecode.tar.gz"
+if ( [ "`${HOME}providerscripts/datastore/AgeOfDatastoreFile.sh ${backup_file}`" -lt "300" ] )
+then
+        exit
+fi
+
+${HOME}/providerscripts/datastore/MountDatastore.sh "${datastore}"
 ${HOME}/providerscripts/application/processing/BundleSourcecodeByApplication.sh "/tmp/backup"
-${HOME}/providerscripts/datastore/DeleteFromDatastore.sh ${DATASTORE_CHOICE} "`/bin/echo ${WEBSITE_URL} | /bin/sed 's/\./-/g'`-${period}/applicationsourcecode.tar.gz.BACKUP"
-${HOME}/providerscripts/datastore/MoveDatastore.sh ${DATASTORE_CHOICE} "`/bin/echo ${WEBSITE_URL} | /bin/sed 's/\./-/g'`-${period}/applicationsourcecode.tar.gz" "`/bin/echo ${WEBSITE_URL} | /bin/sed 's/\./-/g'`-${period}/applicationsourcecode.tar.gz.BACKUP"
-/bin/systemd-inhibit --why="Persisting sourcecode to datastore" ${HOME}/providerscripts/datastore/PutToDatastore.sh "${DATASTORE_CHOICE}" /tmp/applicationsourcecode.tar.gz "`/bin/echo ${WEBSITE_URL} | /bin/sed 's/\./-/g'`-${period}"
+${HOME}/providerscripts/datastore/DeleteFromDatastore.sh ${DATASTORE_CHOICE} "${backup_file}.BACKUP"
+${HOME}/providerscripts/datastore/MoveDatastore.sh ${DATASTORE_CHOICE} "${backup_file}" "${backup_file}.BACKUP"
+/bin/systemd-inhibit --why="Persisting sourcecode to datastore" ${HOME}/providerscripts/datastore/PutToDatastore.sh "${DATASTORE_CHOICE}" /tmp/applicationsourcecode.tar.gz "${datastore}"
 
 ${HOME}/providerscripts/backupscripts/VerifyBackupPresent.sh ${period}
 
