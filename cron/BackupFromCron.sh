@@ -40,6 +40,9 @@
 periodicity="${1}"
 buildidentifier="${2}"
 
+${HOME}/providerscripts/backupscripts/Backup.sh "${periodicity}" "${buildidentifier}"
+
+exit
 trap cleanup 0 1 2 3 6 9 14 15
 
 cleanup()
