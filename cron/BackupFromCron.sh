@@ -38,61 +38,8 @@
 #set -x
 
 periodicity="${1}"
-buildidentifier="${2}"
 
 /bin/sleep "`/usr/bin/shuf -i1-60 -n1`"
 
-${HOME}/providerscripts/backupscripts/Backup.sh "${periodicity}" "${buildidentifier}"
-
-exit
-trap cleanup 0 1 2 3 6 9 14 15
-
-cleanup()
-{
-	${HOME}/providerscripts/datastore/configwrapper/DeleteFromConfigDatastore.sh "backuplock.${periodicity}.file"
-	exit
-}
-
-#In the case where there are multiple webservers running, we don't want backups to spawn concurrently,
-#so put in a random delay before the backup begins. This will make sure that it is unlikely two or more
-#backup processes will run concurrently.
-
-/bin/sleep "`/usr/bin/shuf -i1-300 -n1`"
-
-if ( [ "`${HOME}/providerscripts/datastore/configwrapper/CheckConfigDatastore.sh "backuplock.${periodicity}.file"`" = "0" ] )
-then
-	/usr/bin/touch ${HOME}/runtime/backuplock.${periodicity}.file
-	${HOME}/providerscripts/datastore/configwrapper/PutToConfigDatastore.sh ${HOME}/runtime/backuplock.${periodicity}.file 
-
-	if ( [ -f  ${HOME}/runtime/BACKUP_MISSING ] )
-	then
-		/bin/rm ${HOME}/runtime/BACKUP_MISSING
-	fi
-	
-	${HOME}/providerscripts/backupscripts/Backup.sh "${periodicity}" "${buildidentifier}"
-	
-	count="0"
-	while ( [ -f  ${HOME}/runtime/BACKUP_MISSING ] && [ "${count}" -lt "5" ] )
-	do
-		count="`/usr/bin/expr ${count} + 1`"
-		/bin/rm ${HOME}/runtime/BACKUP_MISSING
-		${HOME}/providerscripts/backupscripts/Backup.sh "${periodicity}" "${buildidentifier}"
-	done
-
-	if ( [ -f  ${HOME}/runtime/BACKUP_MISSING ] )
-	then
-		/bin/rm ${HOME}/runtime/BACKUP_MISSING
-	fi
-
-	if ( [ "${count}" = "5" ] )
-	then
-		${HOME}/providerscripts/email/SendEmail.sh "FAILED TO TAKE BACKUP on webserver `${HOME}/providerscripts/utilities/GetIP.sh`" "I have tried five times to take a backup for periodicity ${periodicity} and couldn't. This is an error and it needs to be looked in to" "ERROR"
-	fi
-	
-	/bin/sleep 1000
-	
-	${HOME}/providerscripts/datastore/configwrapper/DeleteFromConfigDatastore.sh "backuplock.${periodicity}.file"
-else
-	/bin/echo "script already running"
-fi
+${HOME}/providerscripts/backupscripts/Backup.sh "${periodicity}"
 
