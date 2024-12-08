@@ -67,14 +67,6 @@ then
 	fi
 fi
 
-if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh SNAPPED:1`" = "1" ] )
-then
-	if ( [ ! -f ${HOME}/runtime/APPLICATION_SYNCED ] )
-	then
-	   exit
-	fi
-fi
-
 if ( [ ! -f ${HOME}/runtime/INITIAL_BUILD_WEBSERVER ] )
 then
 	if ( [ ! -f ${HOME}/runtime/APPLICATION_SYNCED ] )
