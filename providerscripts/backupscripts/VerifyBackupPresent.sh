@@ -42,7 +42,7 @@ application_datastore="`/bin/echo ${WEBSITE_URL} | /bin/sed 's/\./-/g'`-${period
 ${HOME}/providerscripts/datastore/GetFromDatastore.sh "${DATASTORE_CHOICE}" ${application_datastore} 
 /bin/tar xvfz ${HOME}/backupverification/applicationsourcecode.tar.gz
 
-if ( [ "`/bin/ls /root/backupverification/tmp/backup/XXXXXX-DO_NOT_REMOVE`" = "" ] )
+if ( [ "`/bin/ls ${HOME}/backupverification/tmp/backup/XXXXXX-DO_NOT_REMOVE`" = "" ] )
 then
 	/bin/echo "Backup is absent in datastore"
 	${HOME}/providerscripts/email/SendEmail.sh "Potential missing webroot backup for periodicity ${BUILD_ARCHIVE_CHOICE} in your datastore" "A Backup that I expected seems to be missing in the git repository" "ERROR"
