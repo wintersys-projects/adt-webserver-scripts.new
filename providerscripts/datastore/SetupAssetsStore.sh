@@ -67,14 +67,6 @@ then
 	fi
 fi
 
-if ( [ ! -f ${HOME}/runtime/INITIAL_BUILD_WEBSERVER ] )
-then
-	if ( [ ! -f ${HOME}/runtime/APPLICATION_SYNCED ] )
-	then
-	   exit
-	fi
-fi
-
 directories_to_mount="`${HOME}/providerscripts/utilities/ExtractConfigValues.sh 'DIRECTORIESTOMOUNT' 'stripped' | /bin/sed 's/:config//g'`"
 directories=""
 for directory in ${directories_to_mount}
