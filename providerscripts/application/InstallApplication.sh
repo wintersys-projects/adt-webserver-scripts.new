@@ -59,23 +59,15 @@ then
 			if ( [ "`${HOME}/providerscripts/application/configuration/VerifyApplicationType.sh`" = "1" ] )
 			then
 				/bin/echo "${0} I believe strongly that a ${application_to_install} application has been installed from your git repository ${application_repository_name}" >> ${HOME}/logs/BUILD_PROCESS_MONITORING.log
-				${HOME}/providerscripts/email/SendEmail.sh "I BELIEVE STRONGLY AN APPLICATION HAS BEEN INSTALLED" "The application sourcecode from repository: ${application_repository_name} has been installed" "INFO"
+				${HOME}/providerscripts/email/SendEmail.sh "I BELIEVE STRONGLY AN APPLICATION HAS BEEN INSTALLED" "The baselined sourcecode from repository: ${application_repository_name} has been installed" "INFO"
 				installation_status="1"
 			else
 				/bin/echo "${0} I am doubtful that a ${application_to_install} application has been installed from your git repository ${application_repository_name}" >> ${HOME}/logs/BUILD_PROCESS_MONITORING.log
-				${HOME}/providerscripts/email/SendEmail.sh "I AM DOUBTFUL THAT AN APPLICATION HAS BEEN INSTALLED" "The application sourcecode from repository: ${application_repository_name} has been installed" "ERROR"
+				${HOME}/providerscripts/email/SendEmail.sh "I AM DOUBTFUL THAT AN APPLICATION HAS BEEN INSTALLED" "The baselined sourcecode from repository: ${application_repository_name} has been installed" "ERROR"
 			fi
 		else
-			if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh SUPERSAFEWEBROOT:0`" = "1" ] )
-			then
-				 /bin/echo "${0} I am doubtful that a ${application_to_install} application has been installed from your git repository ${application_repository_name}" >> ${HOME}/logs/BUILD_PROCESS_MONITORING.log
-				 ${HOME}/providerscripts/email/SendEmail.sh "I AM DOUBTFUL THAT AN APPLICATION HAS BEEN INSTALLED" "The application sourcecode from repository: ${application_repository_name} has been installed" "ERROR"
-			elif ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh SUPERSAFEWEBROOT:1`" = "1" ] )  
-			then
-				/bin/echo "${0} I am doubtful that a ${application_to_install} application has been installed from your git repository ${application_repository_name}" >> ${HOME}/logs/BUILD_PROCESS_MONITORING.log
-				/bin/echo "${0} I will look in your datastore to see if I can install your sourcecode from there" >> ${HOME}/logs/BUILD_PROCESS_MONITORING.log
-				installation_status="0"
-			fi
+			/bin/echo "${0} I am doubtful that a ${application_to_install} application has been installed from your git repository ${application_repository_name}" >> ${HOME}/logs/BUILD_PROCESS_MONITORING.log
+			${HOME}/providerscripts/email/SendEmail.sh "I AM DOUBTFUL THAT AN APPLICATION HAS BEEN INSTALLED" "The baselined sourcecode from repository: ${application_repository_name} has been installed" "ERROR"
 		fi
 	elif ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh BUILDARCHIVECHOICE:virgin`" != "1" ] )
  	then
