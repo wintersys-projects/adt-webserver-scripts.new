@@ -75,7 +75,7 @@ then
 	fi
 fi
 
-if ( [ -f ${HOME}/runtime/BUILT_FROM_BACKUP ] && [ ! -f ${HOME}/runtime/INITIAL_BUILD_WEBSERVER ] )
+if ( [ ! -f ${HOME}/runtime/INITIAL_BUILD_WEBSERVER ] )
 then
 	if ( [ ! -f ${HOME}/runtime/APPLICATION_SYNCED ] )
 	then
