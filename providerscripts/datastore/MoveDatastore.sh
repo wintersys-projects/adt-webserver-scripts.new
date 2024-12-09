@@ -33,7 +33,14 @@ then
         datastore_tool="/usr/bin/s5cmd --credentials-file /root/.s5cfg --endpoint-url https://${host_base} "
 fi
 
-${datastore_tool} mv s3://${original_object} s3://${new_object}
+count="0"
+while ( [ "`${datastore_tool} mv s3://${original_object} s3://${new_object} 2>&1 >/dev/null | /bin/grep "ERROR"`" != "" ] && [ "${count}" -lt "5" ] )
+do
+        /bin/sleep 5
+        count="`/usr/bin/expr ${count} + 1`"
+done 
+
+
 
 
 
