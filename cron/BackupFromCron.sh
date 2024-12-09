@@ -1,23 +1,7 @@
 #!/bin/sh
 ############################################################################################################################
-# Description: This script will perform a backup of the webroot when it is called from cron
-# When you have multiple webservers running (possibly 10 or more) you want to have an authoritative webserver
-# which is performing the backup. I do this by inserting a random sleep period between 1 and 300 seconds which
-# enables us to obtain an 'as good as atomic' lock from the datastore which other webservers can query to see
-# if another webserver has claimed to be authoritative before them so that the webserver which is query can
-# stand down from this backup attempt. This means that we only get one webserver as the "backup" webserver
-# or the webserver performing the backup for this backup cycle (hourly, daily, weekly) and so on. 
-# In fringe conditions its possible that a webserver might be shutdown or terminated as part of a scaling action
-# mid way through the backup process which can take quite a few 10s of seconds to complete. This is why its very
-# much recommended to always have "supersafe" backups enabled in your template because "supersafe backups"
-# makes two backups in sequence (one to git and one to the datastore) meaning that if the backup process that is i
-# chronologically first fails or is interrupted the "other" backup is still intergral and any subsequent scaling processes 
-# will be able to use the backup version is valid and or exists
-# The backups run in sequence from cron at set periodicities (you are of course at liberty to set a different sequence
-# for your backup taking process by modifying the cron script). 
-# You can also take manual backups from the command line on the buildmachine and you will find scripts in
-# the direcory ${BUILD_HOME}/helperscripts relating to making backups and baselines of your application webroot.
-# Look there for further explaination
+# Description: This script will backup your webroot to your datastore and these backups are then used
+# to make installations during future deployments
 # Date: 16/11/2016
 # Author: Peter Winter
 ###########################################################################################################
