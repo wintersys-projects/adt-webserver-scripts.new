@@ -28,4 +28,9 @@ then
 	exit
 fi
 
+if ( [ ! -s ${HOME}/runtime/joomla_configuration.php ] )
+then
+	/bin/cp /var/www/html/configuration.php.default ${HOME}/runtime/joomla_configuration.php
+fi
+
 /usr/bin/run ${HOME}/providerscripts/datastore/configwrapper/PutToConfigDatastore.sh ${HOME}/runtime/joomla_configuration.php joomla_configuration.php
