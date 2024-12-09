@@ -73,7 +73,7 @@ then
  	then
 		cd ${HOME}
 		application_datastore="`/bin/echo ${WEBSITE_URL} | /bin/sed 's/\./-/g'`-${BUILD_ARCHIVE_CHOICE}/applicationsourcecode.tar.gz"
-		${HOME}/providerscripts/datastore/GetFromDatastore.sh "${DATASTORE_CHOICE}" ${application_datastore}
+		${HOME}/providerscripts/datastore/GetFromDatastore.sh ${application_datastore}
 		/bin/tar xvfz ${HOME}/applicationsourcecode.tar.gz
 		/bin/rm ${HOME}/applicationsourcecode.tar.gz
 		/bin/mv ${HOME}/tmp/backup/* /var/www/html
