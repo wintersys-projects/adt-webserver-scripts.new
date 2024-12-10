@@ -58,11 +58,12 @@ DB_PORT="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DBPORT'`"
 if ( [ ! -f /var/www/html/dbp.dat ] )
 then
 	prefix="p`/usr/bin/openssl rand -base64 32 | /usr/bin/tr -cd 'a-zA-Z0-9' | /usr/bin/cut -b 1-6 | /usr/bin/tr '[:upper:]' '[:lower:]'`x_"
+ 
 	if ( [ "${prefix}" != "" ] )
 	then
-		${HOME}/providerscripts/utilities/StoreConfigValue.sh "DBPREFIX" "${prefix}"
 		/bin/echo "${prefix}" > /var/www/html/dbp.dat
 	fi
+ 
 else
 	prefix="`/bin/cat /var/www/html/dbp.dat`"
 fi
