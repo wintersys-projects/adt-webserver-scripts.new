@@ -25,6 +25,19 @@ then
 	exit
 fi
 
+if ( [ ! -f ${HOME}/runtime/DRUPAL_CONFIG_SET ] && [ "`${HOME}/providerscripts/datastore/configwrapper/ListFromConfigDatastore.sh drupal_settings.php`" != "" ] )
+then	
+	${HOME}/providerscripts/datastore/configwrapper/GetFromConfigDatastore.sh drupal_settings.php ${HOME}/runtime/drupal_settings.php
+ 	if ( [ -f /var/www/html/sites/default/settings.php ] )
+  	then
+   		/bin/rm /var/www/html/sites/default/settings.php
+	fi
+ 	/bin/cp ${HOME}/runtime/drupal_settings.php /var/www/html/sites/default/settings.php
+  	/bin/touch ${HOME}/runtime/DRUPAL_CONFIG_SET
+fi
+
+exit
+
 if ( [ "`${HOME}/providerscripts/datastore/configwrapper/ListFromConfigDatastore.sh drupal_settings.php`" != "" ] )
 then
 	${HOME}/providerscripts/datastore/configwrapper/GetFromConfigDatastore.sh drupal_settings.php ${HOME}/runtime/drupal_settings.php
