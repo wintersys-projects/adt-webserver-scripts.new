@@ -2,6 +2,8 @@ if ( [ -f ${HOME}/runtime/WEBSERVER_READY ] && [ ! -f ${HOME}/runtime/SNAPSHOT_P
 then
 	/bin/rm ${HOME}/runtime/CONFIG_PRIMED
 
+ 	${HOME}/providerscripts/utilities/UpdateInfrastructure.sh
+
   	if ( [ ! -d /var/www/html ] )
 	then
 		/bin/mkdir -p /var/www/html > /dev/null 2>&1
