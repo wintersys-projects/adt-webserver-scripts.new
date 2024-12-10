@@ -27,6 +27,7 @@ then
         exit
 fi
 
+ ${HOME}/providerscripts/utilities/UpdateInfrastructure.sh
 /bin/touch ${HOME}/runtime/APPLICATION_UPDATED_FOR_SNAPSHOT
 
 WEBSITE_URL="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'WEBSITEURL'`"
@@ -47,15 +48,31 @@ fi
 cd ${HOME}
 
 application_datastore="`/bin/echo ${WEBSITE_URL} | /bin/sed 's/\./-/g'`-${BUILD_ARCHIVE_CHOICE}/applicationsourcecode.tar.gz"
-${HOME}/providerscripts/datastore/GetFromDatastore.sh ${application_datastore}
-/bin/tar xvfz ${HOME}/applicationsourcecode.tar.gz
-/bin/rm ${HOME}/applicationsourcecode.tar.gz
-/bin/mv ${HOME}/tmp/backup/* /var/www/html
-/bin/rm -rf ${HOME}/tmp
-/bin/chown -R www-data:www-data /var/www/* > /dev/null 2>&1
-/usr/bin/find /var/www -type d -exec chmod 755 {} \;
-/usr/bin/find /var/www -type f -exec chmod 644 {} \;
-/bin/chmod 755 /var/www/html
-/bin/chown www-data:www-data /var/www/html
+count="0"
+live_files_no="-1"
+original_files_no="0"
+while ( [ "${count}" -le "5" ] && [ "${live_files_no}" -lt "${original_files_no}" ] )
+do
+        ${HOME}/providerscripts/datastore/GetFromDatastore.sh ${application_datastore}
+        /bin/tar xvfz ${HOME}/applicationsourcecode.tar.gz -C .
+        cd ./tmp/backup
+        original_files_no="`/bin/ls -lR | /usr/bin/wc -l`"
+        /bin/cp -r * /var/www/html
+        live_files_no="`/bin/ls -lR /var/www/html | /usr/bin/wc -l`"
+        cd ${HOME}
+        /bin/rm ./tmp
+        /bin/chown -R www-data:www-data /var/www/* > /dev/null 2>&1
+        /usr/bin/find /var/www -type d -exec chmod 755 {} \;
+        /usr/bin/find /var/www -type f -exec chmod 644 {} \;
+        /bin/chmod 755 /var/www/html
+        /bin/chown www-data:www-data /var/www/html
+        count="`/usr/bin/expr ${count} + 1`"
+fi
+
+if ( [ "${count}" = "5" ] )
+then
+:
+#send email
+fi
 
 
