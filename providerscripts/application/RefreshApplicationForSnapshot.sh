@@ -28,6 +28,7 @@ then
 fi
 
  ${HOME}/providerscripts/utilities/UpdateInfrastructure.sh
+ 
 /bin/touch ${HOME}/runtime/APPLICATION_UPDATED_FOR_SNAPSHOT
 
 WEBSITE_URL="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'WEBSITEURL'`"
@@ -48,10 +49,12 @@ fi
 cd ${HOME}
 
 application_datastore="`/bin/echo ${WEBSITE_URL} | /bin/sed 's/\./-/g'`-${BUILD_ARCHIVE_CHOICE}/applicationsourcecode.tar.gz"
+
 count="0"
 live_files_no="-1"
 original_files_no="0"
-while ( [ "${count}" -le "5" ] && [ "${live_files_no}" -lt "${original_files_no}" ] )
+
+while ( [ "${count}" -lt "5" ] && [ "${live_files_no}" -lt "${original_files_no}" ] )
 do
         ${HOME}/providerscripts/datastore/GetFromDatastore.sh ${application_datastore}
         /bin/tar xvfz ${HOME}/applicationsourcecode.tar.gz -C .
@@ -60,8 +63,8 @@ do
         /bin/cp -r * /var/www/html
         live_files_no="`/bin/ls -lR /var/www/html | /usr/bin/wc -l`"
         cd ${HOME}
-        /bin/rm ./tmp
-        /bin/chown -R www-data:www-data /var/www/* > /dev/null 2>&1
+        /bin/rm -r ./tmp
+        /bin/chown -R www-data:www-data /var/www/* 
         /usr/bin/find /var/www -type d -exec chmod 755 {} \;
         /usr/bin/find /var/www -type f -exec chmod 644 {} \;
         /bin/chmod 755 /var/www/html
@@ -71,8 +74,7 @@ fi
 
 if ( [ "${count}" = "5" ] )
 then
-:
-#send email
+        ${HOME}/providerscripts/email/SendEmail.sh "APPLICATION INSTALLATION FAILED" "I had 5 goes at installing your application and failed" "ERROR"
 fi
 
 
