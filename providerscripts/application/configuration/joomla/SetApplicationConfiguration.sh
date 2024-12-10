@@ -27,7 +27,14 @@ then
         exit
 fi
 
-if ( [ ! -f ${HOME}/runtime/JOOMLA_CONFIG_SET ] && [ "`${HOME}/providerscripts/datastore/configwrapper/ListFromConfigDatastore.sh joomla_configuration.php`" != "" ] )
+if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh BUILDARCHIVECHOICE:virgin`" = "1" ] )
+then
+        exit
+fi
+
+diff="`/usr/bin/diff /var/www/html/configuration.php ${HOME}/runtime/joomla_configuration.php`"
+
+if ( ( [ ! -f ${HOME}/runtime/JOOMLA_CONFIG_SET ] && [ "`${HOME}/providerscripts/datastore/configwrapper/ListFromConfigDatastore.sh joomla_configuration.php`" != "" ] ) || [ "${diff}" != "" ] )
 then
         ${HOME}/providerscripts/datastore/configwrapper/GetFromConfigDatastore.sh joomla_configuration.php ${HOME}/runtime/joomla_configuration.php
         if ( [ -f /var/www/html/configuration.php ] )
@@ -37,6 +44,7 @@ then
         /bin/cp ${HOME}/runtime/joomla_configuration.php /var/www/html/configuration.php
         /bin/touch ${HOME}/runtime/JOOMLA_CONFIG_SET
 fi
+
 exit
 #######test
 
