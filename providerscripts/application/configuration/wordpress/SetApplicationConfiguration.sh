@@ -24,6 +24,18 @@ if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh BUILDARCHIVECHOIC
 then
 	exit
 fi
+####test
+if ( [ ! -f ${HOME}/runtime/WP_CONFIG_SET ] && [ "`${HOME}/providerscripts/datastore/configwrapper/ListFromConfigDatastore.sh wordpress_config.php`" != "" ] )
+then
+	${HOME}/providerscripts/datastore/configwrapper/GetFromConfigDatastore.sh wordpress_config.php ${HOME}/runtime/wordpress_config.php
+ 	if ( [ -f /var/www/html/wp-config.php ] )
+  	then
+   		/bin/rm /var/www/html/wp-config.php
+	fi
+	/bin/cp ${HOME}/runtime/wordpress_config.php /var/www/html/wp-config.php
+	/bin/touch ${HOME}/runtime/WP_CONFIG_SET
+ fi
+ ####test
 
 if ( [ ! -f ${HOME}/runtime/CONFIG_PRIMED ] && [ "`${HOME}/providerscripts/datastore/configwrapper/ListFromConfigDatastore.sh wp-config-sample.php`" = "" ] )
 then
