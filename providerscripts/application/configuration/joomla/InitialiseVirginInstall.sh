@@ -60,7 +60,7 @@ then
 	
 	if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEDBaaSINSTALLATIONTYPE:MySQL`" = "1" ] || [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEINSTALLATIONTYPE:MySQL`" = "1" ] )
 	then
-		/bin/echo "For your information this application requires MySQL as its database" > /var/www/html/dbe.dat#
+		/bin/echo "For your information this application requires MySQL as its database" > /var/www/html/dbe.dat
   	fi
 
 	if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEDBaaSINSTALLATIONTYPE:Postgres`" = "1" ] || [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh DATABASEINSTALLATIONTYPE:Postgres`" = "1" ] )
