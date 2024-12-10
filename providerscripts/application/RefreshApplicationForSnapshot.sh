@@ -70,7 +70,7 @@ do
         /bin/chmod 755 /var/www/html
         /bin/chown www-data:www-data /var/www/html
         count="`/usr/bin/expr ${count} + 1`"
-fi
+done
 
 if ( [ "${count}" = "5" ] )
 then
