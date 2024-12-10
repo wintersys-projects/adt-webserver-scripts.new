@@ -106,7 +106,7 @@ fi
 
 datastore="`/bin/echo ${WEBSITE_URL} | /bin/sed 's/\./-/g'`-${period}"
 backup_file="${datastore}/applicationsourcecode.tar.gz"
-if ( [ "`${HOME}providerscripts/datastore/AgeOfDatastoreFile.sh ${backup_file}`" -lt "300" ] )
+if ( [ "`${HOME}/providerscripts/datastore/AgeOfDatastoreFile.sh ${backup_file}`" -lt "300" ] )
 then
         exit
 fi
