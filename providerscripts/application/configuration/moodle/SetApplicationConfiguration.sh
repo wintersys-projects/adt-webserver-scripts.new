@@ -25,6 +25,21 @@ then
 	exit
 fi
 
+if ( [ ! -f ${HOME}/runtime/MOODLE_CONFIG_SET ] && [ "`${HOME}/providerscripts/datastore/configwrapper/ListFromConfigDatastore.sh moodle_config.php`" != "" ] )
+then	
+	${HOME}/providerscripts/datastore/configwrapper/GetFromConfigDatastore.sh moodle_config.php ${HOME}/runtime/moodle_config.php
+   
+ 	if ( [ -f /var/www/html/moodle/config.php ] )
+  	then
+   		/bin/rm /var/www/html/moodle/config.php
+	fi
+ 	
+  	/bin/cp ${HOME}/runtime/moodle_config.php /var/www/html/moodle/config.php
+  	/bin/touch ${HOME}/runtime/MOODLE_CONFIG_SET
+fi
+
+exit
+
 if ( [ "`${HOME}/providerscripts/datastore/configwrapper/ListFromConfigDatastore.sh moodle_config.php`" != "" ] )
 then
 	${HOME}/providerscripts/datastore/configwrapper/GetFromConfigDatastore.sh moodle_config.php ${HOME}/runtime/moodle_config.php
