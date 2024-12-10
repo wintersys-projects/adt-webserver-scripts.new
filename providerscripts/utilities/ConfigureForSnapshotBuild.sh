@@ -1,4 +1,4 @@
-if ( [ -f ${HOME}/runtime/WEBSERVER_READY ] && [ ! -f ${HOME}/runtime/SNAPSHOT_PRIMED ] )
+if ( [ -f ${HOME}/runtime/WEBSERVER_READY ] && [ -f ${HOME}/runtime/SNAPSHOT_BUILT ] && [ ! -f ${HOME}/runtime/SNAPSHOT_PRIMED ] )
 then
 	/bin/rm ${HOME}/runtime/CONFIG_PRIMED
 
