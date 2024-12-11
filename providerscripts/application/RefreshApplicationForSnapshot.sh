@@ -22,6 +22,11 @@
 #######################################################################################################
 #set -x
 
+if ( [  ${HOME}/runtime/APPLICATION_WEBROOT_UPDATING ] )
+then
+        exit
+fi
+
 if ( [ -f ${HOME}/runtime/SNAPSHOT_BUILT ] )
 then
         if ( [ "`/usr/bin/find ${HOME}/runtime/SNAPSHOT_BUILT -maxdepth 1 -mmin -10 -type f`" != "" ] )
@@ -34,6 +39,8 @@ if ( [ ! -f ${HOME}/runtime/SNAPSHOT_BUILT ] || [ -f ${HOME}/runtime/APPLICATION
 then
         exit
 fi
+
+/bin/touch ${HOME}/runtime/APPLICATION_WEBROOT_UPDATING
 
  ${HOME}/providerscripts/utilities/UpdateInfrastructure.sh
  
@@ -83,5 +90,7 @@ then
         ${HOME}/providerscripts/email/SendEmail.sh "APPLICATION INSTALLATION FAILED" "I had 5 goes at installing your application and failed" "ERROR"
 fi
 /bin/touch ${HOME}/runtime/APPLICATION_UPDATED_FOR_SNAPSHOT
+/bin/rm ${HOME}/runtime/APPLICATION_WEBROOT_UPDATING
+
 
 
