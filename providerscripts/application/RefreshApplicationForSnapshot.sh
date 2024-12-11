@@ -29,8 +29,6 @@ fi
 
  ${HOME}/providerscripts/utilities/UpdateInfrastructure.sh
  
-/bin/touch ${HOME}/runtime/APPLICATION_UPDATED_FOR_SNAPSHOT
-
 WEBSITE_URL="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'WEBSITEURL'`"
 WEBSITE_NAME="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'WEBSITENAME'`"
 WEBSITE_SUBDOMAIN="`/bin/echo ${WEBSITE_URL} | /usr/bin/awk -F'.' '{print $1}'`"
@@ -76,5 +74,6 @@ if ( [ "${count}" = "5" ] )
 then
         ${HOME}/providerscripts/email/SendEmail.sh "APPLICATION INSTALLATION FAILED" "I had 5 goes at installing your application and failed" "ERROR"
 fi
+/bin/touch ${HOME}/runtime/APPLICATION_UPDATED_FOR_SNAPSHOT
 
 
