@@ -61,20 +61,6 @@ exec 1>>${HOME}/logs/${out_file}
 err_file="initialbuild/webserver-build-err-`/bin/date | /bin/sed 's/ //g'`"
 exec 2>>${HOME}/logs/${err_file}
 
-#Check parameters
-###############################################################################################################################
-#Remeber if you make any changes to the parameters to this script, it is called in two places, on the Build Client during the
-#build process and also on the autoscaler from the BuildWebserver script.
-#Both places will need updating to reflect the changes that you make to the parameters
-###############################################################################################################################
-if ( [ "$1" = "" ]  || [ "$2" = "" ] )
-then
-	/bin/echo "${0} Usage: ./ws.sh <build archive> <server user>" >> ${HOME}/logs/initialbuild/BUILD_PROCESS_MONITORING.log
-	exit
-fi
-
-BUILD_ARCHIVE_CHOICE="${1}"
-SERVER_USER="${2}"
 
 /bin/echo "${0} #######################################################################################" >> ${HOME}/logs/initialbuild/BUILD_PROCESS_MONITORING.log
 /bin/echo "${0} `/bin/date`: Building a new webserver" >> ${HOME}/logs/initialbuild/BUILD_PROCESS_MONITORING.log
@@ -84,13 +70,13 @@ SERVER_USER="${2}"
 
 #Load the environment into memory for convenience
 
-${HOME}/providerscripts/utilities/StoreConfigValue.sh "BUILDARCHIVECHOICE" "${BUILD_ARCHIVE_CHOICE}"
 
 CLOUDHOST="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'CLOUDHOST'`"
 BUILD_IDENTIFIER="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'BUILDIDENTIFIER'`"
 ALGORITHM="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'ALGORITHM'`"
 WEBSITE_URL="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'WEBSITEURL'`"
-
+BUILD_ARCHIVE_CHOICE="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'BUILDARCHIVECHOICE'`"
+SERVER_USER="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'SERVERUSER'`"
 SERVER_USER_PASSWORD="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'SERVERUSERPASSWORD'`"
 DATASTORE_CHOICE="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'DATASTORECHOICE'`"
 WEBSERVER_CHOICE="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'WEBSERVERCHOICE'`"
