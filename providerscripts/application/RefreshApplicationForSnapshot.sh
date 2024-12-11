@@ -41,9 +41,6 @@ then
 fi
 
 /bin/touch ${HOME}/runtime/APPLICATION_WEBROOT_UPDATING
-
- ${HOME}/providerscripts/utilities/UpdateInfrastructure.sh
- ${HOME}/providerscripts/utilities/UpdateSoftware.sh
  
 WEBSITE_URL="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'WEBSITEURL'`"
 WEBSITE_NAME="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'WEBSITENAME'`"
@@ -90,6 +87,9 @@ if ( [ "${count}" = "5" ] )
 then
         ${HOME}/providerscripts/email/SendEmail.sh "APPLICATION INSTALLATION FAILED" "I had 5 goes at installing your application and failed" "ERROR"
 fi
+
+${HOME}/providerscripts/utilities/UpdateSoftware.sh "SNAPPED"
+
 /bin/touch ${HOME}/runtime/APPLICATION_UPDATED_FOR_SNAPSHOT
 /bin/rm ${HOME}/runtime/APPLICATION_WEBROOT_UPDATING
 
