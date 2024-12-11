@@ -32,7 +32,11 @@ then
         if ( [ "`${HOME}/providerscripts/datastore/configwrapper/ListFromConfigDatastore.sh joomla_configuration.php`" != "" ] )
         then
                 ${HOME}/providerscripts/datastore/configwrapper/GetFromConfigDatastore.sh joomla_configuration.php ${HOME}/runtime/joomla_configuration.php
-                /bin/cp ${HOME}/runtime/joomla_configuration.php /var/www/html/configuration.php
+                /usr/bin/php -ln ${HOME}/runtime/joomla_configuration.php
+                if ( [ "$?" != "0" ] )
+                then
+                        /bin/cp ${HOME}/runtime/joomla_configuration.php /var/www/html/configuration.php
+                fi
         fi
 fi
 exit
