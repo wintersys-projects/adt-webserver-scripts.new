@@ -43,6 +43,7 @@ fi
 /bin/touch ${HOME}/runtime/APPLICATION_WEBROOT_UPDATING
 
  ${HOME}/providerscripts/utilities/UpdateInfrastructure.sh
+ ${HOME}/providerscripts/utilities/UpdateSoftware.sh
  
 WEBSITE_URL="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'WEBSITEURL'`"
 WEBSITE_NAME="`${HOME}/providerscripts/utilities/ExtractConfigValue.sh 'WEBSITENAME'`"
