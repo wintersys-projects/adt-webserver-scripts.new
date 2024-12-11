@@ -27,32 +27,17 @@ then
         exit
 fi
 
-if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh BUILDARCHIVECHOICE:virgin`" = "1" ] )
+if ( [ "`/usr/bin/diff /var/www/html/configuration.php ${HOME}/runtime/joomla_configuration.php`" != "" ] )
 then
-        exit
-fi
-
-if ( [ ! -s /var/www/html/configuration.php ] )
-then
-        if ( [ -f ${HOME}/runtime/JOOMLA_CONFIG_SET ] )
+        if ( [ "`${HOME}/providerscripts/datastore/configwrapper/ListFromConfigDatastore.sh joomla_configuration.php`" != "" ] )
         then
-                /bin/rm ${HOME}/runtime/JOOMLA_CONFIG_SET
+                ${HOME}/providerscripts/datastore/configwrapper/GetFromConfigDatastore.sh joomla_configuration.php ${HOME}/runtime/joomla_configuration.php
+                /bin/cp ${HOME}/runtime/joomla_configuration.php /var/www/html/configuration.php
         fi
 fi
-
-if (  [ ! -f ${HOME}/runtime/JOOMLA_CONFIG_SET ] && [ "`${HOME}/providerscripts/datastore/configwrapper/ListFromConfigDatastore.sh joomla_configuration.php`" != "" ] )
-then
-        ${HOME}/providerscripts/datastore/configwrapper/GetFromConfigDatastore.sh joomla_configuration.php ${HOME}/runtime/joomla_configuration.php
-        if ( [ -f /var/www/html/configuration.php ] )
-        then
-                /bin/rm /var/www/html/configuration.php
-        fi
-        /bin/cp ${HOME}/runtime/joomla_configuration.php /var/www/html/configuration.php
-        /bin/touch ${HOME}/runtime/JOOMLA_CONFIG_SET
-fi
-
 exit
 #######test
+
 
 if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh BUILDARCHIVECHOICE:virgin`" = "1" ] )
 then
