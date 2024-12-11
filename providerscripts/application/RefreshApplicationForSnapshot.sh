@@ -22,7 +22,7 @@
 #######################################################################################################
 #set -x
 
-if ( [  ${HOME}/runtime/APPLICATION_WEBROOT_UPDATING ] )
+if ( [  -f ${HOME}/runtime/APPLICATION_WEBROOT_UPDATING ] )
 then
         exit
 fi
