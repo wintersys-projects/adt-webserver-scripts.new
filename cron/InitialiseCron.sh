@@ -76,7 +76,6 @@ fi
 /bin/echo "@hourly export HOME="${HOMEDIR}" && ${HOME}/providerscripts/datastore/configwrapper/DeleteFromConfigDatastore.sh \"backuplock.*.file\"" >> /var/spool/cron/crontabs/root
 /bin/echo "@hourly export HOME="${HOMEDIR}" && ${HOME}/providerscripts/utilities/LoadMonitoring.sh" >> /var/spool/cron/crontabs/root
 
-/bin/echo "@daily export HOME="${HOMEDIR}" && ${HOME}/providerscripts/utilities/PerformSoftwareUpdate.sh" >> /var/spool/cron/crontabs/root
 
 /bin/echo "@reboot export HOME="${HOMEDIR}" && ${HOME}/providerscripts/webserver/RestartWebserver.sh" >> /var/spool/cron/crontabs/root
 /bin/echo "@reboot export HOME="${HOMEDIR}" && ${HOME}/providerscripts/application/configuration/InstallConfigurationByApplication.sh" >> /var/spool/cron/crontabs/root
