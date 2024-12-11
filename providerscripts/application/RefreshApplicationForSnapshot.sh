@@ -30,7 +30,7 @@ then
         fi
 fi
 
-if ( [ -f ${HOME}/runtime/APPLICATION_UPDATED_FOR_SNAPSHOT ] )
+if ( [ ! -f ${HOME}/runtime/SNAPSHOT_BUILT ] || [ -f ${HOME}/runtime/APPLICATION_UPDATED_FOR_SNAPSHOT ] )
 then
         exit
 fi
