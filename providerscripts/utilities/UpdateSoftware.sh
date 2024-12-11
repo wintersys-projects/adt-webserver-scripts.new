@@ -12,6 +12,10 @@ for script in `/usr/bin/find ${HOME}/runtime/installedsoftware/ -name "*.sh" -pr
 do
         /bin/sh ${HOME}/installscripts/${script} ${BUILDOS}
 done
+
 ${HOME}/providerscripts/utilities/UpdateInfrastructure.sh
+
+ /usr/sbin/shutdown -r now
+
 
 
