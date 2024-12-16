@@ -443,10 +443,6 @@ ${HOME}/providerscripts/utilities/CleanupAfterBuild.sh
 
 /usr/bin/touch ${HOME}/runtime/WEBSERVER_READY
 
-if ( [ "`${HOME}/providerscripts/utilities/CheckConfigValue.sh AUTOSCALEFROMBACKUP:1`" = "1" ] )
-then
-	${HOME}/providerscripts/backupscripts/BackupEntireMachine.sh
-fi
 
-/usr/sbin/shutdown -r now
+#/usr/sbin/shutdown -r now
 
